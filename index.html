@@ -6,23 +6,11 @@
   <link rel="stylesheet" href="styles.css">
   <title>Tu Sitio Web</title>
 
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--//////////////---------NAV BAR---------//////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-
-
-
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
     }
-
-
 
     .navbar {
       display: flex;
@@ -30,11 +18,11 @@
       align-items: center;
       background-color: #333;
       color: white;
-      padding: 10px 20px;
+      padding: 15px 30px;
     }
 
     .logo img {
-      width: 80px; /* Ajusta el tamaño del logo según sea necesario */
+      width: 80px;
     }
 
     .menu {
@@ -68,7 +56,18 @@
     .mobile-menu-toggle {
       font-size: 24px;
       cursor: pointer;
-      display: none; /* Ocultar inicialmente en pantallas grandes */
+      display: none;
+    }
+
+    .mobile-menu-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+      display: none;
+      z-index: 2; /* Coloca encima del menú */
     }
 
     .mobile-menu {
@@ -78,11 +77,11 @@
       color: white;
       position: fixed;
       top: 0;
-      left: -85%; /* Inicia fuera de la pantalla */
-      width: 85%;
+      left: -80%;
+      width: 80%;
       height: 100%;
-      transition: left 0.3s ease; /* Efecto de deslizamiento */
-      z-index: 1;
+      transition: left 0.3s ease;
+      z-index: 3; /* Coloca encima del fondo oscuro */
     }
 
     .mobile-menu a {
@@ -98,11 +97,11 @@
     }
 
     .mobile-menu.show {
-      left: 0; /* Muestra el menú deslizándolo desde la izquierda */
+      left: 0;
     }
 
     .order-now {
-      order: 3; /* Ajusta el orden si es necesario */
+      order: 3;
     }
 
     .order-now button {
@@ -129,16 +128,25 @@
       }
 
       .cart-order-toggle {
-        order: 2; /* Ajusta el orden si es necesario */
+        order: 2;
       }
 
       .order-now {
-        display: none; /* Oculta el botón Order Now en dispositivos móviles */
+        display: none;
       }
 
       .navbar {
         justify-content: space-between;
         padding: 10px;
+      }
+
+      .mobile-menu-container {
+        display: none; /* Oculta inicialmente */
+      }
+
+      .mobile-menu.show {
+        left: 0;
+        width: 60%;
       }
     }
   </style>
@@ -167,6 +175,8 @@
   </div>
 </nav>
 
+<div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
+
 <div class="mobile-menu">
   <a href="#">Inicio</a>
   <a href="#">Productos</a>
@@ -180,20 +190,18 @@
 <script>
   function toggleMobileMenu() {
     var mobileMenu = document.querySelector('.mobile-menu');
+    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
     mobileMenu.classList.toggle('show');
+    mobileMenuContainer.style.display = mobileMenu.classList.contains('show') ? 'block' : 'none';
+  }
+
+  function closeMobileMenu() {
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
+    mobileMenu.classList.remove('show');
+    mobileMenuContainer.style.display = 'none';
   }
 </script>
-
-
-
-
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--///////////---------NAV BAR ENDS---------////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
-  <!--/////////////////////////////////////////////////////-->
 
 </body>
 </html>
