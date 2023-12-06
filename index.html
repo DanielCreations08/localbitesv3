@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Tu Sitio Web</title>
+
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--//////////////---------NAV BAR---------//////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+
+
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .logo img {
+      width: 80px; /* Ajusta el tamaño del logo según sea necesario */
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .menu a:hover {
+      color: #ffcc00;
+    }
+
+    .cart-order-toggle {
+      display: flex;
+      gap: 10px;
+    }
+
+    .cart img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-toggle {
+      font-size: 24px;
+      cursor: pointer;
+      display: none; /* Ocultar inicialmente en pantallas grandes */
+    }
+
+    .mobile-menu {
+      display: flex;
+      flex-direction: column;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: -85%; /* Inicia fuera de la pantalla */
+      width: 85%;
+      height: 100%;
+      transition: left 0.3s ease; /* Efecto de deslizamiento */
+      z-index: 1;
+    }
+
+    .mobile-menu a {
+      padding: 15px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      background-color: #555;
+    }
+
+    .mobile-menu.show {
+      left: 0; /* Muestra el menú deslizándolo desde la izquierda */
+    }
+
+    .order-now {
+      order: 3; /* Ajusta el orden si es necesario */
+    }
+
+    .order-now button {
+      background-color: #ffcc00;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .order-now button:hover {
+      background-color: #ffdb4d;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .menu {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .cart-order-toggle {
+        order: 2; /* Ajusta el orden si es necesario */
+      }
+
+      .order-now {
+        display: none; /* Oculta el botón Order Now en dispositivos móviles */
+      }
+
+      .navbar {
+        justify-content: space-between;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
+  </div>
+  <div class="menu">
+    <a href="#">Inicio</a>
+    <a href="#">Productos</a>
+    <a href="#">Servicios</a>
+    <a href="#">Contacto</a>
+    <a href="#">Ayuda</a>
+  </div>
+  <div class="cart-order-toggle">
+    <div class="cart">
+      <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
+    </div>
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
+    <div class="order-now">
+      <button>Order Now</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="#">Inicio</a>
+  <a href="#">Productos</a>
+  <a href="#">Servicios</a>
+  <a href="#">Contacto</a>
+  <a href="#">Ayuda</a>
+</div>
+
+<!-- Tu contenido va aquí -->
+
+<script>
+  function toggleMobileMenu() {
+    var mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.classList.toggle('show');
+  }
+</script>
+
+
+
+
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--///////////---------NAV BAR ENDS---------////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+  <!--/////////////////////////////////////////////////////-->
+
+</body>
+</html>
