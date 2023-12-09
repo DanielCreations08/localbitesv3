@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/pages/restaurantsNearMe.css">
   <script src="script.js" defer></script> 
 
 
@@ -17,7 +17,7 @@
     <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
   </div>
   <div class="menu">
-    <a href="#">Home</a>
+    <a href="/index.html">Home</a>
     <a href="#">Catering</a>
     <a href="#">Donations</a>
     <a href="#">About Us</a>
@@ -37,7 +37,7 @@
 <div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
 
 <div class="mobile-menu">
-  <a href="#">Home</a>
+  <a href="/index.html">Home</a>
   <a href="#">Catering</a>
   <a href="#">Donations</a>
   <a href="#">About Us</a>
@@ -124,44 +124,67 @@
     }
 
     .welcome-section {
-        text-align: center;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 1s ease-out 0.5s forwards;
-        margin-bottom: 20px;
-        background-color: #fff;
-        padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
 
-        border-radius: 5px;
-    }
+        .search-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .search-container {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        #search {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 70%;
+            transition: border-color 0.3s ease;
+        }
 
-    #search {
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: 10px;
-        width: 60%;
-        transition: border-color 0.3s ease;
-    }
+        #search:focus {
+            border-color: #000000;
+        }
 
-    #search:focus {
-        border-color: #000000;
-    }
+        .search-button {
+            padding: 15px 20px;
+            background-color: #FB7306;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
- 
+        .search-button:hover {
+            background-color: #000000;
+        }
 
-    .view-all-button:hover {
-        background-color: #000000;
-    }
+        .view-all-button {
+         
+            padding: 15px 20px;
+            background-color: #FB7306;
+            color: #fff;  
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            border-color: #FB7306;
+        
+        }
 
+        .view-all-button:hover {
+            background-color: #ca5b00;
+        }
 
+        
     .cities-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
