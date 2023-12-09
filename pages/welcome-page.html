@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script> 
-   <!-- Font Awesome 6.5 CSS -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 
   <title>Delivery v3</title>
@@ -31,7 +29,7 @@
     </div>
     <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
     <div class="order-now">
-      <button>Login</button>
+      <button>Order Now</button>
     </div>
   </div>
 </nav>
@@ -45,6 +43,9 @@
   <a href="#">About Us</a>
   <a href="#">My Account</a>
 </div>
+
+
+
 
 
 <style>
@@ -134,71 +135,32 @@
         border-radius: 5px;
     }
 
-
-
     .search-container {
-  display: flex;
-  width: 50%;
-  margin: 20px auto;
-  position: relative;
-}
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.search-box {
-  width: calc(100% - 40px); /* Ajuste para evitar que el contenedor cubra el stroke */
-  padding: 10px 10px 11px 10px;
-  border: 1px solid #dddddd; /* Añadido un borde para el stroke */
-}
+    #search {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        width: 60%;
+        transition: border-color 0.3s ease;
+    }
 
-.search-button {
-  background-color: white; /* Fondo blanco del contenedor del icono */
-  border: 1px solid #dddddd; /* Añadido un borde para el stroke */
-  padding: 9px;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-}
+    #search:focus {
+        border-color: #000000;
+    }
 
-/* Nuevo estilo para el icono Font Awesome */
-.search-button i {
-  font-size: 18px;
-  color: #95a5a6; /* Gris claro */
-}
+ 
 
-/* Estilo de hover para el icono */
-.search-button:hover i {
-  color: #e74c3c; /* Rojo */
-}
+    .view-all-button:hover {
+        background-color: #000000;
+    }
 
-.find-restaurants-button {
-  display: block;
-  width: 16%;
-  border-radius: 6px;
-  font-weight: bolder;
-  margin: 8px auto;
-  background-color: #FB7306;
-  color: #fff;
-  border: none;
-  padding: 22px 10px;
-  cursor: pointer;
-}
-
-
-
-.find-restaurants-button:hover {
-  background-color: #ccb145; /* Red */
-}
-
-
-/* Estilos para dispositivos móviles */
-@media screen and (max-width: 768px) {
-  .search-container {
-    width: 95%;
-  }
-
-  .find-restaurants-button {
-    width: 60%;
-  }
-}
 
     .cities-grid {
         display: grid;
@@ -333,48 +295,41 @@
     </div>
 </div>
 
-
-<section>
-    <div class="welcome-section">
-        <h1>Food Delivery Service</h1>
-        <p>Every order you place with us makes a meaningful contribution to supporting the Center of Hope Food Pantry in Kankakee</p>
-        
+<div class="welcome-section">
+    <h1>Welcome to Local Bites Delivery</h1>
+    <p>Every order you place with us makes a meaningful contribution to supporting the Center of Hope Food Pantry in Kankakee</p>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Enter Your Address Here">
-        <button class="search-button"><i class="fa-solid fa-map-pin"></i></button>
-      </div>
-      
-      <button class="find-restaurants-button">FIND RESTAURANTS</button>
+        <input type="text" id="search" placeholder="Search for menus...">
+        <button class="search-button">Search</button>
+    </div>
+    <button class="view-all-button">See All Restaurants</button>
+</div>
+
+<div class="cities-grid">
+    <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+        <div class="city-info">
+            <h2>Manteno</h2>
+        </div>
+        <div class="delivery-man">
+            <img src="/assets/delivery-man.png" alt="Kankakee Image">      
+        </div>
+        
         
     </div>
-    
-    <div class="cities-grid">
-        <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
-            <div class="city-info">
-                <h2>Manteno</h2>
-            </div>
-            <div class="delivery-man">
-                <img src="/assets/delivery-man.png" alt="Kankakee Image">      
-            </div>
-            
-            
-        </div>
-    
-    
-    
-        <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
-            <div class="city-info">
-                <h2>Kankakee</h2>
-            </div>
-            <div class="delivery-man">
-                <img src="/assets/delivery-man.png" alt="Kankakee Image">      
-            </div>
-            
-            
-        </div>
-    </div>
-</section>
 
+
+
+    <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+        <div class="city-info">
+            <h2>Kankakee</h2>
+        </div>
+        <div class="delivery-man">
+            <img src="/assets/delivery-man.png" alt="Kankakee Image">      
+        </div>
+        
+        
+    </div>
+</div>
 </body>
 
 </html>

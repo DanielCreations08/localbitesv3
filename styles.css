@@ -121,8 +121,9 @@ body {
   border-radius: 6px;
 }
 
+
 .order-now button:hover {
-  background-color: #ffdb4d;
+  background-color: #ccb145;
 }
 
 @media only screen and (max-width: 768px) {
