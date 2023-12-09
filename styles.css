@@ -110,8 +110,8 @@ body {
 }
 
 .order-now button {
-  background-color: #FFDE59;
-  color: #333;
+  background-color: #000000;
+  color: #ffffff;
   border: none;
   padding: 15px 30px;
   font-weight: 700;
@@ -123,7 +123,7 @@ body {
 
 
 .order-now button:hover {
-  background-color: #ccb145;
+  background-color: #5a5a5a;
 }
 
 @media only screen and (max-width: 768px) {
