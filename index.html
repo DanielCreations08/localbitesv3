@@ -260,10 +260,10 @@
             <p>We have an app available!</p>
             <p>Download it now for a better experience.</p>
             <div id="app-icons">
-                <img src="/assets/app_store_icon.png.png" alt="App Store">
-                <img src="/assets/google_play_icon.png.png" alt="Google Play">
+                <img src="/assets/app_store_icon.png" alt="App Store">
+                <img src="/assets/google_play_icon.png" alt="Google Play">
             </div>
-            <a id="continue-link" href="#">Continue Order on Website</a>
+            <a id="continue-link" href="#" onclick="hidePopup()">Continue Order on Website</a>
         </div>
     </div>
 
@@ -296,7 +296,14 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         // Mostrar el popup después de un tiempo (por ejemplo, 5 segundos)
-        setTimeout(showPopup, 2800);
+        setTimeout(showPopup, 5000);
+        
+        // Cerrar el popup al hacer clic fuera del cuadro del popup
+        document.getElementById("popup-container").addEventListener("click", function (event) {
+            if (event.target.id === "popup-container") {
+                hidePopup();
+            }
+        });
     });
 </script>
 </body>
