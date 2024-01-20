@@ -255,10 +255,11 @@ body {
         }
 
         .search-container {
-            margin-top: 135px;
+            margin-top: 142px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding-bottom: 1500px;
         }
 
         #search {
@@ -295,31 +296,6 @@ body {
             transform: translateY(0);
         }
     }
-
-    h1 {
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    p {
-        color: #666;
-        margin-bottom: 20px;
-    }
-
-    /* Media Query para dispositivos con un ancho de pantalla de 600 píxeles o menos */
-    @media (max-width: 600px) {
-
-
-        .branding-container {
-            flex-direction: row;
-        }
-
-
-        .center-logo {
-            z-index: 1;
-        }
-    }
-
 
     
 
@@ -361,7 +337,7 @@ body {
       justify-content: center;
       z-index: 1;
       transition: opacity 0.1s ease-out;
-      height: 40px;
+      height: 45px;
     }
 
     .navbarLocationText {
@@ -372,11 +348,11 @@ body {
     }
 
     .changeLocation {
+      color: #333;
       font-size: 12px;
- 
       display: flex;
       justify-content: center;
-      align-items: center;
+      width: 100%;
     }
 
 
@@ -404,5 +380,5 @@ body {
         margin-left: 20px;
       }
   
-
+      
     }
