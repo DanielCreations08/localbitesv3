@@ -47,20 +47,15 @@
 </div>
 </head>
 
-<div class="locationContainer" id="locationContainer">
-  <div class="deliveringTo">Delivering to</div>
-  <div class="currentLocation">
-    Kankakee, IL, USA
-    <span class="arrowIcon"><i class="fas fa-chevron-down"></i></span>
+  <!-- Location Bar -->
+  <div class="locationBar" id="locationBar">
+    <div class="boldText">Delivering to:</div>
+    <div class="locationText">
+      <span>Kankakee, IL, USA</span>
+      <span class="locationIcon"><i class="fas fa-map-marker-alt"></i></span>
+    </div>
   </div>
-</div>
 
-<div class="locationContainerTwo">
-  <div class="navbarLocationContainer" id="navbarLocationContainer">
-    <div class="navbarLocationText">Kankakee, IL, USA <div class="changeLocation">(Tap to Change)</div></div>
-    <span class="arrowIcon"><i class="fas fa-chevron-down"></i></span>
-  </div>
-</div>
 
 
 
@@ -76,31 +71,23 @@
 
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-  <script>
-    // JavaScript for the transition effect
-    window.addEventListener('scroll', function() {
-      var locationContainer = document.getElementById('locationContainer');
-      var navbarLocationContainer = document.getElementById('navbarLocationContainer');
-      var scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-      // Show/hide navbar location container on desktop
-      if (scrollTop > 15) {
-        navbarLocationContainer.style.opacity = 1;
-      } else {
-        navbarLocationContainer.style.opacity = 0;
-      }
+<script>
+  // JavaScript for the scroll effect
+  var locationBar = document.getElementById('locationBar');
+  var prevScrollPos = window.pageYOffset;
 
-      // Transform the location container on desktop
-      var transformScale = 1 - (scrollTop / 10); // Adjust the scaling factor as needed
-      locationContainer.style.transform = 'scale(' + transformScale + ')';
+  window.addEventListener('scroll', function() {
+    var currentScrollPos = window.pageYOffset;
 
-      // Ensure opacity is 1 when transformed (to handle mobile display)
-      if (transformScale < 0) {
-        locationContainer.style.opacity = 0;
-      } else {
-        locationContainer.style.opacity = 1;
-      }
-    });
-  </script>
+    // Scroll-up effect
+    if (prevScrollPos > currentScrollPos || currentScrollPos < 50) {
+      locationBar.classList.remove('scroll-up');
+    } else {
+      locationBar.classList.add('scroll-up');
+    }
+
+    prevScrollPos = currentScrollPos;
+  });
+</script>
 </html>

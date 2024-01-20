@@ -255,7 +255,7 @@ body {
         }
 
         .search-container {
-            margin-top: 142px;
+            margin-top: 182px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,85 +300,48 @@ body {
     
 
     
-    .locationContainer {
-      width: 97%;
+
+
+
+    
+
+    /* Location Bar */
+    .locationBar {
+      position: fixed;
+      top: 90px; /* Adjusted margin-top for the navbar */
+      left: 0;
+      width: 100%;
+      height: 50px; /* Initial height */
+      padding: 20px; /* Adjusted padding for the new layout */
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      transition: all 0.3s ease-out;
+      display: flex;
       flex-direction: column;
-      position: fixed;
-      left: 20px;
-      top: 100px;
-      transform: translate(-50%, -50%);
-  
-      z-index: 1;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
     }
 
-    .deliveringTo,
-    .currentLocation {
-      font-size: 20px;
+    .locationBar.scroll-up {
+      height: 40px; /* Adjusted height when scrolled up */
+      padding: 10px; /* Adjusted padding when scrolled up */
+      font-size: 85%; /* Reduced font size when scrolled up */
+      transform: translateY(-15px); /* Adjusted translateY for sliding up effect */
     }
 
-    .currentLocation {
+    .boldText {
       font-weight: bold;
+      margin-bottom: 5px; /* Adjusted margin to separate "Delivering to:" from the location */
+    }
+
+    .locationText {
+      text-align: center;
       display: flex;
       align-items: center;
     }
 
-    .arrowIcon {
-      margin-left: 4px;
-    }
-
-    /* Additional styles for the navbar appearance */
-    .navbarLocationContainer {
-      background-color: #ffcc00;
-      width: 100%;
-      position: fixed;
-      top: 78px; /* Adjusted margin-top */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      transition: opacity 0.1s ease-out;
-      height: 45px;
-    }
-
-    .navbarLocationText {
-      font-size: 15px;
-      font-weight: bold;
-      color: #fff;
-      margin-right: 5px;
-    }
-
-    .changeLocation {
-      color: #333;
-      font-size: 12px;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-
-
-
-    @media only screen and (max-width: 767px) {
-      .locationContainer {
-        top: 95px; /* Adjusted margin-top */
-        transform: translate(0, 0);
-        width: 70%; /* Adjusted width for mobile */
-        position: fixed;
-        justify-content: center;
-      }
-
-      .navbarLocationContainer {
-        top: 72px; /* Adjusted margin-top */
-        position: fixed;
-        width: 100%;
-      }
-
-
-      .navbarLocationText {
-        font-size: 15px;
-        line-height: 16px;
-        margin-left: 20px;
-      }
-  
-      
+    .locationIcon {
+      margin-left: 5px;
     }
