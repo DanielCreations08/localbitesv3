@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/pages/main-page.css">
+  <script src="/pages/main-page.js" defer></script> 
+
+
+  
+  <title>Delivery v3</title>
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
+  </div>
+  <div class="menu">
+    <a href="/index.html">Home</a>
+    <a href="#">Catering</a>
+    <a href="#">Donations</a>
+    <a href="#">About Us</a>
+    <a href="#">My Account</a>
+  </div>
+  <div class="cart-order-toggle">
+    <div class="cart">
+      <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
+    </div>
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
+    <div class="order-now">
+      <button>Order Now</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
+
+<div class="mobile-menu">
+  <a href="/index.html">Home</a>
+  <a href="#">Catering</a>
+  <a href="#">Donations</a>
+  <a href="#">About Us</a>
+  <a href="#">My Account</a>
+</div>
+</head>
+
+<div class="locationContainer" id="locationContainer">
+  <div class="deliveringTo">Delivering to</div>
+  <div class="currentLocation">
+    Kankakee, IL, USA
+    <span class="arrowIcon"><i class="fas fa-chevron-down"></i></span>
+  </div>
+</div>
+
+<div class="locationContainerTwo">
+  <div class="navbarLocationContainer" id="navbarLocationContainer">
+    <div class="navbarLocationText">Kankakee, IL, USA <div class="changeLocation">(Tap to Change)</div></div>
+    <span class="arrowIcon"><i class="fas fa-chevron-down"></i></span>
+  </div>
+</div>
+
+
+
+<div class="welcome-section">
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search for restaurants...">
+        <button class="search-button">Search</button>
+    </div>
+</div>
+
+</div>
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+  <script>
+    // JavaScript for the transition effect
+    window.addEventListener('scroll', function() {
+      var locationContainer = document.getElementById('locationContainer');
+      var navbarLocationContainer = document.getElementById('navbarLocationContainer');
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      // Show/hide navbar location container on desktop
+      if (scrollTop > 15) {
+        navbarLocationContainer.style.opacity = 1;
+      } else {
+        navbarLocationContainer.style.opacity = 0;
+      }
+
+      // Transform the location container on desktop
+      var transformScale = 1 - (scrollTop / 10); // Adjust the scaling factor as needed
+      locationContainer.style.transform = 'scale(' + transformScale + ')';
+
+      // Ensure opacity is 1 when transformed (to handle mobile display)
+      if (transformScale < 0) {
+        locationContainer.style.opacity = 0;
+      } else {
+        locationContainer.style.opacity = 1;
+      }
+    });
+  </script>
+</html>

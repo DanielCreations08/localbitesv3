@@ -16,7 +16,7 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
+  z-index: 2;
 }
 
 .logo img {
@@ -83,7 +83,7 @@ body {
   width: 80%;
   height: 100%;
   transition: left 0.3s ease;
-  z-index: 3; /* Coloca encima del fondo oscuro */
+  z-index: 2; /* Coloca encima del fondo oscuro */
 }
 
 .mobile-menu a {
