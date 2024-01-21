@@ -70,6 +70,131 @@
 
 
 
+
+
+
+
+
+<div class="filterContainer">
+   <!-- Botón de filtro -->
+   <button class="filterButton" onclick="filterCategory('all')">All Categories</button>
+   <button class="filterButton" onclick="filterCategory('breakfast')">Breakfast</button>
+   <button class="filterButton" onclick="filterCategory('lunch')">Lunch</button>
+   <button class="filterButton" onclick="filterCategory('mexican')">Mexican</button>
+   <button class="filterButton" onclick="filterCategory('asian')">Asian</button>
+   <button class="filterButton" onclick="filterCategory('american')">American</button>
+   <button class="filterButton" onclick="filterCategory('healthy')">Healthy</button>
+   <button class="filterButton" onclick="filterCategory('seafood')">Seafood</button>
+   <button class="filterButton" onclick="filterCategory('italian')">Italian</button>
+   <!-- Agrega más botones según las categorías que necesites -->
+</div>
+  
+    <!-- Restaurant Grid Container -->
+    <div class="restaurantGrid" id="restaurantGrid">
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+
+<!-- Ejemplo de restaurante 1 -->
+<div class="restaurantCard" data-category="breakfast">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.png" alt="Restaurant Image">
+  <div class="restaurantName">BENG</div>
+  <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+</div>
+
+<!-- Ejemplo de restaurante 2 (Cerrado) -->
+<div class="restaurantCard closed" data-category="lunch">
+  <img class="restaurantImage" src="/pages/restaurants/hokkaido.PNG" alt="Restaurant Image">
+  <div class="restaurantName">Isidro's Tamales Y Taqueria</div>
+  <div class="restaurantHours">Closed Now</div>
+</div>
+  
+
+
+
+
 </body>
 
 <script>
@@ -90,4 +215,56 @@
     prevScrollPos = currentScrollPos;
   });
 </script>
+
+
+
+<script>
+  // JavaScript for scroll arrows
+  var categoryContainer = document.getElementById('categoryContainer');
+  var scrollArrows = document.querySelectorAll('.scrollArrows');
+  var scrollStep = 100; // Adjusted scroll step as needed
+
+  scrollArrows.forEach(function(arrow) {
+    arrow.addEventListener('click', function() {
+      if (arrow.classList.contains('scrollLeft')) {
+        categoryContainer.scrollLeft -= scrollStep;
+      } else if (arrow.classList.contains('scrollRight')) {
+        categoryContainer.scrollLeft += scrollStep;
+      }
+    });
+  });
+
+  // Show/hide scroll arrows based on overflow
+  categoryContainer.addEventListener('scroll', function() {
+    scrollArrows.forEach(function(arrow) {
+      arrow.style.display = categoryContainer.scrollWidth > categoryContainer.clientWidth ? 'block' : 'none';
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  // Función de filtro
+  function filterCategory(category) {
+    const cards = document.querySelectorAll('.restaurantCard');
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+
+      if (category === 'all' || category === cardCategory) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
 </html>

@@ -164,83 +164,6 @@ body {
 
 
 
-    .top-bar {
-        position: relative;
-        height: 170px;
-        position: relative;
-        text-align: center;
-        color: #fff;
-        padding: 10px;
-    }
-
-    .branding-container {
-        position: relative;
-        margin-top: 95px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-        
-    }
-
-    .branding-image {
-        width: 50px;
-        height: auto;
-        margin: 0 5px;
-        z-index: 1;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .branding-image.left {
-        animation: bounceLeft 1s infinite alternate;
-    }
-
-    .branding-image.right {
-        animation: bounceRight 1s infinite alternate;
-    }
-
-    @keyframes bounceLeft {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-5px);
-        }
-    }
-
-    @keyframes bounceRight {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(5px);
-        }
-    }
-
-    .center-logo {
-        padding-top: 30px;
-        width: 80px;
-        height: auto;
-        z-index: 1;
-    }
-
-    .top-bar::before,
-    .top-bar::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #FFDE59;
-    }
-
-    .top-bar::before {
-        left: 0;
-    }
-
-    .top-bar::after {
-        right: 0;
-    }
 
     .welcome-section {
             
@@ -248,18 +171,17 @@ body {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out 0.5s forwards;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 20px 0px 20px;
             border-radius: 5px;
         }
 
         .search-container {
-            margin-top: 182px;
+            margin-top: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 1500px;
         }
 
         #search {
@@ -308,35 +230,37 @@ body {
     /* Location Bar */
     .locationBar {
       position: fixed;
-      top: 90px; /* Adjusted margin-top for the navbar */
-      left: 0;
+      top: 80px; /* Adjusted margin-top for the navbar */
       width: 100%;
-      height: 50px; /* Initial height */
-      padding: 20px; /* Adjusted padding for the new layout */
-      background-color: #fff;
+      height: 70px; /* Initial height */
+      background-color: #ffffff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 2;
+      z-index: 1;
       transition: all 0.3s ease-out;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+ 
       font-size: 18px;
     }
 
     .locationBar.scroll-up {
+   
       height: 40px; /* Adjusted height when scrolled up */
-      padding: 10px; /* Adjusted padding when scrolled up */
+      padding: 14px 0px 0px 10px; /* Adjusted padding when scrolled up */
       font-size: 85%; /* Reduced font size when scrolled up */
       transform: translateY(-15px); /* Adjusted translateY for sliding up effect */
     }
 
     .boldText {
+      margin-right: 10px;
       font-weight: bold;
       margin-bottom: 5px; /* Adjusted margin to separate "Delivering to:" from the location */
     }
 
     .locationText {
+      margin-right: 10px;
       text-align: center;
       display: flex;
       align-items: center;
@@ -345,3 +269,165 @@ body {
     .locationIcon {
       margin-left: 5px;
     }
+
+
+    @media only screen and (max-width: 767px) {
+      .locationBar {
+        top: 73px;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Restaurant Grid Container */
+.restaurantGrid {
+  margin: 2px 10px 25px 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px 0px; /* Default gap for larger screens */
+  padding: 25px 5px; /* Padding for both sides */
+  justify-content: center;
+}
+
+/* Media query for smaller screens (e.g., mobile) */
+@media only screen and (max-width: 767px) {
+  .restaurantGrid {
+    gap: 25px 0px; /* Reduced gap for smaller screens */
+  }
+}
+
+/* Restaurant Card */
+.restaurantCard {
+  position: relative;
+  width: 160px; /* Adjusted the width to 100% */
+  height: 215px;
+  left: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Set margin to 0 to avoid unintended spacing */
+}
+
+/* Restaurant Image */
+.restaurantImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden; /* Añadido para ocultar cualquier desbordamiento de la imagen */
+}
+
+/* Restaurant Name */
+.restaurantName {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff; /* White color for the name */
+  background-color: #ff8800; /* Orange background for the name */
+  padding: 5px;
+  border-radius: 0 0 0 0;
+}
+
+/* Restaurant Hours */
+.restaurantHours {
+  font-size: 14px;
+  text-align: center;
+  color: #fff; /* White color for the hours */
+  background-color: #ffbb00; /* Yellow background for the hours */
+  padding: 5px;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Closed Restaurant Style */
+.closed {
+  color: #ff0000; /* Red color for closed restaurants */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Filter Button Container */
+.filterContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0px 0px 0px 0px; /* Agregado margen lateral en desktop */
+  display: flex;
+}
+
+/* Filter Button */
+.filterButton {
+  padding: 8px 12px;
+  margin: 0px 10px 0px 10px;
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 22px;
+  transition: background-color 0.3s ease-out;
+}
+
+/* Hover effect */
+.filterButton:hover {
+  background-color: #ffcc00; /* Naranja en hover */
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  display: none; /* Oculto por defecto */
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  .filterContainer {
+    overflow-x: auto;
+    margin: 0; /* Eliminado margen lateral en móviles */
+    width: 100%; /* Ajuste para ocupar todo el ancho */
+    white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
+    flex-wrap: unset; /* Restablecer el envoltorio flexible */
+    justify-content: flex-start; /* Alinear los elementos al principio */
+  }
+
+  .scrollIndicator {
+    display: block; /* Mostrar solo en dispositivos móviles */
+  }
+}
