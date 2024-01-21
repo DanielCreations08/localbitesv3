@@ -273,7 +273,7 @@ body {
 
     @media only screen and (max-width: 767px) {
       .locationBar {
-        top: 73px;
+        top: 70px;
       }
     }
 
@@ -307,18 +307,19 @@ body {
 
 /* Restaurant Grid Container */
 .restaurantGrid {
-  margin: 2px 10px 25px 10px;
+  margin: 2px 12px 25px 35px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 25px 0px; /* Default gap for larger screens */
-  padding: 25px 5px; /* Padding for both sides */
-  justify-content: center;
+  padding: 25px 0px; /* Padding for both sides */
+  justify-content: space-around;
 }
 
 /* Media query for smaller screens (e.g., mobile) */
 @media only screen and (max-width: 767px) {
   .restaurantGrid {
     gap: 25px 0px; /* Reduced gap for smaller screens */
+    margin: 2px 5px 25px 25px;
   }
 }
 
@@ -327,7 +328,6 @@ body {
   position: relative;
   width: 160px; /* Adjusted the width to 100% */
   height: 215px;
-  left: 10px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -335,6 +335,14 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0; /* Set margin to 0 to avoid unintended spacing */
+}
+
+
+@media only screen and (max-width: 767px) {
+  .restaurantCard {
+    width: 152px; /* Adjusted the width to 100% */
+    height: 207px;
+  }
 }
 
 /* Restaurant Image */
