@@ -326,8 +326,8 @@ body {
 /* Restaurant Card */
 .restaurantCard {
   position: relative;
-  width: 160px; /* Adjusted the width to 100% */
-  height: 215px;
+  width: 170px; /* Adjusted the width to 100% */
+  height: 210px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -340,8 +340,8 @@ body {
 
 @media only screen and (max-width: 767px) {
   .restaurantCard {
-    width: 152px; /* Adjusted the width to 100% */
-    height: 207px;
+    width: 142px; /* Adjusted the width to 100% */
+    height: 182px;
   }
 }
 
