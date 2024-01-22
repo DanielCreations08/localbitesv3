@@ -318,8 +318,13 @@ body {
 /* Media query for smaller screens (e.g., mobile) */
 @media only screen and (max-width: 767px) {
   .restaurantGrid {
-    gap: 25px 0px; /* Reduced gap for smaller screens */
-    margin: 2px 5px 25px 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Adjust the gap between cards */
+    padding: 10px; /* Adjust the overall padding */
+    margin: 2px 15px 20px 15px;
   }
 }
 
