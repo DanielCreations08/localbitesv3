@@ -320,11 +320,11 @@ body {
   .restaurantGrid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 15px; /* Adjust the gap between cards */
-    padding: 10px; /* Adjust the overall padding */
-    margin: 2px 15px 20px 15px;
+    padding: 10px 0px; /* Adjust the overall padding */
+    margin: 2px 2px 2px 2px;
   }
 }
 
