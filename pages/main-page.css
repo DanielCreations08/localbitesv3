@@ -282,6 +282,54 @@ body {
 
 
 
+/* Filter Button Container */
+.filterContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  margin: 0px 0px 0px 20px; /* Agregado margen lateral en desktop */
+  display: flex;
+}
+
+/* Filter Button */
+.filterButton {
+  padding: 8px 12px;
+  margin: 0px 0px 0px 15px;
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 22px;
+  transition: background-color 0.3s ease-out;
+}
+
+/* Hover effect */
+.filterButton:hover {
+  background-color: #ffcc00; /* Naranja en hover */
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  display: none; /* Oculto por defecto */
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  .filterContainer {
+    overflow-x: auto;
+    margin: 0; /* Eliminado margen lateral en móviles */
+    width: 100%; /* Ajuste para ocupar todo el ancho */
+    white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
+    flex-wrap: unset; /* Restablecer el envoltorio flexible */
+    justify-content: flex-start; /* Alinear los elementos al principio */
+  }
+
+  .scrollIndicator {
+    display: block; /* Mostrar solo en dispositivos móviles */
+  }
+}
+
 
 
 
@@ -323,7 +371,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 8px; /* Adjust the gap between cards */
-    padding: 8px 0px; /* Adjust the overall padding */
+    padding: 8px 0px 35px 0px; /* Adjust the overall padding */
     margin: 1px 1px 1px 1px;
   }
 }
@@ -393,53 +441,3 @@ body {
 
 
 
-
-
-/* Filter Button Container */
-.filterContainer {
-  overflow-x: auto;
-  white-space: nowrap;
-  background-color: #fff;
-  padding: 10px 0px 15px 0px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0px 0px 0px 25px; /* Agregado margen lateral en desktop */
-  display: flex;
-}
-
-/* Filter Button */
-.filterButton {
-  padding: 8px 12px;
-  margin: 0px 10px 0px 10px;
-  background-color: #fff; /* Fondo blanco */
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  cursor: pointer;
-  line-height: 22px;
-  transition: background-color 0.3s ease-out;
-}
-
-/* Hover effect */
-.filterButton:hover {
-  background-color: #ffcc00; /* Naranja en hover */
-}
-
-/* Scroll Indicator */
-.scrollIndicator {
-  display: none; /* Oculto por defecto */
-}
-
-/* Estilos para dispositivos móviles */
-@media only screen and (max-width: 767px) {
-  .filterContainer {
-    overflow-x: auto;
-    margin: 0; /* Eliminado margen lateral en móviles */
-    width: 100%; /* Ajuste para ocupar todo el ancho */
-    white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
-    flex-wrap: unset; /* Restablecer el envoltorio flexible */
-    justify-content: flex-start; /* Alinear los elementos al principio */
-  }
-
-  .scrollIndicator {
-    display: block; /* Mostrar solo en dispositivos móviles */
-  }
-}

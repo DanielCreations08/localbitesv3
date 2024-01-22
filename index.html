@@ -102,19 +102,12 @@
         }
 
 
-    .top-bar {
-        height: 90px;
-        position: relative;
-        text-align: center;
-        color: #fff;
-        padding: 10px;
-    }
+ 
 
     .addressSection {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("");
-        padding-top: 90px;
-        background-color: #ccb145;
-        height: 575px;
+        /*background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("");*/
+        padding-top: 0px;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
     }
@@ -123,22 +116,21 @@
 
 
     .welcome-section {
-        color: white;
+        color: rgb(0, 0, 0);
         text-align: center;
         opacity: 0;
         transform: translateY(20px);
         animation: fadeInUp 1s ease-out 0.5s forwards;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         width: 60%;
         font-size: 32px;
-        padding: 20px;
+        padding: 0px;
         border-radius: 5px;
     }
 
     .welcomeDescription {
-        font-size: 18px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        font-size: 20px;
+        /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);*/
     }
     
     .search-container {
@@ -199,10 +191,10 @@
 
 
     .addressSection { 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/assets/background-delivery-address.jpg");
+    /*background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("");*/
     background-size: cover; /* O ajusta según tus necesidades */
     background-position: center; /* O ajusta según tus necesidades */
-    padding-top: 60px; 
+    padding-top: 0px; 
     height: 768px; 
     display: flex; 
     justify-content: center; 
@@ -218,14 +210,14 @@
         animation: fadeInUp 1s ease-out 0.5s forwards;
         margin-bottom: 20px;
         font-size: 25px;
-        padding: 10px;
+        padding: 0px;
 
         border-radius: 5px;
      }
 
      .welcomeDescription {
         font-size: 18px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);*/
     }
 
 
@@ -249,6 +241,13 @@
 </style>
 </head>
 
+<div>
+  <div class="branding-container">
+      <img src="/assets/brand-burger.png" alt="Burger Logo" class="branding-image left">
+      <img src="/assets/seasonal-logo.png" alt="Center Logo" class="center-logo">
+      <img src="/assets/brand-taco.png" alt="Taco Logo" class="branding-image right">
+  </div>
+</div>
 
 <section>
   <div class="addressSection">
@@ -269,7 +268,6 @@
 
 
     <div class="welcome-section">
-        <h1>Food Delivery Service Near You</h1>
         <div class="welcomeDescription">
             <p>Every order you place with us makes a meaningful contribution to supporting the Center of Hope Food Pantry in Kankakee</p>
         </div>
