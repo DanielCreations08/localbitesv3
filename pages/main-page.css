@@ -322,9 +322,9 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Adjust the gap between cards */
-    padding: 10px 0px; /* Adjust the overall padding */
-    margin: 2px 2px 2px 2px;
+    gap: 8px; /* Adjust the gap between cards */
+    padding: 8px 0px; /* Adjust the overall padding */
+    margin: 1px 1px 1px 1px;
   }
 }
 
