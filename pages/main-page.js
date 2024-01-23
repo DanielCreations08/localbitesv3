@@ -89,6 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  
+document.addEventListener("DOMContentLoaded", function () {
+  const carousel = document.getElementById("carousel");
+
+  carousel.addEventListener("scroll", function () {
+    if (carousel.scrollLeft === carousel.scrollWidth - carousel.clientWidth) {
+      // Smoothly scroll back to the beginning when reaching the end
+      carousel.scrollTo({
+        left: 0,
+        behavior: "smooth"
+      });
+    }
+  });
+});
 
   
