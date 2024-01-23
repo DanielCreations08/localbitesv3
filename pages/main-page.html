@@ -57,6 +57,7 @@
   </div>
 
 
+  
 
 
 <div class="welcome-section">
@@ -69,6 +70,15 @@
 </div>
 
 
+
+<!-- Popup Container -->
+<div id="popup-container">
+  <div id="popup-content">
+    <button id="close-button" onclick="hidePopup()">X</button>
+    <p>Sorry, this restaurant is closed.</p>
+    <a id="continue-link" href="#" onclick="hidePopup()">Continue</a>
+</div>
+</div>
 
 
 
@@ -101,49 +111,49 @@
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="italian">
+<div class="restaurantCard closed" data-category="italian" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/pizza-mia.png" alt="Restaurant Image">
   <div class="restaurantName">Pizza Mia</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="breakfast">
+<div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/yannis-cafe-manteno.png" alt="Restaurant Image">
   <div class="restaurantName">Yanni's Cafe</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="lunch">
+<div class="restaurantCard closed" data-category="lunch" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/jimmy-jos-bbq.png" alt="Restaurant Image">
   <div class="restaurantName">Jimmy Jo's BBQ</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="breakfast">
+<div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/beng-food.png" alt="Restaurant Image">
   <div class="restaurantName">BENG</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="breakfast">
+<div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro-manteno.png" alt="Restaurant Image">
   <div class="restaurantName">Uplifted Bistro Manteno</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="breakfast">
+<div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/hokkaido-ramen.png" alt="Restaurant Image">
   <div class="restaurantName">Hokkaido Ramen House in Bourbonnais</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="asian">
+<div class="restaurantCard closed" data-category="asian" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/main-dynasty.png" alt="Restaurant Image">
   <div class="restaurantName">Main Dynasty</div>
   <div class="restaurantHours">Closed</div>
@@ -151,14 +161,14 @@
 
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="healthy">
+<div class="restaurantCard closed" data-category="healthy" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/essential-smoothies.png" alt="Restaurant Image">
   <div class="restaurantName">Essential Smoothies</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="mexican">
+<div class="restaurantCard closed" data-category="mexican" onclick="showPopup ()">
   <img class="restaurantImage" src="/pages/restaurants/la-siesta.png" alt="Restaurant Image">
   <div class="restaurantName">La Siesta</div>
   <div class="restaurantHours">Closed</div>
@@ -166,28 +176,28 @@
 
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="american">
+<div class="restaurantCard" data-category="american" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/poor-boy.png" alt="Restaurant Image">
   <div class="restaurantName">Poor Boy</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="mexican">
+<div class="restaurantCard closed" data-category="mexican" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/dos-amigos.png" alt="Restaurant Image">
   <div class="restaurantName">Dos Amigos</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 1 -->
-<div class="restaurantCard" data-category="italian">
+<div class="restaurantCard closed" data-category="italian" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/tuccis.png" alt="Restaurant Image">
   <div class="restaurantName">Tucci's</div>
   <div class="restaurantHours">Closed</div>
 </div>
 
 <!-- Ejemplo de restaurante 2 (Cerrado) -->
-<div class="restaurantCard closed" data-category="american">
+<div class="restaurantCard closed" data-category="american" onclick="showPopup()">
   <img class="restaurantImage" src="/pages/restaurants/windy-hill-grill.png" alt="Restaurant Image">
   <div class="restaurantName">Windy Hill Grill</div>
   <div class="restaurantHours">Closed</div>
@@ -198,6 +208,28 @@
 
 
 </body>
+
+
+<!-- JavaScript to handle popup visibility -->
+<script>
+  function showPopup() {
+      document.getElementById("popup-container").style.display = "flex";
+  }
+
+  function hidePopup() {
+      document.getElementById("popup-container").style.display = "none";
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+      // Close the popup when clicking outside the popup content
+      document.getElementById("popup-container").addEventListener("click", function (event) {
+          if (event.target.id === "popup-container") {
+              hidePopup();
+          }
+      });
+  });
+</script>
+
 
 <script>
   // JavaScript for the scroll effect
