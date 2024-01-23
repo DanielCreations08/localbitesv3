@@ -4,6 +4,11 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
 
 /* NAV BAR STYLE */
 .navbar {
@@ -178,7 +183,7 @@ body {
         }
 
         .search-container {
-            margin-top: 140px;
+            margin-top: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -294,13 +299,13 @@ body {
 
 /* Filter Button */
 .filterButton {
-  padding: 8px 12px;
+  font-size: 18px;
+  padding: 12px 15px;
   margin: 0px 0px 0px 15px;
   background-color: #fff; /* Fondo blanco */
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   cursor: pointer;
-  line-height: 22px;
   transition: background-color 0.3s ease-out;
 }
 
@@ -329,6 +334,47 @@ body {
     display: block; /* Mostrar solo en dispositivos móviles */
   }
 }
+
+
+
+
+
+
+
+/* Featured Restaurants Container */
+.featuredContainer {
+  
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  margin: 0px 20px 0px 20px; /* Agregado margen lateral en desktop */
+  display: flex;
+  overflow-x: auto;
+}
+
+/* Filter Button */
+.featuredRestaurants {
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -378,6 +424,7 @@ body {
 
 /* Restaurant Card */
 .restaurantCard {
+ 
   position: relative;
   width: 170px; /* Adjusted the width to 100% */
   height: 210px;
@@ -388,6 +435,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0; /* Set margin to 0 to avoid unintended spacing */
+  
 }
 
 
