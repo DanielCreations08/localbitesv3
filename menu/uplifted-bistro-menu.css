@@ -4,7 +4,14 @@ body {
     font-family: Arial, sans-serif;
   }
 
-  
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+
 /* NAV BAR STYLE */
 .navbar {
     display: flex;
@@ -165,9 +172,308 @@ body {
 
 
 
-.foodCover {
-    background-color: gray;
+.hoursContainer {
+    margin-top: 90px;
     display: flex;
     justify-content: center;
     width: 100%;
 }
+
+.workingHours {
+    font-size: 18px;
+    padding: 8px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .hoursContainer {
+        margin-top: 82px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+
+    .workingHours {
+        font-size: 15px;
+    }
+}
+
+
+
+
+/* Filter Button Container */
+.filterContainer {
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: #fff;
+    padding: 10px 0px 15px 0px;
+    margin: 0px 0px 0px 20px; /* Agregado margen lateral en desktop */
+    display: flex;
+  }
+  
+  /* Filter Button */
+  .filterButton {
+    font-size: 18px;
+    padding: 12px 15px;
+    margin: 0px 0px 0px 15px;
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+  }
+  
+  /* Hover effect */
+  .filterButton:hover {
+    background-color: #ffcc00; /* Naranja en hover */
+  }
+  
+  /* Scroll Indicator */
+  .scrollIndicator {
+    display: none; /* Oculto por defecto */
+  }
+  
+  /* Estilos para dispositivos móviles */
+  @media only screen and (max-width: 767px) {
+    .filterContainer {
+      overflow-x: auto;
+      margin: 0; /* Eliminado margen lateral en móviles */
+      width: 100%; /* Ajuste para ocupar todo el ancho */
+      white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
+      flex-wrap: unset; /* Restablecer el envoltorio flexible */
+      justify-content: flex-start; /* Alinear los elementos al principio */
+    }
+  
+    .scrollIndicator {
+      display: block; /* Mostrar solo en dispositivos móviles */
+    }
+  }
+  
+
+
+  
+
+
+  /* Restaurant Grid Container */
+.restaurantGrid {
+    margin: 2px 12px 25px 35px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 25px 0px; /* Default gap for larger screens */
+    padding: 25px 0px; /* Padding for both sides */
+    justify-content: space-around;
+  }
+  
+  /* Media query for smaller screens (e.g., mobile) */
+  @media only screen and (max-width: 767px) {
+    .restaurantGrid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px; /* Adjust the gap between cards */
+      padding: 8px 0px 35px 0px; /* Adjust the overall padding */
+      margin: 1px 1px 1px 1px;
+    }
+  }
+  
+  /* Restaurant Card */
+  .restaurantCard {
+   
+    position: relative;
+    width: 170px; /* Adjusted the width to 100% */
+    height: 220px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* Set margin to 0 to avoid unintended spacing */
+    
+  }
+  
+  @media only screen and (max-width: 414px) {
+    .restaurantCard {
+      width: 174px; /* Adjusted the width to 100% */
+      height: 200px;
+    }
+  }
+  
+  @media only screen and (max-width: 430px) {
+    .restaurantCard {
+      width: 175px; /* Adjusted the width to 100% */
+      height: 200px;
+    }
+  }
+  
+  
+  /* Restaurant Image */
+  .restaurantImage {
+    margin: 10px;
+    object-fit: cover;
+    border-radius: 10px;
+    overflow: hidden; /* Añadido para ocultar cualquier desbordamiento de la imagen */
+  }
+  
+  /* Restaurant Name */
+  .restaurantName {
+    border-radius: 16px;
+    text-overflow: ellipsis; /* Add this line */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff; /* White color for the name */
+    background-color: #ff8800; /* Orange background for the name */
+    padding: 2px;
+    margin: 0px 40px;
+  }
+  
+
+  .foodItemName {
+    text-overflow: ellipsis; /* Add this line */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; /* White color for the name */
+    background-color: #ffffff; /* Orange background for the name */
+    padding: 5px;
+    margin: 5px 0px 0px 0px;
+  }
+
+
+/* Restaurant Hours */
+.foodDescription {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Número máximo de líneas antes de la truncación */
+    -webkit-box-orient: vertical; /* Orientación vertical del contenedor de caja */
+    font-size: 14px;
+    text-align: center;
+    color: #000000; /* White color for the hours */
+    background-color: #ffffff; /* Yellow background for the hours */
+    padding: 2px 0px 5px 0px;
+    margin: 0px 4px 10px 4px;
+  }
+
+
+  .popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  /* Styles for the food box */
+  .food-box {
+    text-align: center;
+  }
+
+  /* Updated style for the food image */
+  .food-box img {
+    width: 100%; /* Make the image fill its container */
+    height: 100%; /* Make the image fill its container */
+    object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
+    border-radius: 10px;
+  }
+
+  .foodContainer {
+    margin: 25px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .itemName {
+    background-color: #ffffff;
+    
+  }
+
+  .itemDescription {
+    margin: 0px 15px;
+  }
+
+
+  /* Styles for the meat selection */
+  .meat-selection {
+    margin-top: 10px;
+  }
+
+  .meat-rectangle {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .meat-text-orange {
+    font-weight: bold;
+    color: orange;
+  }
+
+  .food-price {
+    font-size: 25px;
+  }
+
+  .meat-text-blue {
+    color: blue;
+  }
+
+  /* Styles for the bacon and sausage options */
+  .topping-options {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .toppings {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topping-rectangle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .topping-price-box {
+    text-align: center;
+    background-color: orange;
+    color: white;
+    border-radius: 8px;
+    padding: 5px;
+    margin-top: 5px;
+  }

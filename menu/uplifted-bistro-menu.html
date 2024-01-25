@@ -58,12 +58,123 @@
 </head>
 
 
-    <div class="CoverContainer">
-        <div class="foodCover">
-            FOOD PICTURE
-        </div>oodCover
-
+    <div class="hoursContainer">
+        <div class="workingHours">
+            Today working hours: 10:30 am to 8:30pm
+        </div>
     </div>
+
+            <!-- Food Category Filter -->
+<div class="filterContainer">
+
+    <button class="filterButton" onclick="filterCategory('all')">All Categories</button>
+    <button class="filterButton" onclick="filterCategory('morningstars')">Morning Stars</button>
+    <button class="filterButton" onclick="filterCategory('lunch')">Elevated Salads</button>
+    <button class="filterButton" onclick="filterCategory('mexican')">Uplifted Kids</button>
+    <button class="filterButton" onclick="filterCategory('asian')">Signature Sandwich</button>
+    <button class="filterButton" onclick="filterCategory('american')">Elevated Mac & Cheese</button>
+    <button class="filterButton" onclick="filterCategory('healthy')">Blend Vibes</button>
+    <button class="filterButton" onclick="filterCategory('seafood')">Bubble Tea</button>
+    <button class="filterButton" onclick="filterCategory('italian')">Uplifted Quenchers</button>
+ 
+ </div>
+
+
+<!-- Restaurants Grid -->
+<section>
+  <div class="titleContainer">
+      <div class="title" data-category="morningstars">
+          <h1>Morning Stars</h1>
+      </div>
+  </div>
+
+  <div class="restaurantGrid" id="restaurantGrid">
+      <!-- Open Restaurant Example-->
+      <a href="#" style="text-decoration: none;">
+          <div class="restaurantCard popup-trigger" data-category="morningstars">
+              <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro.png" alt="Restaurant Image">
+              <div class="restaurantName">$8.59</div>
+              <div class="foodItemName">Meat Starter</div>
+              <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
+          </div>
+      </a>
+
+      <!-- Pop-up Container -->
+      <div class="popup-container" id="popupContainer">
+          <div class="popup-content">
+              <span class="close-btn" onclick="closePopup()">×</span>
+              <div class="food-box">
+                <div class="foodContainer">
+                  <div class="foodPics">
+                    <img src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Food Picture">
+                  </div>
+                </div>
+                <div class="itemName">
+                  <h2>Meat Starter</h2>
+                </div>
+
+                  <div class="itemDescription">
+                    <p>Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</p>
+                  </div>
+
+                  <p class="food-price">$6.79</p>
+              </div>
+
+              <div class="meat-selection">
+                  <div class="meat-rectangle">
+                      <span class="meat-text-orange">Choose your meat</span>
+                      <span class="meat-text-blue">1 required</span>
+                  </div>
+
+                  <div class="topping-options">
+                      <div class="topping-rectangle" onclick="selectTopping('Bacon')">
+                          <div class="toppings">Bacon</div>
+                          <span class="topping-price-box">Add +0.00</span>
+                      </div>
+                      <div class="topping-rectangle" onclick="selectTopping('Sausage')">
+                          <div class="toppings">Sausage</div>
+                          <span class="topping-price-box">Add +0.00</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <script>
+          // Get the elements
+          const popupContainer = document.getElementById('popupContainer');
+          const popupTrigger = document.querySelector('.popup-trigger');
+
+          // Function to open the pop-up
+          function openPopup() {
+              popupContainer.style.display = 'flex';
+          }
+
+          // Function to close the pop-up
+          function closePopup() {
+              popupContainer.style.display = 'none';
+          }
+
+          // Function to select a topping (you can customize this function)
+          function selectTopping(topping) {
+              // Add your logic here
+              console.log(`Selected topping: ${topping}`);
+          }
+
+          // Add click event listener to the trigger
+          popupTrigger.addEventListener('click', openPopup);
+
+          // Add click event listener to close the pop-up when clicking outside it
+          window.addEventListener('click', (event) => {
+              if (event.target === popupContainer) {
+                  closePopup();
+              }
+          });
+      </script>
+  </div>
+</section>
+
+
     
 </body>
-</html>
+</html>                                                                         
