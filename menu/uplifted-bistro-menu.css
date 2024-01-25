@@ -167,13 +167,128 @@ body {
   
   /* NAV BAR ENDS */
 
+  .welcome-section {
+            
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+    background-color: #fff;
+    padding: 0px 20px 0px 20px;
+    border-radius: 5px;
+}
+
+.search-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media query for smaller screens (e.g., mobile) */
+@media only screen and (max-width: 767px) {
+    .search-container {
+      margin-top: 30px;
+     }
+}
+
+#search {
+    padding: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 70%;
+    transition: border-color 0.3s ease;
+}
+
+#search:focus {
+    border-color: #000000;
+}
+
+.search-button {
+    padding: 15px 20px;
+    background-color: #FB7306;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #000000;
+}
+
+
+@keyframes fadeInUp {
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+
+
+
+
+
+
+/* Location Bar */
+.locationBar {
+  position: fixed;
+  top: 80px; /* Adjusted margin-top for the navbar */
+  width: 100%;
+  height: 70px; /* Initial height */
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transition: all 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+}
+
+.locationBar.scroll-up {
+
+  height: 40px; /* Adjusted height when scrolled up */
+  padding: 14px 0px 0px 10px; /* Adjusted padding when scrolled up */
+  font-size: 85%; /* Reduced font size when scrolled up */
+  transform: translateY(-15px); /* Adjusted translateY for sliding up effect */
+}
+
+.boldText {
+  margin-right: 10px;
+  font-weight: bold;
+  margin-bottom: 5px; /* Adjusted margin to separate "Delivering to:" from the location */
+}
+
+.locationText {
+  margin-right: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.locationIcon {
+  margin-left: 5px;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .locationBar {
+    top: 72px;
+  }
+}
 
 
 
 
 
 .hoursContainer {
-    margin-top: 90px;
+    margin-top: 110px;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -187,7 +302,7 @@ body {
 
 @media only screen and (max-width: 767px) {
     .hoursContainer {
-        margin-top: 82px;
+        margin-top: 90px;
         display: flex;
         justify-content: center;
         width: 100%;

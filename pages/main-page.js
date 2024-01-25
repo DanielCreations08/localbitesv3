@@ -36,7 +36,12 @@
         }
       });
     }
-      // Restaurant Category Filter Horizontal Scroll
+
+
+
+
+    
+      // Location Bar Size
   var locationBar = document.getElementById('locationBar');
   var prevScrollPos = window.pageYOffset;
 
