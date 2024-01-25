@@ -126,17 +126,59 @@
                       <span class="meat-text-blue">1 required</span>
                   </div>
 
-                  <div class="topping-options">
-                      <div class="topping-rectangle" onclick="selectTopping('Bacon')">
-                          <div class="toppings">Bacon</div>
-                          <span class="topping-price-box">Add +0.00</span>
-                      </div>
-                      <div class="topping-rectangle" onclick="selectTopping('Sausage')">
-                          <div class="toppings">Sausage</div>
-                          <span class="topping-price-box">Add +0.00</span>
-                      </div>
+                  <div class="topping-options" id="toppingOptions">
+                    <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
+                        <div class="toppings">Bacon</div>
+                        <span class="topping-price-box">Add +0.00</span>
+                    </div>
+                    <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                        <div class="toppings">Sausage</div>
+                        <span class="topping-price-box">Add +0.00</span>
+                    </div>
+
+                    <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                      <div class="toppings">Sausage</div>
+                      <span class="topping-price-box">Add +0.00</span>
+                  </div>
+                    <!-- Add more topping rectangles as needed -->
                   </div>
               </div>
+
+
+
+
+
+
+
+              <div class="meat-selection">
+                <div class="meat-rectangle">
+                    <span class="meat-text-orange">Choose your meat</span>
+                    <span class="meat-text-blue">1 required</span>
+                </div>
+
+                <div class="topping-options" id="toppingOptions">
+                  <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
+                      <div class="toppings">Bacon</div>
+                      <span class="topping-price-box">Add +0.00</span>
+                  </div>
+                  <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
+                    <div class="toppings">Bacon</div>
+                    <span class="topping-price-box">Add +0.00</span>
+                </div>
+                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                      <div class="toppings">Sausage</div>
+                      <span class="topping-price-box">Add +0.00</span>
+                  </div>
+
+                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                    <div class="toppings">Sausage</div>
+                    <span class="topping-price-box">Add +0.00</span>
+                </div>
+                  <!-- Add more topping rectangles as needed -->
+                </div>
+            </div>
+
+
           </div>
       </div>
 
@@ -170,6 +212,30 @@
                   closePopup();
               }
           });
+
+
+
+
+
+
+
+
+
+
+          // Function to handle topping selection
+function selectTopping(topping, element) {
+    // Add or remove 'selected' class on tap
+    element.classList.toggle('selected');
+
+    // Add your logic to handle the selected topping (if needed)
+    if (element.classList.contains('selected')) {
+        // Topping is selected
+        console.log(topping + ' selected');
+    } else {
+        // Topping is deselected
+        console.log(topping + ' deselected');
+    }
+}
       </script>
   </div>
 </section>
