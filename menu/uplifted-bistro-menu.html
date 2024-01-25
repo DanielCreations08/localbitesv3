@@ -92,12 +92,26 @@
       <!-- Open Restaurant Example-->
       <a href="#" style="text-decoration: none;">
           <div class="restaurantCard popup-trigger" data-category="morningstars">
-              <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro.png" alt="Restaurant Image">
+              <img class="restaurantImage" src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Restaurant Image">
               <div class="restaurantName">$8.59</div>
               <div class="foodItemName">Meat Starter</div>
               <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
           </div>
       </a>
+
+
+
+
+      <a href="#" style="text-decoration: none;">
+        <div class="restaurantCard popup-trigger" data-category="morningstars">
+            <img class="restaurantImage" src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Restaurant Image">
+            <div class="restaurantName">$8.59</div>
+            <div class="foodItemName">Meat Starter</div>
+            <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
+        </div>
+    </a>
+
+
 
       <!-- Pop-up Container -->
       <div class="popup-container" id="popupContainer">
@@ -180,7 +194,27 @@
 
 
 
+        <!-- New Section for Special Instructions -->
+        <div class="special-instructions-section">
+          <label for="specialInstructions">Special Instructions:</label>
+          <textarea id="specialInstructions" rows="4"></textarea>
+      </div>
 
+<!-- Quantity Section -->
+<div class="quantity-section">
+  <span class="quantity-label">Quantity:</span>
+  <span class="quantity-icons" onclick="adjustQuantity(-1)">-</span>
+  <span id="quantity">1</span>
+  <span class="quantity-icons" onclick="adjustQuantity(1)">+</span>
+</div>
+
+<!-- Checkout Section -->
+<div class="checkout-section">
+  <div class="add-to-order-container">
+      <button onclick="addToOrder()">Add to Order</button>
+  </div>
+  <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
+</div>
 
 
 
@@ -243,6 +277,41 @@ function selectTopping(topping, element) {
         console.log(topping + ' deselected');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+let selectedQuantity = 1;
+
+// Function to adjust quantity
+function adjustQuantity(value) {
+    selectedQuantity += value;
+    if (selectedQuantity < 1) {
+        selectedQuantity = 1;
+    }
+    document.getElementById('quantity').innerText = selectedQuantity;
+}
+
+// Function to add to order
+function addToOrder() {
+    // Add your logic to handle adding to the order (e.g., send to the server, update cart, etc.)
+    console.log('Added to order with special instructions:', document.getElementById('specialInstructions').value);
+    console.log('Quantity:', selectedQuantity);
+    console.log('Total Price:', calculateTotalPrice()); // Replace with your dynamic total price calculation
+}
+
+// Function to calculate total price (replace with your logic)
+function calculateTotalPrice() {
+    return selectedQuantity * 6.79; // Replace with your actual calculation
+}
+
       </script>
   </div>
 </section>

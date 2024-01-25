@@ -214,6 +214,7 @@ body {
   
   /* Filter Button */
   .filterButton {
+    color: #000000;
     font-size: 18px;
     padding: 12px 15px;
     margin: 0px 0px 0px 15px;
@@ -376,7 +377,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
+    max-width: 600px;
     width: 100%;
     position: absolute;
     max-height: 80vh; /* Ajusta según sea necesario */
@@ -384,6 +385,13 @@ body {
     margin: 12px 5px; /* Ajusta la posición vertical del pop-up */
 }
 
+
+@media only screen and (max-width: 767px) {
+  .popup-content {
+    max-width: 300px;
+  }
+
+}
 
   /* Close button */
   .close-btn {
@@ -444,6 +452,7 @@ body {
 
   .food-price {
     font-size: 25px;
+    font-weight: bold;
   }
 
   .meat-text-blue {
@@ -487,4 +496,80 @@ body {
 .topping-rectangle.selected {
   background-color: yellow;
   color: black;
+}
+
+
+
+/* Special Instructions Section */
+.special-instructions-section {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* Quantity Section */
+.quantity-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+.quantity-label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.quantity-icons {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#quantity {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Checkout Section */
+.checkout-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.add-to-order-container {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  font-size: 22px;
+  background-color: orange;
+  color: white;
+  padding: 10px 75px;
+  border: 2px solid yellow;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.total-price {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ed2020;
+  margin-bottom: 10px;
 }
