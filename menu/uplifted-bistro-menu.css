@@ -381,7 +381,7 @@ body {
     position: absolute;
     max-height: 80vh; /* Ajusta según sea necesario */
     overflow-y: auto;
-    margin: 10% auto; /* Ajusta la posición vertical del pop-up */
+    margin: 12px 5px; /* Ajusta la posición vertical del pop-up */
 }
 
 
@@ -391,7 +391,7 @@ body {
     top: 10px;
     right: 10px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 28px;
   }
 
   /* Styles for the food box */
