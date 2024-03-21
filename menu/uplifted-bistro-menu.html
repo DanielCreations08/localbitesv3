@@ -144,25 +144,21 @@
               <span class="close-btn" onclick="closePopup()">×</span>
               <div class="food-box">
 
-                <div class="carousel-inner">
-                  <img src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Comida 1">
-                  <img src="/menu/uplifted-bistro-pics/burrito-starter.jpg" alt="Comida 2">
-                  <img src="/menu/uplifted-bistro-pics/fit-starter.jpg" alt="Comida 3">
-                </div>
-                <button class="prev" onclick="changeSlide(-1)">Anterior</button>
-                <button class="next" onclick="changeSlide(1)">Siguiente</button>
 
+                
 
-
-
-
-
-
-
-
-
-
-
+                <div class="carousel-container">
+                  <div class="carousel-inner">
+                      <img src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Comida 1">
+                      <div class="bottom-controls">
+                          <button class="control-button prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                          <button class="control-button play-pause" onclick="togglePlayPause()"><i id="playPauseIcon" class="fas fa-play"></i></button>
+                          <button class="control-button next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                      </div>
+                      <button class="fullscreen-button" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                  </div>
+              </div>
+              
 
                 
                
@@ -420,29 +416,73 @@ function calculateTotalPrice() {
 
 
 
+
 <script>
 let slideIndex = 0;
+let playing = false;
+let slideshowInterval;
 
 function showSlides() {
-  const slides = document.querySelectorAll('.carousel-inner img');
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
+    const slides = document.querySelectorAll('.carousel-inner img');
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
 
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = 'none';
-  }
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
 
-  slides[slideIndex].style.display = 'block';
+    slides[slideIndex].style.display = 'block';
 }
 
 function changeSlide(n) {
-  slideIndex += n;
-  showSlides();
+    slideIndex += n;
+    showSlides();
 }
+
+function togglePlayPause() {
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    if (playing) {
+        clearInterval(slideshowInterval);
+        playPauseIcon.classList.remove('fa-pause');
+        playPauseIcon.classList.add('fa-play');
+    } else {
+        slideshowInterval = setInterval(() => {
+            changeSlide(1);
+        }, 2000); // Change slides every 2 seconds (adjust as needed)
+        playPauseIcon.classList.remove('fa-play');
+        playPauseIcon.classList.add('fa-pause');
+    }
+    playing = !playing;
+}
+
+function toggleFullscreen() {
+    const container = document.querySelector('.carousel-container');
+    if (!document.fullscreenElement) {
+        container.requestFullscreen().then(() => {
+            // Fullscreen mode activated successfully
+        }).catch(err => {
+            console.error('Error attempting to enable full-screen mode:', err.message);
+        });
+    } else {
+        document.exitFullscreen().catch(err => {
+            console.error('Error attempting to exit full-screen mode:', err.message);
+        });
+    }
+}
+
+document.addEventListener('fullscreenchange', () => {
+    const fullscreenElement = document.fullscreenElement;
+    const fullscreenButton = document.querySelector('.fullscreen-button');
+    const icon = fullscreenElement ? 'compress' : 'expand';
+    fullscreenButton.innerHTML = `<i class="fas fa-${icon}"></i>`;
+});
 
 showSlides();
 
-</script>
+
+  </script>
     
 </body>
 </html>                                                                         
+
+
