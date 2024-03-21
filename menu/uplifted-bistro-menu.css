@@ -707,3 +707,71 @@ button {
   color: #ed2020;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: auto;
+}
+
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
