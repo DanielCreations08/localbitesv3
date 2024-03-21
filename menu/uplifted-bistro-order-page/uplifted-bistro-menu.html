@@ -14,8 +14,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="/menu/uplifted-bistro-menu.css">
-  <script src="/" defer></script> 
+  <link rel="stylesheet" href="/menu/uplifted-bistro-order-page/uplifted-bistro-menu.css">
+  <script src="/menu/uplifted-bistro-order-page/uplifted-bistro-order.js" defer></script>
 
 
   
@@ -113,7 +113,7 @@
       <!-- Food Examples-->
       <a href="#" style="text-decoration: none;">
           <div class="restaurantCard popup-trigger" data-category="morningstars">
-              <img class="restaurantImage" src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Restaurant Image">
+              <img class="restaurantImage" src="/menu/uplifted-bistro-order-page/meat-starter.jpg" alt="Restaurant Image">
               <div class="restaurantName">$8.59</div>
               <div class="foodItemName">Meat Starter</div>
               <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
@@ -149,7 +149,9 @@
 
                 <div class="carousel-container">
                   <div class="carousel-inner">
-                      <img src="/menu/uplifted-bistro-pics/meat-starter.jpg" alt="Comida 1">
+                      <img src="/menu/uplifted-bistro-order-page/meat-starter.jpg" alt="Comida 1">
+                      <img src="/menu/uplifted-bistro-order-page/fit-starter.jpg" alt="Comida 1">
+                      <img src="/menu/uplifted-bistro-order-page/burrito-starter.jpg" alt="Comida 1">
                       <div class="bottom-controls">
                           <button class="control-button prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
                           <button class="control-button play-pause" onclick="togglePlayPause()"><i id="playPauseIcon" class="fas fa-play"></i></button>
@@ -355,66 +357,6 @@ function calculateTotalPrice() {
   </div>
 </section>
 
-<script>
-  
-  
-  // NAV BAR FUNCTION START (...)
-  
-  function toggleMobileMenu() {
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
-    mobileMenu.classList.toggle('show');
-    mobileMenuContainer.style.display = mobileMenu.classList.contains('show') ? 'block' : 'none';
-  }
-
-  function closeMobileMenu() {
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
-    mobileMenu.classList.remove('show');
-    mobileMenuContainer.style.display = 'none';
-  }
-
-  // NAV BAR FUNCTION START (...)
-
-
-
-
-
-
-      // Location Bar Size
-      var locationBar = document.getElementById('locationBar');
-  var prevScrollPos = window.pageYOffset;
-
-  window.addEventListener('scroll', function() {
-    var currentScrollPos = window.pageYOffset;
-
-    // Scroll-up effect
-    if (prevScrollPos > currentScrollPos || currentScrollPos < 50) {
-      locationBar.classList.remove('scroll-up');
-    } else {
-      locationBar.classList.add('scroll-up');
-    }
-
-    prevScrollPos = currentScrollPos;
-  });    // Location Bar Size
-  var locationBar = document.getElementById('locationBar');
-  var prevScrollPos = window.pageYOffset;
-
-  window.addEventListener('scroll', function() {
-    var currentScrollPos = window.pageYOffset;
-
-    // Scroll-up effect
-    if (prevScrollPos > currentScrollPos || currentScrollPos < 50) {
-      locationBar.classList.remove('scroll-up');
-    } else {
-      locationBar.classList.add('scroll-up');
-    }
-
-    prevScrollPos = currentScrollPos;
-  });
-</script>
-
-
 
 
 <script>
@@ -484,5 +426,74 @@ showSlides();
     
 </body>
 </html>                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
