@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Item Order</title>
+<style>
+    /* Styling for the pop-up */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Styling for the tabs */
+    .tab {
+        display: none;
+    }
+
+    .tab.active {
+        display: block;
+    }
+
+    /* Styling for the tab buttons */
+    .tab-btn {
+        background-color: #f0f0f0;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        margin-right: -1px; /* Adjust for border width */
+    }
+
+    .tab-btn.active {
+        background-color: #fff;
+        border-bottom: none;
+    }
+
+    /* Styling for the options */
+    .option {
+        margin-bottom: 10px;
+    }
+
+    /* Styling for the tap-to-light buttons */
+    .light-button {
+        background-color: #ccc;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .light-button.active {
+        background-color: #f0f0f0;
+    }
+
+    /* Media query for responsiveness */
+    @media screen and (max-width: 600px) {
+        .popup-content {
+            width: 90%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Button to trigger the pop-up -->
+<button class="popup-btn" onclick="togglePopup()">Open Menu</button>
+
+<!-- Pop-up with tab sections -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <!-- Tab buttons -->
+        <button class="tab-btn active" onclick="openTab(event, 'order')">Order</button>
+        <button class="tab-btn" onclick="openTab(event, 'social')">Socialize</button>
+
+        <!-- Tab contents -->
+        <div id="order" class="tab active">
+            <h2>Order Section</h2>
+            <!-- Single selection option -->
+            <div class="option">
+                <fieldset>
+                    <legend>Select Tap:</legend>
+                    <button class="light-button" onclick="selectOption(this)" data-value="Option 1">Option 1</button>
+                    <button class="light-button" onclick="selectOption(this)" data-value="Option 2">Option 2</button>
+                    <button class="light-button" onclick="selectOption(this)" data-value="Option 3">Option 3</button>
+                </fieldset>
+            </div>
+            <!-- Multiple selection option -->
+            <div class="option">
+                <fieldset>
+                    <legend>Select Extras:</legend>
+                    <button class="light-button" onclick="toggleExtra(this)">Extra 1</button>
+                    <button class="light-button" onclick="toggleExtra(this)">Extra 2</button>
+                    <button class="light-button" onclick="toggleExtra(this)">Extra 3</button>
+                </fieldset>
+            </div>
+        </div>
+        <div id="social" class="tab">
+            <h2>Socialize Section</h2>
+            <!-- Content for socializing -->
+            <p>Socialize with others here...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = popup.style.display === "none" ? "block" : "none";
+    }
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+
+    function selectOption(button) {
+        var buttons = document.querySelectorAll('.option .light-button');
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+    }
+
+    function toggleExtra(button) {
+        button.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>

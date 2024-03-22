@@ -1,57 +1,44 @@
+document.addEventListener("DOMContentLoaded", function() {
+  const shareButton = document.querySelector(".share-button");
+  const reviewsButton = document.querySelector(".reviews-button");
+  const reviewsModal = document.getElementById("reviews-modal");
 
-  
-  
-  // NAV BAR FUNCTION START (...)
-  
-  function toggleMobileMenu() {
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
-    mobileMenu.classList.toggle('show');
-    mobileMenuContainer.style.display = mobileMenu.classList.contains('show') ? 'block' : 'none';
-  }
-
-  function closeMobileMenu() {
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var mobileMenuContainer = document.querySelector('.mobile-menu-container');
-    mobileMenu.classList.remove('show');
-    mobileMenuContainer.style.display = 'none';
-  }
-
-  // NAV BAR FUNCTION START (...)
-
-
-
-
-
-
-      // Location Bar Size
-      var locationBar = document.getElementById('locationBar');
-  var prevScrollPos = window.pageYOffset;
-
-  window.addEventListener('scroll', function() {
-    var currentScrollPos = window.pageYOffset;
-
-    // Scroll-up effect
-    if (prevScrollPos > currentScrollPos || currentScrollPos < 50) {
-      locationBar.classList.remove('scroll-up');
-    } else {
-      locationBar.classList.add('scroll-up');
-    }
-
-    prevScrollPos = currentScrollPos;
-  });    // Location Bar Size
-  var locationBar = document.getElementById('locationBar');
-  var prevScrollPos = window.pageYOffset;
-
-  window.addEventListener('scroll', function() {
-    var currentScrollPos = window.pageYOffset;
-
-    // Scroll-up effect
-    if (prevScrollPos > currentScrollPos || currentScrollPos < 50) {
-      locationBar.classList.remove('scroll-up');
-    } else {
-      locationBar.classList.add('scroll-up');
-    }
-
-    prevScrollPos = currentScrollPos;
+  shareButton.addEventListener("click", function() {
+    // Simplemente una demostración de alerta para compartir
+    alert("¡Compartir en redes sociales!");
   });
+
+  reviewsButton.addEventListener("click", function() {
+    // Simulación de reseñas
+    const reviewList = reviewsModal.querySelector(".review-list");
+    reviewList.innerHTML = ""; // Limpiar las reseñas anteriores (en caso de que existan)
+    
+    // Añadir reseñas simuladas (puedes obtenerlas de una base de datos en un escenario real)
+    const reviews = [
+      "¡Excelente comida y entrega rápida!",
+      "Me encanta este restaurante, siempre ordeno aquí.",
+      "La comida estaba deliciosa, pero la entrega tardó un poco más de lo esperado."
+    ];
+
+    reviews.forEach(review => {
+      const reviewItem = document.createElement("div");
+      reviewItem.textContent = review;
+      reviewList.appendChild(reviewItem);
+    });
+
+    // Mostrar el modal de reseñas
+    reviewsModal.style.display = "block";
+  });
+
+  // Cierra el modal al hacer clic en la 'x' o fuera del modal
+  reviewsModal.addEventListener("click", function(event) {
+    if (event.target === reviewsModal || event.target.classList.contains("close")) {
+      reviewsModal.style.display = "none";
+    }
+  });
+
+  // Evita que el clic en el modal se propague al contenido
+  reviewsModal.querySelector(".modal-content").addEventListener("click", function(event) {
+    event.stopPropagation();
+  });
+});

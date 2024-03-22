@@ -1,22 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/menu/stefari-cafe-order-page/stefari-menu.css">
-  <script src="/menu/stefari-cafe-order-page/stefari-order.js" defer></script> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordenar Comida</title>
+<style>
+/* Estilos CSS para el menú item */
+.menu-item {
+  cursor: pointer;
+}
 
-   <!-- Font Awesome 6.5 CSS -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+/* Estilos CSS para el pop-up */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
 
-
-  <title>Delivery v3</title>
-
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+</style>
 </head>
 <body>
 
+<!-- Menú Item -->
+<div class="menu-item" onclick="openPopup()">
+  <img src="imagen-comida.jpg" alt="Comida" width="100" height="100">
+</div>
 
+<!-- Pop-up -->
+<div class="overlay" onclick="closePopup()"></div>
+<div class="popup" id="popup">
+  <img id="popup-image" src="imagen-comida.jpg" alt="Comida" width="200">
+  <p>Descripción del producto...</p>
+  <label for="size">Tamaño:</label>
+  <select id="size">
+    <option value="small">Pequeño</option>
+    <option value="medium">Mediano</option>
+    <option value="large">Grande</option>
+  </select>
+  <label for="extras">Extras:</label>
+  <input type="text" id="extras">
+  <label for="quantity">Cantidad:</label>
+  <input type="number" id="quantity" value="1" min="1">
+  <button onclick="addToCart()">Agregar al Carrito</button>
+</div>
+
+<script>
+// Función para abrir el pop-up
+function openPopup() {
+  document.getElementById('popup').style.display = 'block';
+  document.querySelector('.overlay').style.display = 'block';
+}
+
+// Función para cerrar el pop-up
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+  document.querySelector('.overlay').style.display = 'none';
+}
+
+// Función para hacer zoom en la imagen del pop-up
+document.getElementById('popup-image').addEventListener('click', function() {
+  this.style.width = (this.width * 1.5) + 'px';
+});
+
+// Función para agregar al carrito
+function addToCart() {
+  // Implementa la lógica para agregar el producto al carrito aquí
+  alert('Producto agregado al carrito');
+  closePopup();
+}
+</script>
 
 </body>
-
 </html>
