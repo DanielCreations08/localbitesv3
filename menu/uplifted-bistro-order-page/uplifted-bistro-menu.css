@@ -735,6 +735,8 @@ button {
 
 
 #mainImageContainer {
+
+  background-color: #000;
   width: 100%; /* Ancho fijo del contenedor */
   height: 300px; /* Altura fija del contenedor */
   display: flex;
@@ -748,7 +750,7 @@ button {
 #mainImage {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Ajusta la imagen dentro del contenedor sin deformarse ni recortarse */
+  object-fit: cover; /* Ajusta la imagen dentro del contenedor sin deformarse ni recortarse */
 }
 
 .thumbnails {
