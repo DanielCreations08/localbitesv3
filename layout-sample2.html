@@ -4,68 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menu Item Order</title>
-<style>
-    /* Styling for the pop-up */
-    .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-    }
-
-    .popup-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Styling for the tabs */
-    .tab {
-        display: none;
-    }
-
-    .tab.active {
-        display: block;
-    }
-
-    /* Styling for the tab buttons */
-    .tab-btn {
-        background-color: #f0f0f0;
-        color: #333;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        margin-right: -1px; /* Adjust for border width */
-    }
-
-    .tab-btn.active {
-        background-color: #fff;
-        border-bottom: none;
-    }
-
-    /* Styling for the options */
-    .option {
-        margin-bottom: 10px;
-    }
-
-    /* Media query for responsiveness */
-    @media screen and (max-width: 600px) {
-        .popup-content {
-            width: 90%;
-        }
-    }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -75,6 +14,8 @@
 <!-- Pop-up with tab sections -->
 <div class="popup" id="popup">
     <div class="popup-content">
+        <!-- Close button -->
+        <button class="close-btn" onclick="togglePopup()">×</button>
         <!-- Tab buttons -->
         <button class="tab-btn active" onclick="openTab(event, 'order')">Order</button>
         <button class="tab-btn" onclick="openTab(event, 'social')">Socialize</button>
@@ -83,24 +24,22 @@
         <div id="order" class="tab active">
             <h2>Order Section</h2>
             <!-- Single selection option -->
-            <div class="option">
-                <label for="tap">Tap:</label><br>
-                <input type="radio" id="tap1" name="tap" value="Option 1" onclick="selectOption(this)">
-                <label for="tap1">Option 1</label><br>
-                <input type="radio" id="tap2" name="tap" value="Option 2" onclick="selectOption(this)">
-                <label for="tap2">Option 2</label><br>
-                <input type="radio" id="tap3" name="tap" value="Option 3" onclick="selectOption(this)">
-                <label for="tap3">Option 3</label>
+            <div class="option" id="tap-options">
+                <fieldset>
+                    <legend>Select Tap:</legend>
+                    <button class="light-button" data-value="Option 1">Option 1</button>
+                    <button class="light-button" data-value="Option 2">Option 2</button>
+                    <button class="light-button" data-value="Option 3">Option 3</button>
+                </fieldset>
             </div>
             <!-- Multiple selection option -->
-            <div class="option">
-                <label for="extras">Extras:</label><br>
-                <input type="checkbox" id="extra1" name="extras" value="Extra 1" onclick="selectExtra(this)">
-                <label for="extra1">Extra 1</label><br>
-                <input type="checkbox" id="extra2" name="extras" value="Extra 2" onclick="selectExtra(this)">
-                <label for="extra2">Extra 2</label><br>
-                <input type="checkbox" id="extra3" name="extras" value="Extra 3" onclick="selectExtra(this)">
-                <label for="extra3">Extra 3</label>
+            <div class="option" id="extra-options">
+                <fieldset>
+                    <legend>Select Extras:</legend>
+                    <button class="light-button">Extra 1</button>
+                    <button class="light-button">Extra 2</button>
+                    <button class="light-button">Extra 3</button>
+                </fieldset>
             </div>
         </div>
         <div id="social" class="tab">
@@ -112,38 +51,135 @@
 </div>
 
 <script>
+    document.querySelectorAll('.light-button').forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.parentNode.parentNode.id === 'tap-options') {
+                selectOption(this);
+            } else {
+                toggleExtra(this);
+            }
+        });
+    });
+
     function togglePopup() {
         var popup = document.getElementById("popup");
-        popup.style.display = (popup.style.display === "none") ? "block" : "none";
+        popup.style.display = popup.style.display === "none" ? "block" : "none";
     }
 
     function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab");
-        for (i = 0; i < tabcontent.length; i++) {
+        var tabcontent = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        var tablinks = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
         }
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+        evt.currentTarget.classList.add("active");
     }
 
-    function selectOption(option) {
-        var options = document.getElementsByName(option.name);
-        for (var i = 0; i < options.length; i++) {
-            if (options[i] !== option) {
-                options[i].checked = false;
-            }
-        }
+    function selectOption(button) {
+        var buttons = document.querySelectorAll('#tap-options .light-button');
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
     }
 
-    function selectExtra(extra) {
-        // No need to deselect other options for multiple selection
+    function toggleExtra(button) {
+        button.classList.toggle('active');
     }
 </script>
+<style>
+    /* Styling for the pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
 
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the tabs */
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+/* Styling for the tab buttons */
+.tab-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: -1px; /* Adjust for border width */
+}
+
+.tab-btn.active {
+    background-color: #fff;
+    border-bottom: none;
+}
+
+/* Styling for the options */
+.option {
+    margin-bottom: 10px;
+}
+
+/* Styling for the tap-to-light buttons */
+.light-button {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.light-button.active {
+    background-color: #f0f0f0;
+}
+
+/* Styling for the close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 600px) {
+    .popup-content {
+        width: 90%;
+    }
+}
+
+</style>
 </body>
 </html>

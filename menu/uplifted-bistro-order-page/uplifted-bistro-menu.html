@@ -144,22 +144,21 @@
 
 
                 
-
-                <div class="carousel-container">
-                  <div class="carousel-inner">
-                      <img src="/menu/uplifted-bistro-order-page/meat-starter.jpg" alt="Comida 1">
-                      <img src="/menu/uplifted-bistro-order-page/fit-starter.jpg" alt="Comida 1">
-                      <img src="/menu/uplifted-bistro-order-page/burrito-starter.jpg" alt="Comida 1">
-                      <div class="bottom-controls">
-                          <button class="control-button prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-                          <button class="control-button play-pause" onclick="togglePlayPause()"><i id="playPauseIcon" class="fas fa-play"></i></button>
-                          <button class="control-button next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
-                      </div>
-                      <button class="fullscreen-button" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                <div id="mainImageContainer">
+                  <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Product Image" id="mainImage">
+              </div>
+              <div class="thumbnails">
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Thumbnail 1" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img2.jpg" alt="Thumbnail 2" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img3.jpg" alt="Thumbnail 3" onclick="changeMainImage(this.src)">
                   </div>
               </div>
               
-
                 
                
                 <div class="itemName">
@@ -356,70 +355,19 @@ function calculateTotalPrice() {
 
 
 
+
+
 <script>
-let slideIndex = 0;
-let playing = false;
-let slideshowInterval;
-
-function showSlides() {
-    const slides = document.querySelectorAll('.carousel-inner img');
-    if (slideIndex >= slides.length) slideIndex = 0;
-    if (slideIndex < 0) slideIndex = slides.length - 1;
-
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
-    }
-
-    slides[slideIndex].style.display = 'block';
+  
+function changeMainImage(src) {
+  document.getElementById('mainImage').src = src;
 }
-
-function changeSlide(n) {
-    slideIndex += n;
-    showSlides();
-}
-
-function togglePlayPause() {
-    const playPauseIcon = document.getElementById('playPauseIcon');
-    if (playing) {
-        clearInterval(slideshowInterval);
-        playPauseIcon.classList.remove('fa-pause');
-        playPauseIcon.classList.add('fa-play');
-    } else {
-        slideshowInterval = setInterval(() => {
-            changeSlide(1);
-        }, 2000); // Change slides every 2 seconds (adjust as needed)
-        playPauseIcon.classList.remove('fa-play');
-        playPauseIcon.classList.add('fa-pause');
-    }
-    playing = !playing;
-}
-
-function toggleFullscreen() {
-    const container = document.querySelector('.carousel-container');
-    if (!document.fullscreenElement) {
-        container.requestFullscreen().then(() => {
-            // Fullscreen mode activated successfully
-        }).catch(err => {
-            console.error('Error attempting to enable full-screen mode:', err.message);
-        });
-    } else {
-        document.exitFullscreen().catch(err => {
-            console.error('Error attempting to exit full-screen mode:', err.message);
-        });
-    }
-}
-
-document.addEventListener('fullscreenchange', () => {
-    const fullscreenElement = document.fullscreenElement;
-    const fullscreenButton = document.querySelector('.fullscreen-button');
-    const icon = fullscreenElement ? 'compress' : 'expand';
-    fullscreenButton.innerHTML = `<i class="fas fa-${icon}"></i>`;
-});
-
-showSlides();
+</script>
+    
 
 
-  </script>
+
+
     
 </body>
 </html>                                                                         
