@@ -1,245 +1,507 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <style>
-        /* CSS styling will be added later */
-    </style>
+    
+    <title>Document</title>
+</head>
+<body>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <link rel="stylesheet" href="/menu/uplifted-bistro-order-page/uplifted-bistro-menu.css"> 
+  <script src="/menu/uplifted-bistro-order-page/uplifted-bistro-order.js" defer></script> 
+
+  <title>Delivery v3</title>
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
+  </div>
+  <div class="menu">
+    <a href="/index.html">Home</a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+    <a href="#">About Us</a>
+    <a href="#">My Account</a>
+  </div>
+  <div class="cart-order-toggle">
+    <div class="cart"> 
+        <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
+        <span id="cartQuantity">0</span> <!-- Aquí se mostrará la cantidad -->
+    </div>
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
+    <div class="order-now">
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
+
+<div class="mobile-menu">
+  <a href="/index.html">Home</a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+  <a href="#">About Us</a>
+  <a href="#">My Account</a>
+</div>
 </head>
 
-<body>
-    <div class="popup-container" id="popupContainer">
+  <!-- Location Bar -->
+  <div class="locationBar" id="locationBar">
+    <div class="boldText">Delivering to:</div>
+    <div class="locationText">
+      <span>Kankakee, IL, USA</span>
+      <span class="locationIcon"><i class="fas fa-map-marker-alt"></i></span>
+    </div>
+  </div>
+
+
+  
+
+<div class="hoursContainer">
+  <div class="workingHours">
+      Today working hours: 10:30 am to 8:30pm
+  </div>
+</div>
+
+
+<!-- Search Bar -->
+<div class="welcome-section">
+  <div class="search-container">
+      <input type="text" id="search" placeholder="Search a meal...">
+      <button class="search-button">Search</button>
+  </div>
+</div>
+
+
+            <!-- Food Category Filter -->
+<div class="filterContainer">
+
+    <button class="filterButton" onclick="filterCategory('all')">All Categories</button>
+    <button class="filterButton" onclick="filterCategory('morningstars')">Morning Stars</button>
+    <button class="filterButton" onclick="filterCategory('lunch')">Elevated Salads</button>
+    <button class="filterButton" onclick="filterCategory('mexican')">Uplifted Kids</button>
+    <button class="filterButton" onclick="filterCategory('asian')">Signature Sandwich</button>
+    <button class="filterButton" onclick="filterCategory('american')">Elevated Mac & Cheese</button>
+    <button class="filterButton" onclick="filterCategory('healthy')">Blend Vibes</button>
+    <button class="filterButton" onclick="filterCategory('seafood')">Bubble Tea</button>
+    <button class="filterButton" onclick="filterCategory('italian')">Uplifted Quenchers</button>
+ 
+ </div>
+
+
+<!-- Restaurants Grid -->
+<section>
+  <div class="titleContainer">
+      <div class="title" data-category="morningstars">
+          <h1>Morning Stars</h1>
+      </div>
+  </div>
+
+  <div class="restaurantGrid" id="restaurantGrid">
+      <!-- Food Examples-->
+      <a href="#" style="text-decoration: none;">
+          <div class="restaurantCard popup-trigger" data-category="morningstars">
+              <img class="restaurantImage" src="/menu/uplifted-bistro-order-page/meat-starter.jpg" alt="Restaurant Image">
+              <div class="restaurantName">$8.59</div>
+              <div class="foodItemName">Meat Starter</div>
+              <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
+          </div>
+      </a>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Pop-up Container -->
+      <div class="popup-container" id="popupContainer">
+     
         <div class="popup-content">
-            <span class="close-icon" onclick="closePopup()">&#10006;</span>
-            <div class="tab">
-                <button class="tablinks" onclick="openTab(event, 'details')">Details</button>
-                <button class="tablinks" onclick="openTab(event, 'social')">Social</button>
-            </div>
-            <div id="details" class="tabcontent">
-                <div class="product-details">
-                    <h2>Product Name</h2>
-                    <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Product Image" id="mainImage">
-                    <div class="thumbnails">
-                        <div class="thumbnail">
-                            <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Thumbnail 1"
-                                onclick="changeMainImage(this.src)">
-                        </div>
-                        <div class="thumbnail">
-                            <img src="/menu/stefari-cafe-order-page/img2.jpg" alt="Thumbnail 2"
-                                onclick="changeMainImage(this.src)">
-                        </div>
-                        <div class="thumbnail">
-                            <img src="/menu/stefari-cafe-order-page/img3.jpg" alt="Thumbnail 3"
-                                onclick="changeMainImage(this.src)">
-                        </div>
+         
+
+                <div class="itemName">
+                    <div class="itemNameHolder">
+            
                     </div>
-                    <div class="tap-options">
-                        <div class="tap-option" onclick="toggleTapOption(this)">Size</div>
-                        <div class="tap-option" onclick="toggleTapOption(this)">Extras</div>
+                  
+                
+                    <div class="close-btn" onclick="closePopup()">×</div>
+                  </div>
+
+
+              <div class="food-box">
+
+                
+
+                
+                <div id="mainImageContainer">
+                  <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Product Image" id="mainImage">
+              </div>
+              <div class="thumbnails">
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img1.jpg" alt="Thumbnail 1" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img2.jpg" alt="Thumbnail 2" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/stefari-cafe-order-page/img3.jpg" alt="Thumbnail 3" onclick="changeMainImage(this.src)">
+                  </div>
+              </div>
+              
+                
+              <div class="itemNames">
+              
+                  <h1>Meat Starter</h1>
+         
+                
+
+                <div class="itemDescription">
+                  <p>Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.gg and American cheese. Served on choice of toasted bagel, croissant, or wrapgg and American cheese. Served on choice of toasted bagel, croissant, or wrap</p>
+                </div>
+
+                
+                <p class="food-price">$6.79</p>
+              </div>
+          
+              </div>
+
+              <div class="meat-selection">
+                  <div class="meat-rectangle">
+                      <span class="meat-text-orange">Choose your meat</span>
+                      <span class="meat-text-blue">1 required</span>
+                  </div>
+
+                  <div class="topping-options" id="toppingOptions">
+                    <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
+                        <div class="toppings">Bacon</div>
+                        <div class="toppingPriceContainer">
+                          <span class="topping-price-box">Add +0.00</span>
+                        </div>
+                    
                     </div>
-                    <button id="addToCartButton" onclick="addToCart()">Add to Cart</button>
+
+
+                    <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                      <div class="toppings">Sausage</div>
+                      <div class="toppingPriceContainer">
+                        <span class="topping-price-box">Add +0.00</span>
+                      </div>
+                      
+                  </div>
+                    <!-- Add more topping rectangles as needed -->
+                  </div>
+              </div> 
+
+              <div class="meat-selection">
+                <div class="meat-rectangle">
+                    <span class="meat-text-orange">Choose your style</span>
+                    <span class="meat-text-blue">1 required</span>
+                </div>
+
+                <div class="topping-options" id="toppingOptions">
+                  <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
+                      <div class="toppings">Served on Toasted Bagel</div>
+                      <div class="toppingPriceContainer">
+                      <span class="topping-price-box">Add +0.00</span>
+                      </div>
+                  </div>
+
+
+                  
+                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                      <div class="toppings">Served on Croissant</div>
+                      <div class="toppingPriceContainer">
+                        <span class="topping-price-box">Add +0.00</span>
+                        </div>
+                  </div>
+                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
+                    <div class="toppings">Served on Flour Wrap</div>
+                    <div class="toppingPriceContainer">
+                      <span class="topping-price-box">Add +0.00</span>
+                      </div>
+                </div>
+
+                  <!-- Add more topping rectangles as needed -->
                 </div>
             </div>
-            <div id="social" class="tabcontent">
-                <h3>Social Media Integration</h3>
-                <!-- Add social media features here -->
-            </div>
-        </div>
-    </div>
-
-    <button onclick="openPopup()">Open Product Details</button>
-
-    <script>
 
 
-        // Datos del producto
-        const product = {
-            name: "Product Name",
-            mainImageUrl: "/menu/stefari-cafe-order-page/img1.jpg",
-            thumbnails: [
-            ],
-            description: "Description of the product goes here...",
-            price: 10.00
-        };
 
-        function changeMainImage(imageSrc) {
-            const mainImage = document.getElementById('mainImage');
-            mainImage.src = imageSrc;
+        <!-- New Section for Special Instructions -->
+        <div class="special-instructions-section">
+          <label for="specialInstructions">Special Instructions:</label>
+          <textarea id="specialInstructions" rows="4"></textarea>
+      </div>
+
+<!-- Quantity Section -->
+<div class="quantity-section">
+  <span class="quantity-label">Quantity:</span>
+  <span class="quantity-icons" onclick="adjustQuantity(-1)">-</span>
+  <span id="quantity">1</span>
+  <span class="quantity-icons" onclick="adjustQuantity(1)">+</span>
+</div>
+
+<!-- Checkout Section -->
+<div class="checkout-section">
+  <div class="add-to-order-container">
+      <button id="addToCartButton" class="add-to-cart-button" onclick="addToCart(1); closePopup()">Add to Cart</button>
+      
+  </div>
+  <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
+</div>
+
+
+
+
+          </div>
+      </div>
+
+      <script>
+          // Get the elements
+          const popupContainer = document.getElementById('popupContainer');
+          const popupTrigger = document.querySelector('.popup-trigger');
+
+          // Function to open the pop-up
+          function openPopup() {
+              popupContainer.style.display = 'flex';
+          }
+
+          // Function to close the pop-up
+          function closePopup() {
+              popupContainer.style.display = 'none';
+          }
+
+          // Function to select a topping (you can customize this function)
+          function selectTopping(topping) {
+              // Add your logic here
+              console.log(`Selected topping: ${topping}`);
+          }
+
+          // Add click event listener to the trigger
+          popupTrigger.addEventListener('click', openPopup);
+
+          // Add click event listener to close the pop-up when clicking outside it
+          window.addEventListener('click', (event) => {
+              if (event.target === popupContainer) {
+                  closePopup();
+              }
+          });
+
+
+
+
+
+
+
+
+
+
+          // Function to handle topping selection
+function selectTopping(topping, element) {
+    // Add or remove 'selected' class on tap
+    element.classList.toggle('selected');
+
+    // Add your logic to handle the selected topping (if needed)
+    if (element.classList.contains('selected')) {
+        // Topping is selected
+        console.log(topping + ' selected');
+    } else {
+        // Topping is deselected
+        console.log(topping + ' deselected');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+let selectedQuantity = 1;
+
+// Function to adjust quantity
+function adjustQuantity(value) {
+    selectedQuantity += value;
+    if (selectedQuantity < 1) {
+        selectedQuantity = 1;
+    }
+    document.getElementById('quantity').innerText = selectedQuantity;
+}
+
+
+      </script>
+  </div>
+</section>
+
+
+
+
+
+<script>
+  
+function changeMainImage(src) {
+  document.getElementById('mainImage').src = src;
+}
+</script>
+    
+
+<script>
+
+function addToCartWithAnimation() {
+    // Agregar la lógica para agregar el artículo al carrito con animación
+
+    // Agregar la clase de animación al icono del carrito
+    const cartIcon = document.querySelector('.cart img');
+    cartIcon.classList.add('pulse');
+
+    // Eliminar la clase de animación después de 0.5 segundos
+    setTimeout(function() {
+        cartIcon.classList.remove('pulse');
+    }, 500);
+
+    // Aquí iría tu lógica para agregar el artículo al carrito y cerrar el pop-up
+}
+
+    
+
+    let cartQuantity = 0; // Inicializamos la cantidad en 0
+    
+    // Función para añadir al carrito con una cantidad específica
+    function addToCart(quantity) {
+        // Aquí iría la lógica para agregar el artículo al carrito
+    
+        // Incrementar la cantidad en el carrito
+        cartQuantity += quantity;
+        
+        // Actualizar el texto de la cantidad en el carrito
+        const cartQuantityElement = document.getElementById('cartQuantity');
+        cartQuantityElement.textContent = cartQuantity;
+    }
+    
+    // Función para ajustar la cantidad en el carrito
+    function adjustCartQuantity(value) {
+        // Ajustar la cantidad en función del valor proporcionado
+        cartQuantity += value;
+    
+        // Asegurarse de que la cantidad no sea negativa
+        if (cartQuantity < 0) {
+            cartQuantity = 0;
         }
-
-        function toggleTapOption(option) {
-            const tapOptions = document.querySelectorAll('.tap-option');
-            tapOptions.forEach(opt => opt.classList.remove('active'));
-            option.classList.add('active');
-        }
-
-        function addToCart() {
-            closePopup(); // Cerrar el pop-up después de añadir al carrito
-            // Lógica para añadir al carrito
-        }
-
-        window.onload = function () {
-            openPopup();
-            const productDetailsElement = document.querySelector('.product-details');
-            productDetailsElement.querySelector('h2').textContent = product.name;
-            productDetailsElement.querySelector('#mainImage').src = product.mainImageUrl;
-
-            const thumbnailsContainer = productDetailsElement.querySelector('.thumbnails');
-            product.thumbnails.forEach(thumbnailSrc => {
-                const thumbnailDiv = document.createElement('div');
-                thumbnailDiv.classList.add('thumbnail');
-                const thumbnailImage = document.createElement('img');
-                thumbnailImage.src = thumbnailSrc;
-                thumbnailImage.alt = "Thumbnail";
-                thumbnailImage.onclick = function () {
-                    changeMainImage(thumbnailSrc);
-                };
-                thumbnailDiv.appendChild(thumbnailImage);
-                thumbnailsContainer.appendChild(thumbnailDiv);
-            });
-        };
+    
+        // Actualizar el texto de la cantidad en el carrito
+        const cartQuantityElement = document.getElementById('cartQuantity');
+        cartQuantityElement.textContent = cartQuantity;
+    }
+    
     </script>
+    
+
+    
 
 
 
-    <style>
-        /* CSS styling for the pop-up */
-
-        .popup-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .popup-content {
-            width: 50%;
-            height: 80%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 16px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            overflow: auto;
-        }
-
-        @media only screen and (max-width: 767px) {
-            .popup-content {
-                width: 88%;
-                height: 80%;
-            }
-        }
-
-        .close-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-
-        /* CSS styling for the tabs */
-
-        .tab {
-            overflow: hidden;
-        }
-
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 10px 20px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .tabcontent {
-            display: none;
-            padding: 20px;
-        }
-
-        /* CSS styling for the product details */
-
-        .product-details {
-            text-align: center;
-        }
-
-        .product-details h2 {
-            margin-top: 0;
-        }
-
-        .product-details img {
-            max-width: 150px;
-            height: auto;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-
-        .thumbnails {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .thumbnail img {
-            width: 50px;
-            height: auto;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .tap-options {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .tap-option {
-            background-color: #ddd;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        .tap-option.active {
-            background-color: #65a9ff;
-            color: #fff;
-        }
-
-        #addToCartButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            border: none;
-            background-color: #65a9ff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
 </body>
+</html>                                                                         
 
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

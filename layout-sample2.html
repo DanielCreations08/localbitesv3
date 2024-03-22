@@ -3,183 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu Item Order</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<title>Fake Add to Cart Button</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<!-- Button to trigger the pop-up -->
-<button class="popup-btn" onclick="togglePopup()">Open Menu</button>
-
-<!-- Pop-up with tab sections -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <!-- Close button -->
-        <button class="close-btn" onclick="togglePopup()">×</button>
-        <!-- Tab buttons -->
-        <button class="tab-btn active" onclick="openTab(event, 'order')">Order</button>
-        <button class="tab-btn" onclick="openTab(event, 'social')">Socialize</button>
-
-        <!-- Tab contents -->
-        <div id="order" class="tab active">
-            <h2>Order Section</h2>
-            <!-- Single selection option -->
-            <div class="option" id="tap-options">
-                <fieldset>
-                    <legend>Select Tap:</legend>
-                    <button class="light-button" data-value="Option 1">Option 1</button>
-                    <button class="light-button" data-value="Option 2">Option 2</button>
-                    <button class="light-button" data-value="Option 3">Option 3</button>
-                </fieldset>
-            </div>
-            <!-- Multiple selection option -->
-            <div class="option" id="extra-options">
-                <fieldset>
-                    <legend>Select Extras:</legend>
-                    <button class="light-button">Extra 1</button>
-                    <button class="light-button">Extra 2</button>
-                    <button class="light-button">Extra 3</button>
-                </fieldset>
-            </div>
-        </div>
-        <div id="social" class="tab">
-            <h2>Socialize Section</h2>
-            <!-- Content for socializing -->
-            <p>Socialize with others here...</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.querySelectorAll('.light-button').forEach(button => {
-        button.addEventListener('click', function() {
-            if (this.parentNode.parentNode.id === 'tap-options') {
-                selectOption(this);
-            } else {
-                toggleExtra(this);
-            }
-        });
-    });
-
-    function togglePopup() {
-        var popup = document.getElementById("popup");
-        popup.style.display = popup.style.display === "none" ? "block" : "none";
-    }
-
-    function openTab(evt, tabName) {
-        var tabcontent = document.getElementsByClassName("tab");
-        for (var i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        var tablinks = document.getElementsByClassName("tab-btn");
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.classList.add("active");
-    }
-
-    function selectOption(button) {
-        var buttons = document.querySelectorAll('#tap-options .light-button');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-        });
-        button.classList.add('active');
-    }
-
-    function toggleExtra(button) {
-        button.classList.toggle('active');
-    }
-</script>
 <style>
-    /* Styling for the pop-up */
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
 
-.popup-content {
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+  }
+
+  h1, h2 {
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .add-to-cart-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-to-cart-button:hover {
+    background-color: #45a049;
+  }
+
+  .popup {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Styling for the tabs */
-.tab {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: none;
-}
+  }
 
-.tab.active {
+  .popup.show {
     display: block;
-}
+  }
 
-/* Styling for the tab buttons */
-.tab-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-right: -1px; /* Adjust for border width */
-}
-
-.tab-btn.active {
-    background-color: #fff;
-    border-bottom: none;
-}
-
-/* Styling for the options */
-.option {
-    margin-bottom: 10px;
-}
-
-/* Styling for the tap-to-light buttons */
-.light-button {
-    background-color: #ccc;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.light-button.active {
-    background-color: #f0f0f0;
-}
-
-/* Styling for the close button */
-.close-btn {
+  .cart-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
+    top: 20px;
+    right: 20px;
     font-size: 24px;
-    cursor: pointer;
     color: #333;
-}
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
 
-/* Media query for responsiveness */
-@media screen and (max-width: 600px) {
-    .popup-content {
-        width: 90%;
-    }
-}
+  .cart-icon:hover {
+    transform: scale(1.1);
+  }
 
+  .corner-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
 </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Product Details</h1>
+    <p>Product Name: Sample Product</p>
+    <p>Price: $10.00</p>
+
+    <!-- Menu Item Button -->
+    <button id="menuItemButton">Menu Item</button>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+
+
+        
+      <h2>Add to Cart</h2>
+      <button id="addToCartButton" class="add-to-cart-button">
+        Add to Cart
+      </button>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" id="cartIcon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="corner-badge" id="cartItemCount">0</span>
+    </div>
+  </div>
+
+  <script>
+    // Function to handle adding item to cart
+    function addToCart() {
+      // Dummy item details (in real scenario, this data would come from the product page)
+      const item = {
+        name: 'Sample Product',
+        price: 10.00
+      };
+
+      // Update cart item count
+      updateCartItemCount();
+
+      // Close the popup
+      document.getElementById('popup').classList.remove('show');
+    }
+
+    // Function to update cart item count
+    function updateCartItemCount() {
+      const cartItemCount = parseInt(document.getElementById('cartItemCount').textContent) + 1;
+      document.getElementById('cartItemCount').textContent = cartItemCount;
+    }
+
+    // Show popup when menu item button is clicked
+    document.getElementById('menuItemButton').addEventListener('click', function() {
+      document.getElementById('popup').classList.add('show');
+    });
+
+    // Attach click event listener to the "Add to Cart" button
+    document.getElementById('addToCartButton').addEventListener('click', addToCart);
+  </script>
 </body>
 </html>

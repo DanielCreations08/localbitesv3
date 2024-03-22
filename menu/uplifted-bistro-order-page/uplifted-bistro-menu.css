@@ -1,225 +1,228 @@
-
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
 
 
 
 /* NAV BAR STYLE */
 .navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #FB7306;
-    color: white;
-    padding: 15px 0px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 2;
-  }
-  
-  .logo img {
-    width: 120px;
-    padding-left: 25px;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #FB7306;
+  color: white;
+  padding: 15px 0px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+}
+
+.logo img {
+  width: 120px;
+  padding-left: 25px;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #ffcc00;
+}
+
+.cart-order-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.cart img {
+  margin-top: 7px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle {
+  font-size: 35px;
+  padding-bottom: 5px;
+  padding-right: 30px;
+  cursor: pointer;
+  display: none;
+}
+
+.mobile-menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  /* Fondo oscuro */
+  display: none;
+  z-index: 2;
+  /* Coloca encima del menú */
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #FB7306;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: -80%;
+  width: 80%;
+  height: 100%;
+  transition: left 0.3s ease;
+  z-index: 2;
+  /* Coloca encima del fondo oscuro */
+}
+
+.mobile-menu a {
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  background-color: #555;
+}
+
+.mobile-menu.show {
+  left: 0;
+}
+
+.order-now {
+  padding-right: 25px;
+  order: 3;
+}
+
+.order-now button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+
+
+.order-now button:hover {
+  background-color: #5a5a5a;
+}
+
+@media only screen and (max-width: 768px) {
   .menu {
-    display: flex;
-    gap: 20px;
-    flex: 1;
-    justify-content: center;
+    display: none;
   }
-  
-  .menu a {
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s ease;
-  }
-  
-  .menu a:hover {
-    color: #ffcc00;
-  }
-  
-  .cart-order-toggle {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .cart img {
-    margin-top: 7px;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-  }
-  
+
   .mobile-menu-toggle {
-    font-size: 35px;
-    padding-bottom: 5px;
-    padding-right: 30px;
-    cursor: pointer;
-    display: none;
-  }
-  
-  .mobile-menu-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
-    display: none;
-    z-index: 2; /* Coloca encima del menú */
-  }
-  
-  .mobile-menu {
     display: flex;
-    flex-direction: column;
-    background-color: #FB7306;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: -80%;
-    width: 80%;
-    height: 100%;
-    transition: left 0.3s ease;
-    z-index: 2; /* Coloca encima del fondo oscuro */
   }
-  
-  .mobile-menu a {
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    transition: background-color 0.3s ease;
+
+  .cart-order-toggle {
+    order: 2;
   }
-  
-  .mobile-menu a:hover {
-    background-color: #555;
+
+  .order-now {
+    display: none;
   }
-  
+
+  .navbar {
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .mobile-menu-container {
+    display: none;
+    /* Oculta inicialmente */
+  }
+
   .mobile-menu.show {
     left: 0;
+    width: 70%;
   }
-  
-  .order-now {
-    padding-right: 25px;
-    order: 3;
-  }
-  
-  .order-now button {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 6px;
-  }
-  
-  
-  
-  .order-now button:hover {
-    background-color: #5a5a5a;
-  }
-  
-  @media only screen and (max-width: 768px) {
-    .menu {
-      display: none;
-    }
-  
-    .mobile-menu-toggle {
-      display: flex;
-    }
-  
-    .cart-order-toggle {
-      order: 2;
-    }
-  
-    .order-now {
-      display: none;
-    }
-  
-    .navbar {
-      justify-content: space-between;
-      padding: 10px;
-    }
-  
-    .mobile-menu-container {
-      display: none; /* Oculta inicialmente */
-    }
-  
-    .mobile-menu.show {
-      left: 0;
-      width: 70%;
-    }
-  }
-  
-  
-  /* NAV BAR ENDS */
+}
 
-  .welcome-section {
-            
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s ease-out 0.5s forwards;
-    background-color: #fff;
-    padding: 0px 20px 0px 20px;
-    border-radius: 5px;
+
+/* NAV BAR ENDS */
+
+.welcome-section {
+
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.5s forwards;
+  background-color: #fff;
+  padding: 0px 20px 0px 20px;
+  border-radius: 5px;
 }
 
 .search-container {
-    margin-top: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Media query for smaller screens (e.g., mobile) */
 @media only screen and (max-width: 767px) {
-    .search-container {
-      margin-top: 32px;
-     }
+  .search-container {
+    margin-top: 32px;
+  }
 }
 
 #search {
-    padding: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    width: 70%;
-    transition: border-color 0.3s ease;
+  padding: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 70%;
+  transition: border-color 0.3s ease;
 }
 
 #search:focus {
-    border-color: #000000;
+  border-color: #000000;
 }
 
 .search-button {
-    padding: 15px 20px;
-    background-color: #FB7306;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 15px 20px;
+  background-color: #FB7306;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 
 @keyframes fadeInUp {
-to {
+  to {
     opacity: 1;
     transform: translateY(0);
-}
+  }
 }
 
 
@@ -231,9 +234,11 @@ to {
 /* Location Bar */
 .locationBar {
   position: fixed;
-  top: 90px; /* Adjusted margin-top for the navbar */
+  top: 90px;
+  /* Adjusted margin-top for the navbar */
   width: 100%;
-  height: 70px; /* Initial height */
+  height: 70px;
+  /* Initial height */
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1;
@@ -248,16 +253,21 @@ to {
 
 .locationBar.scroll-up {
 
-  height: 40px; /* Adjusted height when scrolled up */
-  padding: 14px 0px 0px 10px; /* Adjusted padding when scrolled up */
-  font-size: 85%; /* Reduced font size when scrolled up */
-  transform: translateY(-15px); /* Adjusted translateY for sliding up effect */
+  height: 40px;
+  /* Adjusted height when scrolled up */
+  padding: 14px 0px 0px 10px;
+  /* Adjusted padding when scrolled up */
+  font-size: 85%;
+  /* Reduced font size when scrolled up */
+  transform: translateY(-15px);
+  /* Adjusted translateY for sliding up effect */
 }
 
 .boldText {
   margin-right: 10px;
   font-weight: bold;
-  margin-bottom: 5px; /* Adjusted margin to separate "Delivering to:" from the location */
+  margin-bottom: 5px;
+  /* Adjusted margin to separate "Delivering to:" from the location */
 }
 
 .locationText {
@@ -284,30 +294,30 @@ to {
 
 
 .hoursContainer {
-    margin-top: 110px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .workingHours {
-    font-size: 18px;
-    padding: 8px;
+  font-size: 18px;
+  padding: 8px;
 }
 
 
 @media only screen and (max-width: 767px) {
-    .hoursContainer {
-        margin-top: 90px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
+  .hoursContainer {
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
 
-    .workingHours {
-        font-size: 15px;
-    }
+  .workingHours {
+    font-size: 15px;
+  }
 }
 
 
@@ -315,320 +325,416 @@ to {
 
 /* Filter Button Container */
 .filterContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  margin: 0px 0px 0px 20px;
+  /* Agregado margen lateral en desktop */
+  display: flex;
+}
+
+/* Filter Button */
+.filterButton {
+  color: #000000;
+  font-size: 18px;
+  padding: 12px 15px;
+  margin: 0px 0px 0px 15px;
+  background-color: #fff;
+  /* Fondo blanco */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+/* Hover effect */
+.filterButton:hover {
+  background-color: #ffcc00;
+  /* Naranja en hover */
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  display: none;
+  /* Oculto por defecto */
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  .filterContainer {
     overflow-x: auto;
+    margin: 0;
+    /* Eliminado margen lateral en móviles */
+    width: 100%;
+    /* Ajuste para ocupar todo el ancho */
     white-space: nowrap;
-    background-color: #fff;
-    padding: 10px 0px 15px 0px;
-    margin: 0px 0px 0px 20px; /* Agregado margen lateral en desktop */
-    display: flex;
+    /* Garantizar que los elementos no se envuelvan en columnas */
+    flex-wrap: unset;
+    /* Restablecer el envoltorio flexible */
+    justify-content: flex-start;
+    /* Alinear los elementos al principio */
   }
-  
-  /* Filter Button */
-  .filterButton {
-    color: #000000;
-    font-size: 18px;
-    padding: 12px 15px;
-    margin: 0px 0px 0px 15px;
-    background-color: #fff; /* Fondo blanco */
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-out;
-  }
-  
-  /* Hover effect */
-  .filterButton:hover {
-    background-color: #ffcc00; /* Naranja en hover */
-  }
-  
-  /* Scroll Indicator */
+
   .scrollIndicator {
-    display: none; /* Oculto por defecto */
+    display: block;
+    /* Mostrar solo en dispositivos móviles */
   }
-  
-  /* Estilos para dispositivos móviles */
-  @media only screen and (max-width: 767px) {
-    .filterContainer {
-      overflow-x: auto;
-      margin: 0; /* Eliminado margen lateral en móviles */
-      width: 100%; /* Ajuste para ocupar todo el ancho */
-      white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
-      flex-wrap: unset; /* Restablecer el envoltorio flexible */
-      justify-content: flex-start; /* Alinear los elementos al principio */
-    }
-  
-    .scrollIndicator {
-      display: block; /* Mostrar solo en dispositivos móviles */
-    }
-  }
-  
+}
 
-  .titleContainer {
-    display: flex;
-    justify-content: center;
-    padding-top: 15px;
-  }
-  
-  
 
-  /* Restaurant Grid Container */
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+
+
+/* Restaurant Grid Container */
 .restaurantGrid {
-    margin: 2px 12px 25px 35px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 25px 0px; /* Default gap for larger screens */
-    padding: 25px 0px; /* Padding for both sides */
-    justify-content: space-around;
-  }
-  
-  /* Media query for smaller screens (e.g., mobile) */
-  @media only screen and (max-width: 767px) {
-    .restaurantGrid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 8px; /* Adjust the gap between cards */
-      padding: 8px 0px 35px 0px; /* Adjust the overall padding */
-      margin: 1px 1px 1px 1px;
-    }
-  }
-  
-  /* Restaurant Card */
-  .restaurantCard {
-   
-    position: relative;
-    width: 170px; /* Adjusted the width to 100% */
-    height: 220px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    margin: 0; /* Set margin to 0 to avoid unintended spacing */
-    
-  }
-  
-  @media only screen and (max-width: 414px) {
-    .restaurantCard {
-      width: 174px; /* Adjusted the width to 100% */
-      height: 200px;
-    }
-  }
-  
-  @media only screen and (max-width: 430px) {
-    .restaurantCard {
-      width: 175px; /* Adjusted the width to 100% */
-      height: 200px;
-    }
-  }
-  
-  
-  /* Restaurant Image */
-  .restaurantImage {
-    margin: 10px;
-    object-fit: cover;
-    border-radius: 10px;
-    overflow: hidden; /* Añadido para ocultar cualquier desbordamiento de la imagen */
-  }
-  
-  /* Restaurant Name */
-  .restaurantName {
-    border-radius: 16px;
-    text-overflow: ellipsis; /* Add this line */
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    color: #fff; /* White color for the name */
-    background-color:  #FB7306; /* Orange background for the name */
-    padding: 2px;
-    margin: 0px 40px;
-  }
-  
+  margin: 2px 12px 25px 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 25px 0px;
+  /* Default gap for larger screens */
+  padding: 25px 0px;
+  /* Padding for both sides */
+  justify-content: space-around;
+}
 
-  .foodItemName {
-    text-overflow: ellipsis; /* Add this line */
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    color: #000000; /* White color for the name */
-    background-color: #ffffff; /* Orange background for the name */
-    padding: 5px;
-    margin: 5px 0px 0px 0px;
+/* Media query for smaller screens (e.g., mobile) */
+@media only screen and (max-width: 767px) {
+  .restaurantGrid {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    /* Adjust the gap between cards */
+    padding: 8px 0px 35px 0px;
+    /* Adjust the overall padding */
+    margin: 1px 1px 1px 1px;
   }
+}
+
+/* Restaurant Card */
+.restaurantCard {
+
+  position: relative;
+  width: 170px;
+  /* Adjusted the width to 100% */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  /* Set margin to 0 to avoid unintended spacing */
+
+}
+
+
+@media only screen and (max-width: 430px) {
+  .restaurantCard {
+    width: 185px;
+    /* Adjusted the width to 100% */
+    height: 290px;
+  }
+}
+
+
+/* Restaurant Image */
+.restaurantImage {
+  margin: 10px;
+  min-height: 135px;
+  object-fit: cover;
+  border-radius: 10px;
+  overflow: hidden;
+  /* Añadido para ocultar cualquier desbordamiento de la imagen */
+}
+
+/* Restaurant Name */
+.restaurantName {
+  border-radius: 16px;
+  text-overflow: ellipsis;
+  /* Add this line */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  /* White color for the name */
+  background-color: #FB7306;
+  /* Orange background for the name */
+  padding: 2px;
+  margin: 0px 40px;
+}
+
+
+.foodItemName {
+  display: flex;
+  justify-content: space-evenly;
+  text-overflow: ellipsis;
+  /* Add this line */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  /* White color for the name */
+  background-color: #ffffff;
+  /* Orange background for the name */
+  padding: 5px;
+  margin: 5px 0px 0px 0px;
+}
+
 
 
 /* Restaurant Hours */
 .foodDescription {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* Número máximo de líneas antes de la truncación */
-    -webkit-box-orient: vertical; /* Orientación vertical del contenedor de caja */
-    font-size: 14px;
-    text-align: center;
-    color: #000000; /* White color for the hours */
-    background-color: #ffffff; /* Yellow background for the hours */
-    padding: 2px 0px 5px 0px;
-    margin: 0px 4px 10px 4px;
-  }
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  /* Número máximo de líneas antes de la truncación */
+  -webkit-box-orient: vertical;
+  /* Orientación vertical del contenedor de caja */
+  font-size: 14px;
+  text-align: center;
+  color: #000000;
+  /* White color for the hours */
+  background-color: #ffffff;
+  /* Yellow background for the hours */
+  padding: 2px 0px 2px 0px;
+  margin: 0px 4px 10px 4px;
+}
 
 
-  .popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    position: absolute;
-    max-height: 80vh; /* Ajusta según sea necesario */
-    overflow-y: auto;
-    margin: 12px 5px; /* Ajusta la posición vertical del pop-up */
+  background-color: white;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 60%;
+  width: 100%;
+  position: absolute;
+  max-height: 92vh;
+  /* Ajusta según sea necesario */
+  overflow-y: auto;
+  margin: 12px 5px;
+  /* Ajusta la posición vertical del pop-up */
 }
 
 
 @media only screen and (max-width: 767px) {
   .popup-content {
-    max-width: 300px;
+    max-width: 94%;
   }
 
 }
 
-  /* Close button */
-  .close-btn {
-    position: fixed;
-    right: 12px;
-    top: 10px;
-    z-index: 1000;
-    font-size: 30px;
-    color: #000;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    padding: 10px 20px;
-    border-radius: 50%; /* Makes it round */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
+
+
+/* Close button */
+.close-btn {
+
+  position: relative;
+  right: 4px;
+  z-index: 1000;
+  font-size: 45px;
+  color: #000;
+  cursor: pointer;
+
 }
+
 
 
 @media only screen and (max-width: 768px) {
   .close-btn {
+    font-size: 50px;
     display: flex;
-    right: 10px;
-    top: 10px;   
-    }
+    right: 7px;
   }
+}
 
 
 
 
-  /* Styles for the food box */
-  .food-box {
-    text-align: center;
+/* Styles for the food box */
+.food-box {
+  text-align: center;
+  margin: 0px 15px;
+}
+
+/* Updated style for the food image */
+.food-box img {
+  width: 100%;
+  /* Make the image fill its container */
+  height: 100%;
+  /* Make the image fill its container */
+  object-fit: cover;
+  /* Cover the entire container while maintaining aspect ratio */
+  border-radius: 10px;
+}
+
+
+
+.itemName {
+  position: relative;
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+
+}
+
+.itemNameHolder {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.itemNames { 
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px 0px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.itemDescription {
+  color: #a1a1a1;
+  font-size: 16px;
+  margin: 0px 50px;
+}
+
+.itemDescription p {
+  border-top: 2px solid rgba(0, 0, 0, 0.1); /* Línea divisoria semitransparente en la parte superior */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Línea divisoria semitransparente en la parte inferior */
+  padding-top: 25px; /* Espacio opcional para separar la línea superior del texto */
+  padding-bottom: 25px; /* Espacio opcional para separar la línea inferior del texto */
+}
+
+
+/* Styles for the meat selection */
+.meat-selection {
+  margin: 0px 5px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.meat-rectangle {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.meat-text-orange {
+  font-size: 16px;
+  font-weight: bold;
+  color: orange;
+}
+
+.food-price {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.meat-text-blue {
+  color: blue;
+}
+
+/* Styles for the bacon and sausage options */
+.topping-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.toppings {
+  display: flex;
+  justify-content: center;
+}
+
+.topping-rectangle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 8px;
+  padding: 15px 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .topping-price-box{
+
+    font-size: 13px;
+    padding: 9px 5px;
+
   }
-
-  /* Updated style for the food image */
-  .food-box img {
-    width: 100%; /* Make the image fill its container */
-    height: 100%; /* Make the image fill its container */
-    object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
-    border-radius: 10px;
-  }
-
-  .foodContainer {
-    margin: 25px 20px 10px 20px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .itemName {
-    background-color: #ffffff;
-    
-  }
-
-  .itemDescription {
-    margin: 0px 15px;
-  }
+  
+}
 
 
-  /* Styles for the meat selection */
-  .meat-selection {
-    margin-top: 10px;
-  }
 
-  .meat-rectangle {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
 
-  .meat-text-orange {
-    font-weight: bold;
-    color: orange;
-  }
 
-  .food-price {
-    font-size: 25px;
-    font-weight: bold;
-  }
 
-  .meat-text-blue {
-    color: blue;
-  }
+.toppingPriceContainer {
+  width: 100%;
+  padding: 8px 0px;
+  margin: 2px 0px;
+}
 
-  /* Styles for the bacon and sausage options */
-  .topping-options {
-    display: flex;
-    flex-wrap: wrap;
-  }
 
-  .toppings {
-    display: flex;
-    justify-content: center;
-  }
 
-  .topping-rectangle {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #ccc;
-    text-align: center;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 5px;
-    cursor: pointer;
-  }
+.topping-price-box {
+  background-color: #fa2600;
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 35px;
+  margin-top: 5px;
+}
 
+
+
+@media only screen and (max-width: 768px) {
   .topping-price-box {
-    text-align: center;
-    background-color:  #FB7306;
-    color: white;
-    border-radius: 8px;
-    padding: 5px;
-    margin-top: 5px;
+
+    font-size: 12px;
+    padding: 9px 15px;
+
   }
+  
+}
 
 
-  /* Selected styles */
+/* Selected styles */
 .topping-rectangle.selected {
-  background-color: #E3CA45;
+  background-color: #45e35d;
   color: black;
 }
 
@@ -636,7 +742,7 @@ to {
 
 /* Special Instructions Section */
 .special-instructions-section {
-  margin-top: 20px;
+  margin: 20px 10px 0px 10px;
 }
 
 label {
@@ -651,22 +757,31 @@ textarea {
   border-radius: 4px;
   resize: vertical;
 }
+
 /**/
 /* Quantity Section */
 .quantity-section {
   display: flex;
+
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 15px;
+  border-top: 2px solid rgba(0, 0, 0, 0.1); /* Línea divisoria semitransparente en la parte superior */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Línea divisoria semitransparente en la parte inferior */
+  padding-top: 25px; /* Espacio opcional para separar la línea superior del texto */
+  padding-bottom: 25px; /* Espacio opcional para separar la línea inferior del texto */
 }
 
 .quantity-label {
+  
   font-weight: bold;
   font-size: 20px;
   margin-right: 10px;
 }
 
 .quantity-icons {
+  padding: 0px 20px;
+
   cursor: pointer;
   font-size: 22px;
 }
@@ -692,7 +807,7 @@ textarea {
 
 button {
   font-size: 22px;
-  background-color:  #FB7306;
+  background-color: #FB7306;
   color: white;
   padding: 10px 75px;
   border: 2px solid #FCEF7C;
@@ -736,27 +851,29 @@ button {
 
 #mainImageContainer {
 
-  background-color: #000;
-  width: 100%; /* Ancho fijo del contenedor */
-  height: 300px; /* Altura fija del contenedor */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
- 
-  overflow: hidden; /* Oculta partes de las imágenes que excedan los límites del contenedor */
+  overflow: hidden;
+  /* Oculta partes de las imágenes que excedan los límites del contenedor */
 }
+
+
 
 #mainImage {
   width: 100%;
+  max-height: 372px;
+  max-width: auto;
   height: 100%;
-  object-fit: cover; /* Ajusta la imagen dentro del contenedor sin deformarse ni recortarse */
+  object-fit: cover;
+  /* Ajusta la imagen dentro del contenedor sin deformarse ni recortarse */
 }
 
+
+
 .thumbnails {
+
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  margin-bottom: 8px;
 }
 
 .thumbnail {
@@ -765,10 +882,13 @@ button {
 }
 
 .thumbnail img {
-  max-width: 100px;
-  max-height: 100px; /* Limita el tamaño máximo de las miniaturas */
-  width: 100px; /* Ancho automático para mantener la proporción */
-  height: 100px; /* Altura automática para mantener la proporción */
+  max-width: 110px;
+  max-height: 110px;
+  /* Limita el tamaño máximo de las miniaturas */
+  width: 80px;
+  /* Ancho automático para mantener la proporción */
+  height: 80px;
+  /* Altura automática para mantener la proporción */
   border: 2px solid transparent;
   transition: border-color 0.3s ease;
 }
