@@ -98,21 +98,21 @@
         <div id="order" class="tab active">
             <h2>Order Section</h2>
             <!-- Single selection option -->
-            <div class="option">
+            <div class="option" id="tap-options">
                 <fieldset>
                     <legend>Select Tap:</legend>
-                    <button class="light-button" onclick="selectOption(this)" data-value="Option 1">Option 1</button>
-                    <button class="light-button" onclick="selectOption(this)" data-value="Option 2">Option 2</button>
-                    <button class="light-button" onclick="selectOption(this)" data-value="Option 3">Option 3</button>
+                    <button class="light-button" data-value="Option 1">Option 1</button>
+                    <button class="light-button" data-value="Option 2">Option 2</button>
+                    <button class="light-button" data-value="Option 3">Option 3</button>
                 </fieldset>
             </div>
             <!-- Multiple selection option -->
-            <div class="option">
+            <div class="option" id="extra-options">
                 <fieldset>
                     <legend>Select Extras:</legend>
-                    <button class="light-button" onclick="toggleExtra(this)">Extra 1</button>
-                    <button class="light-button" onclick="toggleExtra(this)">Extra 2</button>
-                    <button class="light-button" onclick="toggleExtra(this)">Extra 3</button>
+                    <button class="light-button">Extra 1</button>
+                    <button class="light-button">Extra 2</button>
+                    <button class="light-button">Extra 3</button>
                 </fieldset>
             </div>
         </div>
@@ -125,19 +125,28 @@
 </div>
 
 <script>
+    document.querySelectorAll('.light-button').forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.parentNode.parentNode.id === 'tap-options') {
+                selectOption(this);
+            } else {
+                toggleExtra(this);
+            }
+        });
+    });
+
     function togglePopup() {
         var popup = document.getElementById("popup");
         popup.style.display = popup.style.display === "none" ? "block" : "none";
     }
 
     function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab");
-        for (i = 0; i < tabcontent.length; i++) {
+        var tabcontent = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
+        var tablinks = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < tablinks.length; i++) {
             tablinks[i].classList.remove("active");
         }
         document.getElementById(tabName).style.display = "block";
@@ -145,7 +154,7 @@
     }
 
     function selectOption(button) {
-        var buttons = document.querySelectorAll('.option .light-button');
+        var buttons = document.querySelectorAll('#tap-options .light-button');
         buttons.forEach(function(btn) {
             btn.classList.remove('active');
         });
@@ -159,3 +168,4 @@
 
 </body>
 </html>
+
