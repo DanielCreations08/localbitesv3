@@ -193,68 +193,54 @@
           
               </div>
 
-              <div class="meat-selection">
-                  <div class="meat-rectangle">
-                      <span class="meat-text-orange">Choose your meat</span>
-                      <span class="meat-text-blue">1 required</span>
-                  </div>
+              <div class="delivery-simulator">
+                <div class="selection-section">
 
-                  <div class="topping-options" id="toppingOptions">
-                    <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
-                        <div class="toppings">Bacon</div>
-                        <div class="toppingPriceContainer">
-                          <span class="topping-price-box">Add +0.00</span>
+
+                    <div class="selection-title">
+                        <div class="title-container">
+                            <span class="section-title">Choose Your Meal</span>
+                            <span class="required-text">1 Required</span> <!-- Nuevo texto -->
                         </div>
-                    
                     </div>
-
-
-                    <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
-                      <div class="toppings">Sausage</div>
-                      <div class="toppingPriceContainer">
-                        <span class="topping-price-box">Add +0.00</span>
-                      </div>
-                      
-                  </div>
-                    <!-- Add more topping rectangles as needed -->
-                  </div>
-              </div> 
-
-              <div class="meat-selection">
-                <div class="meat-rectangle">
-                    <span class="meat-text-orange">Choose your style</span>
-                    <span class="meat-text-blue">1 required</span>
-                </div>
-
-                <div class="topping-options" id="toppingOptions">
-                  <div class="topping-rectangle" onclick="selectTopping('Bacon', this)">
-                      <div class="toppings">Served on Toasted Bagel</div>
-                      <div class="toppingPriceContainer">
-                      <span class="topping-price-box">Add +0.00</span>
-                      </div>
-                  </div>
-
-
-                  
-                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
-                      <div class="toppings">Served on Croissant</div>
-                      <div class="toppingPriceContainer">
-                        <span class="topping-price-box">Add +0.00</span>
+                    <div class="selection-options" id="mealOptions">
+                        <div class="option" onclick="selectOption('Burger', this)">
+                            <span>Burger</span>
+                            <span class="price">+$5.00</span>
                         </div>
-                  </div>
-                  <div class="topping-rectangle" onclick="selectTopping('Sausage', this)">
-                    <div class="toppings">Served on Flour Wrap</div>
-                    <div class="toppingPriceContainer">
-                      <span class="topping-price-box">Add +0.00</span>
-                      </div>
+                        <div class="option" onclick="selectOption('Pizza', this)">
+                            <span>Pizza</span>
+                            <span class="price">+$8.00</span>
+                        </div>
+                        <div class="option" onclick="selectOption('Salad', this)">
+                            <span>Salad</span>
+                            <span class="price">+$6.00</span>
+                        </div>
+                    </div>
                 </div>
-
-                  <!-- Add more topping rectangles as needed -->
+            
+                <div class="selection-section">
+                  <div class="selection-title">
+                      <span class="title-container">Choose Your Drinks</span>
+                  </div>
+                  
+                  <div class="selection-options" id="drinkOptions">
+                      <div class="option" onclick="toggleMultiSelection('Coke', this)">
+                          <span>Coke</span>
+                          <span class="price">+$2.00</span>
+                      </div>
+                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
+                            <span>Pepsi</span>
+                            <span class="price">+$2.00</span>
+                        </div>
+                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
+                            <span>Fanta</span>
+                            <span class="price">+$2.00</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-
+            
         <!-- New Section for Special Instructions -->
         <div class="special-instructions-section">
           <label for="specialInstructions">Special Instructions:</label>
@@ -277,6 +263,12 @@
   </div>
   <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
 </div>
+
+
+
+</div>
+
+    </div>
 
 
 
@@ -448,6 +440,75 @@ function addToCartWithAnimation() {
 
 
 </script>
+
+<script>
+  // Obtener la referencia a la imagen principal
+  const mainImage = document.getElementById('mainImage');
+  
+  // Agregar un evento de escucha para el movimiento del mouse
+  mainImage.addEventListener('mousemove', function(e) {
+    // Calcular el tamaño del área de zoom
+    const zoomLevel = 2; // Factor de zoom
+    const offsetX = e.offsetX / mainImage.clientWidth; // Posición X del cursor relativa a la imagen
+    const offsetY = e.offsetY / mainImage.clientHeight; // Posición Y del cursor relativa a la imagen
+    
+    // Aplicar transformación CSS para realizar el zoom
+    mainImage.style.transformOrigin = `${offsetX * 100}% ${offsetY * 100}%`; // Establecer el punto de origen del zoom
+    mainImage.style.transform = `scale(${zoomLevel})`; // Aplicar el zoom
+  });
+  
+  // Restablecer el zoom cuando el mouse sale de la imagen
+  mainImage.addEventListener('mouseleave', function() {
+    mainImage.style.transform = 'scale(1)'; // Restablecer el zoom
+  });
+  </script>
+
+  <script>
+    // Function to handle drink selection
+function selectDrink(drink, element) {
+    // Remove 'selected' class from all drink rectangles
+    const drinkRectangles = document.querySelectorAll('.drink-rectangle');
+    drinkRectangles.forEach(rectangle => {
+        rectangle.classList.remove('selected');
+    });
+
+    // Add 'selected' class to the clicked drink rectangle
+    element.classList.add('selected');
+
+    // Add your logic to handle the selected drink
+    console.log(drink + ' selected');
+}
+
+  </script>
+
+
+<script>
+function selectOption(item, element) {
+    const allOptions = element.parentElement.querySelectorAll('.option');
+
+    // Deseleccionar todas las opciones
+    allOptions.forEach(option => {
+        option.classList.remove('selected');
+    });
+
+    // Seleccionar la opción clicada
+    element.classList.add('selected');
+
+    console.log(item + ' selected');
+}
+
+function toggleMultiSelection(item, element) {
+    element.classList.toggle('selected');
+
+    if (element.classList.contains('selected')) {
+        console.log(item + ' selected');
+    } else {
+        console.log(item + ' deselected');
+    }
+}
+
+</script>
+  
 
 </body>
 </html>                                                                         
