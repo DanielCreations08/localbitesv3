@@ -144,7 +144,17 @@
       <div class="popup-container" id="popupContainer">
      
         <div class="popup-content">
-         
+            
+                <!-- Contenedor de las pestañas -->
+    <div class="tab-container">
+        <!-- Pestañas -->
+        <button class="tab-btn active" onclick="openTab(event, 'content1')">Menu Item</button>
+        <button class="tab-btn" onclick="openTab(event, 'content2')">Reviews</button>
+    </div>
+    <!-- Contenido de las pestañas -->
+    <div id="content1" class="tab-content active">
+        <!-- Contenido de la primera pestaña -->
+     
 
                 <div class="itemName">
                     <div class="itemNameHolder">
@@ -154,7 +164,7 @@
                 
                     <div class="close-btn" onclick="closePopup()">×</div>
                   </div>
-
+    
 
               <div class="food-box">
 
@@ -297,6 +307,34 @@
   <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
 </div>
 
+</div>
+    
+<div id="content2" class="tab-content">
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <div class="reviewer-info">
+                <img src="profile-pic.jpg" alt="Reviewer Profile Picture">
+                <div class="reviewer-details">
+                    <h3>John Doe</h3>
+                    <span class="review-date">April 1, 2024</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>This product is amazing! It exceeded my expectations. Highly recommended.</p>
+                <div class="rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span>
+                </div>
+            </div>
+        </div>
+        <!-- Additional reviews can be added here -->
+    </div>
+    
+</div>
 
 
 </div>
@@ -327,6 +365,7 @@
           // Function to select a topping (you can customize this function)
           function selectTopping(topping) {
               // Add your logic here
+    
               console.log(`Selected topping: ${topping}`);
           }
 
@@ -542,6 +581,29 @@ function toggleMultiSelection(item, element) {
 
 </script>
   
+
+<script>
+// Función para abrir la pestaña deseada
+function openTab(evt, tabName) {
+    // Oculta todos los contenidos de las pestañas
+    var tabContents = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+
+    // Quita la clase "active" de todos los botones de pestaña
+    var tabBtns = document.getElementsByClassName("tab-btn");
+    for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].className = tabBtns[i].className.replace(" active", "");
+    }
+
+    // Muestra el contenido de la pestaña seleccionada
+    document.getElementById(tabName).style.display = "block";
+    // Agrega la clase "active" al botón de la pestaña seleccionada
+    evt.currentTarget.className += " active";
+}
+
+</script>
 
 </body>
 </html>                                                                         
