@@ -34,7 +34,7 @@
 <!--   <a href="#">Donations</a>-->
   </div>
   <div class="cart-order-toggle">
-    <div class="cart"> 
+    <div class="cart"  onclick="showCart()"> 
         <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
         <span id="cartQuantity">0</span> <!-- Aquí se mostrará la cantidad -->
     </div>
@@ -116,7 +116,7 @@
       <a href="#" style="text-decoration: none;">
           <div class="restaurantCard popup-trigger" data-category="morningstars">
               <img class="restaurantImage" src="/menu/uplifted-bistro-order-page/item100.jpg" alt="Restaurant Image">
-              <div class="restaurantName">$8.59</div>
+              <div class="restaurantName">$6.79</div>
               <div class="foodItemName">Meat Starter</div>
               <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
           </div>
@@ -314,14 +314,14 @@
         <h2>Customer Reviews</h2>
         <div class="review">
             <div class="reviewer-info">
-                <img src="profile-pic.jpg" alt="Reviewer Profile Picture">
+                <img src="/user-reviews/user-review.jpg" alt="Reviewer Profile Picture">
                 <div class="reviewer-details">
                     <h3>John Doe</h3>
                     <span class="review-date">April 1, 2024</span>
                 </div>
             </div>
             <div class="review-content">
-                <p>This product is amazing! It exceeded my expectations. Highly recommended.</p>
+                <p>My favorite breakfast ever! Highly recommended.</p>
                 <div class="rating">
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
@@ -604,6 +604,266 @@ function openTab(evt, tabName) {
 }
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="checkout-container">
+    <h1 class="checkout-title">Checkout Page</h1>
+    <button class="checkout-button" onclick="showCart()">Open Cart</button>
+  
+    <div class="cart-popup" id="cartPopup">
+        <span class="close-button-cart" onclick="closeCart()">&times;</span>
+        <h2 style="text-align: center;">Your Cart</h2>
+        <div id="cartContent" class="cart-content"></div>
+        <div class="cart-total">Total: $<span id="totalCost">0.00</span></div>
+        <button onclick="checkout()" class="view-all-button">Checkout</button>
+    </div>
+</div>
+
+
+  <style>
+    /* Existing CSS */
+    .checkout-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+      position: relative; /* Add relative positioning to the container */
+    }
+    .checkout-title {
+      text-align: center;
+    }
+    .checkout-button {
+      display: block;
+      margin: 20px auto; /* Center the button */
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .cart-popup {
+      position: fixed;
+      top: 60px;
+      right: -2600px; /* Off the viewport */
+      transition: right 0.3s ease-in-out; /* Animation transition */
+      background-color: #ffffff; /* White background */
+      padding: 20px;
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000;
+      width: 40%; /* Set a fixed width for the cart */
+    }
+    @media only screen and (max-width: 768px) {
+      .cart-popup {
+        top: 65px;
+        right: -1600px; /* Off the viewport */
+        transition: right 0.3s ease-in-out; /* Animation transition */
+        padding: 10px;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        z-index: 1000;
+        width: 82%; /* Set a fixed width for the cart */
+      }
+    }
+
+    .cart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .cart-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    }
+    .cart-popup.active {
+      right: 20px; /* Show the cart from the right corner */
+    }
+    .cart-total {
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .item-image {
+      width: 65px;
+      height: 65px;
+      border-radius: 5px; /* Change to square border */
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .item-details {
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+    }
+    .quantity-adjust {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    .quantity-adjust button {
+      background-color: orange;
+      border: 2px solid #f9a602; /* Yellow border */
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0px 5px;
+    }
+    .quantity-input {
+      text-align: center;
+      padding: 2px;
+      margin: 10px 6px 0px 6px;
+      width: 20px;
+    }
+    .close-button-cart {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .view-all-button {
+      background-color: #30b521;
+      display: block;
+      margin: 10px auto; /* Center the button and decrease padding */
+      padding: 18px 50px; /* Decrease padding */
+      color: #ffffff; /* Green color */
+      font-size: 16px;
+      cursor: pointer;
+      border: none; /* Remove border */
+    }
+    .cart-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .restaurant-name {
+      font-weight: bold;
+    }
+  </style>
+
+<script>
+    let cartItems = [];
+    
+    function showCart() {
+      var cartPopup = document.getElementById('cartPopup');
+      cartPopup.classList.add('active');
+    }
+    
+    function closeCart() {
+      var cartPopup = document.getElementById('cartPopup');
+      cartPopup.classList.remove('active');
+    }
+    
+    function checkout() {
+      // Redirect to another page (simulate checkout completion)
+      window.location.href = "checkout-complete.html";
+    }
+    
+    function addItemToCart() {
+      let existingItem = cartItems.find(item => item.id === "item100");
+      if (existingItem) {
+        existingItem.quantity++;
+        existingItem.totalCost += existingItem.price;
+      } else {
+        let newItem = {
+          id: "item100",
+          name: "Meat Starter",
+          restaurant: "Uplifted Bistro",
+          image: "/menu/uplifted-bistro-order-page/item100.jpg",
+          price: 6.79,
+          quantity: 1,
+          totalCost: 6.79
+        };
+        cartItems.push(newItem);
+      }
+      updateCartContent();
+      showCart();
+    }
+    
+    function updateCartContent() {
+      const cartContent = document.getElementById('cartContent');
+      cartContent.innerHTML = "";
+      cartItems.forEach(item => {
+        const itemHTML = `
+          <div class="cart-item">
+            <div class="item-details">
+              <img src="${item.image}" alt="Item Image" class="item-image">
+              <div>
+                <span>${item.name}</span>s<br>
+                <span class="restaurant-name">${item.restaurant}</span><br>
+                $${item.price.toFixed(2)} 
+              </div>
+              <div class="quantity-adjust">
+                <button onclick="decreaseQuantity('${item.id}')">-</button>
+                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                <button onclick="increaseQuantity('${item.id}')">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+        cartContent.innerHTML += itemHTML;
+      });
+      updateTotalCost();
+    }
+    
+    function updateTotalCost() {
+      let totalCost = cartItems.reduce((acc, item) => acc + item.totalCost, 0);
+      document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+    }
+    
+    function increaseQuantity(itemId) {
+      let item = cartItems.find(item => item.id === itemId);
+      if (item) {
+        item.quantity++;
+        item.totalCost += item.price;
+        updateCartContent();
+      }
+    }
+    
+    function decreaseQuantity(itemId) {
+      let item = cartItems.find(item => item.id === itemId);
+      if (item) {
+        item.quantity--;
+        item.totalCost -= item.price;
+        if (item.quantity === 0) {
+          cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+        }
+        updateCartContent();
+      }
+    }
+    
+    // Call addItemToCart initially to handle adding item to cart
+    document.getElementById('addToCartButton').addEventListener('click', addItemToCart);
+    
+    // Call updateCartContent initially to handle empty cart state
+    updateCartContent();
+</script>
+
 
 </body>
 </html>                                                                         
