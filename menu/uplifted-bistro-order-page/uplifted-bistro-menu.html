@@ -36,8 +36,10 @@
   <div class="cart-order-toggle">
     <div class="cart"  onclick="showCart()"> 
         <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
-        <span id="cartQuantity">0</span> <!-- Aquí se mostrará la cantidad -->
+        <span class="cart-quantity" id="cartQuantity">0</span> <!-- New span for quantity -->
     </div>
+</div>
+
     <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
     <div class="order-now">
     </div>
@@ -292,11 +294,12 @@
 
 <!-- Quantity Section -->
 <div class="quantity-section">
-  <span class="quantity-label">Quantity:</span>
-  <span class="quantity-icons" onclick="adjustQuantity(-1)">-</span>
-  <span id="quantity">1</span>
-  <span class="quantity-icons" onclick="adjustQuantity(1)">+</span>
-</div>
+    <span class="quantity-label">Quantity:</span>
+    <span class="quantity-icons" onclick="adjustQuantity(-1)">-</span>
+    <span id="quantity">1</span>
+    <span class="quantity-icons" onclick="adjustQuantity(1)">+</span>
+  </div>
+  
 
 <!-- Checkout Section -->
 <div class="checkout-section">
@@ -412,7 +415,6 @@ function selectTopping(topping, element) {
 
 
 
-
 let selectedQuantity = 1;
 
 // Function to adjust quantity
@@ -423,6 +425,16 @@ function adjustQuantity(value) {
     }
     document.getElementById('quantity').innerText = selectedQuantity;
 }
+
+// Function to update selected quantity when input changes
+function updateSelectedQuantity() {
+    const quantityInput = document.getElementById('quantity');
+    selectedQuantity = parseInt(quantityInput.value) || 1; // Parse the value to integer, default to 1 if NaN
+}
+
+// Call updateSelectedQuantity whenever input changes
+document.getElementById('quantity').addEventListener('input', updateSelectedQuantity);
+
 
 
       </script>
@@ -441,59 +453,7 @@ function changeMainImage(src) {
 </script>
     
 
-<script>
-
-function addToCartWithAnimation() {
-    // Agregar la lógica para agregar el artículo al carrito con animación
-
-    // Agregar la clase de animación al icono del carrito
-    const cartIcon = document.querySelector('.cart img');
-    cartIcon.classList.add('pulse');
-
-    // Eliminar la clase de animación después de 0.5 segundos
-    setTimeout(function() {
-        cartIcon.classList.remove('pulse');
-    }, 500);
-
-    // Aquí iría tu lógica para agregar el artículo al carrito y cerrar el pop-up
-}
-
     
-
-    let cartQuantity = 0; // Inicializamos la cantidad en 0
-    
-    // Función para añadir al carrito con una cantidad específica
-    function addToCart(quantity) {
-        // Aquí iría la lógica para agregar el artículo al carrito
-    
-        // Incrementar la cantidad en el carrito
-        cartQuantity += quantity;
-        
-        // Actualizar el texto de la cantidad en el carrito
-        const cartQuantityElement = document.getElementById('cartQuantity');
-        cartQuantityElement.textContent = cartQuantity;
-    }
-    
-    // Función para ajustar la cantidad en el carrito
-    function adjustCartQuantity(value) {
-        // Ajustar la cantidad en función del valor proporcionado
-        cartQuantity += value;
-    
-        // Asegurarse de que la cantidad no sea negativa
-        if (cartQuantity < 0) {
-            cartQuantity = 0;
-        }
-    
-        // Actualizar el texto de la cantidad en el carrito
-        const cartQuantityElement = document.getElementById('cartQuantity');
-        cartQuantityElement.textContent = cartQuantity;
-    }
-    
-    </script>
-    
-
-    
-
 <script>
   // Restaurant Category Filters
   function filterCategory(category) {
@@ -806,30 +766,42 @@ function openTab(evt, tabName) {
     }
     
     function updateCartContent() {
-      const cartContent = document.getElementById('cartContent');
-      cartContent.innerHTML = "";
-      cartItems.forEach(item => {
-        const itemHTML = `
-          <div class="cart-item">
-            <div class="item-details">
-              <img src="${item.image}" alt="Item Image" class="item-image">
-              <div>
-                <span>${item.name}</span>s<br>
-                <span class="restaurant-name">${item.restaurant}</span><br>
-                $${item.price.toFixed(2)} 
-              </div>
-              <div class="quantity-adjust">
-                <button onclick="decreaseQuantity('${item.id}')">-</button>
-                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-                <button onclick="increaseQuantity('${item.id}')">+</button>
-              </div>
-            </div>
+  const cartContent = document.getElementById('cartContent');
+  cartContent.innerHTML = "";
+  let totalQuantity = 0; // Initialize total quantity counter
+  cartItems.forEach(item => {
+    totalQuantity += item.quantity; // Accumulate quantity for each item
+    const itemHTML = `
+      <div class="cart-item">
+        <div class="item-details">
+          <img src="${item.image}" alt="Item Image" class="item-image">
+          <div>
+            <span>${item.name}</span>s<br>
+            <span class="restaurant-name">${item.restaurant}</span><br>
+            $${item.price.toFixed(2)} 
           </div>
-        `;
-        cartContent.innerHTML += itemHTML;
-      });
-      updateTotalCost();
-    }
+          <div class="quantity-adjust">
+            <button onclick="decreaseQuantity('${item.id}')">-</button>
+            <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+            <button onclick="increaseQuantity('${item.id}')">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+    cartContent.innerHTML += itemHTML;
+  });
+  updateTotalCost();
+  // Update cart quantity display
+  document.getElementById('cartQuantity').textContent = totalQuantity;
+  // Add pulse animation class to cart icon if there are items in the cart
+  const cartIcon = document.querySelector('.cart');
+  if (totalQuantity > 0) {
+    cartIcon.classList.add('pulse');
+  } else {
+    cartIcon.classList.remove('pulse');
+  }
+}
+
     
     function updateTotalCost() {
       let totalCost = cartItems.reduce((acc, item) => acc + item.totalCost, 0);
