@@ -134,17 +134,23 @@ body {
     display: none;
   }
 
-  .mobile-menu-toggle {
-    display: flex;
-  }
 
   .cart-order-toggle {
-    order: 2;
+    order: 1;
+    position: fixed;
+    right: 60px;
   }
 
-  .order-now {
-    display: none;
+  .mobile-menu-toggle {
+    display: flex;
+    order: 2;
+
+    position: fixed;
+    right: 1px;
+    padding: 10px 15px;
   }
+
+
 
   .navbar {
     justify-content: space-between;
