@@ -16,7 +16,11 @@ body {
 }
 
 .logo img {
-  width: 120px;
+  width: 138px;
+  position:fixed;
+  left: 8px;
+  top: 12px;
+  
 }
 
 .menu {
@@ -24,6 +28,7 @@ body {
   gap: 20px;
   flex: 1;
   justify-content: center;
+  margin-left: 160px;
 }
 
 .menu a {
