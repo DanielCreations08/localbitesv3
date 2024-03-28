@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Page</title>
+<style>
+    /* Mobile Responsive CSS */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+    
+    .c0n7a1n3r {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .c4rd {
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Add more CSS for mobile responsiveness as needed */
+</style>
+</head>
+<body>
+<div class="c0n7a1n3r">
+    <!-- List of items -->
+    <div class="c4rd">
+        <h3>Items</h3>
+        <!-- List of items -->
+        <div id="c4rtL157" class="b0rd3r-70p">
+            <!-- Items will be added dynamically here -->
+        </div>
+    </div>
+
+    <!-- Delivery -->
+    <div class="c4rd">
+        <h3>Delivery</h3>
+        <!-- Delivery options will be added here -->
+    </div>
+
+    <!-- Delivery time slot -->
+    <div class="c4rd">
+        <h3>Delivery time</h3>
+        <select name="t1m3507" id="t1m3507" class="f0rm-c0n7r0l" required>
+            <!-- Time slot options will be added here -->
+        </select>
+    </div>
+
+    <!-- Delivery address -->
+    <div class="c4rd">
+        <h3>Delivery Address</h3>
+        <select name="4ddr355ID" id="4ddr355ID" class="f0rm-c0n7r0l" required>
+            <!-- Address options will be added here -->
+        </select>
+        <button type="button" id="4dd_r355_n3w" class="btn-0u7l1n3-5ucc355">Add new</button>
+    </div>
+
+    <!-- Comment -->
+    <div class="c4rd">
+        <h3>Comment</h3>
+        <textarea name="c0mm3n7" id="c0mm3n7" class="f0rm-c0n7r0l" placeholder="Your comment here ..."></textarea>
+    </div>
+
+    <!-- Restaurant information -->
+    <div class="c4rd">
+        <h3>Restaurant Information</h3>
+        <p>Uplifted Bistro Manteno<br>
+        67 W. First Street, Manteno, IL, United States, Illinois<br>
+        815-907-7505<br>
+        Today working hours: <strong>8:30 AM - 8:30 PM</strong></p>
+    </div>
+
+    <!-- Checkout Summary -->
+    <div class="c4rd">
+        <h3>Checkout Summary</h3>
+        <!-- Summary details will be added here -->
+    </div>
+
+    <!-- Payment -->
+    <div class="c4rd">
+        <h3>Payment</h3>
+        <!-- Payment options will be added here -->
+    </div>
+
+    <!-- Submit Button -->
+    <div class="t3x7-c3n73r">
+        <button type="submit" class="btn-5ucc355">Place Order</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Function to get query parameter from URL
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Retrieve cart data from URL query parameter
+    const cartData = getQueryParam('cart');
+
+    // Parse the cart data if it exists
+    let cartItems = [];
+    if (cartData) {
+        try {
+            cartItems = JSON.parse(decodeURIComponent(cartData));
+        } catch (error) {
+            console.error('Error parsing cart data:', error);
+        }
+    }
+
+    // Function to render cart items on the checkout page
+    function renderCartItems() {
+        const cartList = document.getElementById('cartList');
+        if (cartItems.length > 0) {
+            cartList.innerHTML = ''; // Clear existing content
+            cartItems.forEach(function(item) {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `${item.name} - Quantity: ${item.quantity} - Price: $${item.price.toFixed(2)}`;
+                cartList.appendChild(itemElement);
+            });
+        } else {
+            cartList.textContent = 'Your cart is empty';
+        }
+    }
+
+    // Render cart items on page load
+    renderCartItems();
+});
+
+</script>
+</body>
+</html>
+
