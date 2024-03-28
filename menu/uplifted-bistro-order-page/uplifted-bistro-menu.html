@@ -730,12 +730,10 @@ function openTab(evt, tabName) {
     }
     
     function checkout() {
-    console.log("Checkout function called."); // Debugging statement
     // Encode cart data into URL parameters
     const cartData = encodeURIComponent(JSON.stringify(cartItems));
-    console.log("Cart data:", cartData); // Debugging statement
     // Redirect to the checkout page with cart data
-    window.location.href = "/pages/checkout.html"
+    window.location.href = "/pages/checkout.html?cart=" + cartData;
 }
 
     
