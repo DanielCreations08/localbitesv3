@@ -4,101 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout Page</title>
-<style>
-    /* Mobile Responsive CSS */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f9fa;
-    }
-    
-    .c0n7a1n3r {
-        max-width: 100%;
-        padding: 20px;
-    }
-
-    .c4rd {
-        background: #fff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    /* Additional Mobile Responsive CSS */
-    .c4rd {
-        width: 100%;
-    }
-
-    /* Media Query for larger screens */
-    @media (min-width: 768px) {
-        .c4rd {
-            width: 48%;
-            margin-right: 2%;
-        }
-        .c4rd:nth-child(2n) {
-            margin-right: 0;
-        }
-    }
-
-    /* Styles for item list */
-    .item-container {
-        background: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        padding: 15px;
-        margin-bottom: 10px;
-    }
-
-    .item-details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .quantity-price {
-        font-size: 14px;
-    }
-
-    .quantity-actions {
-        display: flex;
-        align-items: center;
-    }
-
-    .btn-action {
-        cursor: pointer;
-        border: none;
-        background: none;
-        margin: 0 5px;
-    }
-
-    /* Styles for summary */
-    .summary-details {
-        font-weight: bold;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-<div class="c0n7a1n3r">
+<div class="container">
     <!-- List of items -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Items</h3>
         <!-- List of items -->
-        <div id="c4rtL157" class="b0rd3r-70p">
+        <div id="cartList" class="border-wrap">
             <!-- Items will be added dynamically here -->
         </div>
     </div>
 
-
     <!-- Tip -->
-<div class="c4rd">
-    <h3>Tip</h3>
-    <input type="number" id="tipAmount" class="f0rm-c0n7r0l" placeholder="Enter tip amount">
-</div>
+    <div class="card">
+        <h3>Tip</h3>
+        <input type="number" id="tipAmount" class="form-control" placeholder="Enter tip amount">
+    </div>
 
     <!-- Delivery -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Delivery</h3>
         <div>
             <label for="deliveryMethod">Select delivery method:</label><br>
@@ -110,59 +36,30 @@
     </div>
 
     <!-- Delivery time slot -->
-    <div class="c4rd" id="deliveryTimeSlot">
+    <div class="card" id="deliveryTimeSlot">
         <h3>Delivery time</h3>
-        <select name="t1m3507" id="t1m3507" class="f0rm-c0n7r0l" required>
+        <select name="timeslot" id="timeslot" class="form-control" required>
             <!-- Time slot options will be added here -->
         </select>
     </div>
 
-
-
-
     <!-- Delivery address -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Delivery Address</h3>
-        <select name="4ddr355ID" id="4ddr355ID" class="f0rm-c0n7r0l" required>
+        <select name="addressID" id="addressID" class="form-control" required>
             <!-- Address options will be added here -->
         </select>
-        <button type="button" id="addAddressBtn" class="btn-0u7l1n3-5ucc355">Add new</button>
+        <button type="button" id="addAddressBtn" class="btn-outline-success">Add new</button>
     </div>
-
-
-    <!-- The Modal -->
-<div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Add New Address</h2>
-      <!-- Form for adding a new address -->
-      <form id="newAddressForm">
-          <label for="townInput">Town:</label>
-          <input type="text" id="townInput" name="townInput" required><br><br>
-          <label for="intercomInput">Intercom:</label>
-          <input type="text" id="intercomInput" name="intercomInput"><br><br>
-          <label for="addressNumberInput">Address Number:</label>
-          <input type="text" id="addressNumberInput" name="addressNumberInput" required><br><br>
-          <label for="floorInput">Floor:</label>
-          <input type="text" id="floorInput" name="floorInput"><br><br>
-          <label for="apartmentNumberInput">Apartment Number:</label>
-          <input type="text" id="apartmentNumberInput" name="apartmentNumberInput"><br><br>
-          <label for="entryNumberInput">Entry Number:</label>
-          <input type="text" id="entryNumberInput" name="entryNumberInput"><br><br>
-          <button type="submit">Add Address</button>
-      </form>
-    </div>
-  </div>
 
     <!-- Comment -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Comment</h3>
-        <textarea name="c0mm3n7" id="c0mm3n7" class="f0rm-c0n7r0l" placeholder="Your comment here ..."></textarea>
+        <textarea name="comment" id="comment" class="form-control" placeholder="Your comment here ..."></textarea>
     </div>
 
     <!-- Restaurant information -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Restaurant Information</h3>
         <p>Uplifted Bistro Manteno<br>
         67 W. First Street, Manteno, IL, United States, Illinois<br>
@@ -171,7 +68,7 @@
     </div>
 
     <!-- Checkout Summary -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Checkout Summary</h3>
         <div id="checkoutSummary" class="summary-details">
             <!-- Summary details will be added here -->
@@ -179,28 +76,162 @@
     </div>
 
     <!-- Payment -->
-    <div class="c4rd">
+    <div class="card">
         <h3>Payment</h3>
         <!-- Payment -->
-<div class="c4rd" id="stripePayment">
-    <h3>Pay with Stripe</h3>
-    <button id="stripePayButton" class="btn-5ucc355">Pay with Card</button>
-</div>
+        <div id="stripePayment">
+            <h3>Pay with Stripe</h3>
+            <button id="stripePayButton" class="btn-success">Pay with Card</button>
+        </div>
 
-
-<!-- Payment -->
-<div class="c4rd" id="paypalPayment">
-    <h3>Pay with PayPal</h3>
-    <button id="paypalPayButton" class="btn-5ucc355">Pay with PayPal</button>
-</div>
-
+        <!-- Payment -->
+        <div id="paypalPayment">
+            <h3>Pay with PayPal</h3>
+            <button id="paypalPayButton" class="btn-success">Pay with PayPal</button>
+        </div>
     </div>
 
     <!-- Submit Button -->
-    <div class="t3x7-c3n73r">
-        <button type="submit" class="btn-5ucc355">Place Order</button>
+    <div class="text-center">
+        <button type="submit" class="btn-success">Place Order</button>
     </div>
 </div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Address</h2>
+        <!-- Form for adding a new address -->
+        <form id="newAddressForm">
+            <label for="townInput">Town:</label>
+            <input type="text" id="townInput" name="townInput" required><br><br>
+            <label for="intercomInput">Intercom:</label>
+            <input type="text" id="intercomInput" name="intercomInput"><br><br>
+            <label for="addressNumberInput">Address Number:</label>
+            <input type="text" id="addressNumberInput" name="addressNumberInput" required><br><br>
+            <label for="floorInput">Floor:</label>
+            <input type="text" id="floorInput" name="floorInput"><br><br>
+            <label for="apartmentNumberInput">Apartment Number:</label>
+            <input type="text" id="apartmentNumberInput" name="apartmentNumberInput"><br><br>
+            <label for="entryNumberInput">Entry Number:</label>
+            <input type="text" id="entryNumberInput" name="entryNumberInput"><br><br>
+            <button type="submit">Add Address</button>
+        </form>
+    </div>
+</div>
+
+
+<style>
+    /* Mobile Responsive CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Additional Mobile Responsive CSS */
+.card {
+    width: 100%;
+}
+
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+    .card {
+        width: 48%;
+        margin-right: 2%;
+    }
+    .card:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+/* Styles for item list */
+.item-container {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantity-price {
+    font-size: 14px;
+}
+
+.quantity-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-action {
+    cursor: pointer;
+    border: none;
+    background: none;
+    margin: 0 5px;
+}
+
+/* Styles for summary */
+.summary-details {
+    font-weight: bold;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -210,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartItems = JSON.parse(decodeURIComponent(cartData));
 
     // Render cart items
-    const cartItemsContainer = document.getElementById('c4rtL157');
+    const cartItemsContainer = document.getElementById('cartList');
     const checkoutSummary = document.getElementById('checkoutSummary');
 
     let totalPrice = 0;
@@ -229,39 +260,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-// Render items from itemsMap
-itemsMap.forEach((quantity, name) => {
-    const itemElement = document.createElement('div');
-    itemElement.classList.add('item-container');
+    // Render items from itemsMap
+    itemsMap.forEach((quantity, name) => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item-container');
 
-    const itemTotal = cartItems.find(item => item.name === name).price * quantity;
+        const itemTotal = cartItems.find(item => item.name === name).price * quantity;
 
-    // Construct the image URL using the item name directly
-    const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
+        // Construct the image URL using the item name directly
+        const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
 
-    itemElement.innerHTML = `
-        <div class="item-details">
-            <div>${name}</div>
-            <div class="item-image">
-                <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+        itemElement.innerHTML = `
+            <div class="item-details">
+                <div>${name}</div>
+                <div class="item-image">
+                    <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+                </div>
+                <div class="quantity-actions">
+                    <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
+                    <span>${quantity}</span>
+                    <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
+                    <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
+                </div>
+                <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
             </div>
-            <div class="quantity-actions">
-                <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
-                <span>${quantity}</span>
-                <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
-                <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
-            </div>
-            <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
-        </div>
-    `;
-    cartItemsContainer.appendChild(itemElement);
-});
+        `;
+        cartItemsContainer.appendChild(itemElement);
+    });
 
     // Display total price in the summary
     checkoutSummary.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
 
     // Set delivery time based on current time and restaurant working hours
-    const deliveryTimeSlot = document.getElementById('t1m3507');
+    const deliveryTimeSlot = document.getElementById('timeslot');
     const currentTime = new Date();
     const currentHour = currentTime.getHours();
     const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
@@ -285,8 +316,6 @@ itemsMap.forEach((quantity, name) => {
     // Add event listener to Add Address button
     document.getElementById('addAddressBtn').addEventListener('click', addNewAddress);
 });
-
-
 
 // Function to increase quantity
 function increaseQuantity(element, name) {
@@ -347,6 +376,13 @@ function updateTotalPrice(name, newQuantity) {
     // Calculate total price
     const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
 
+    // Calculate tip amount
+    const tipAmountInput = document.getElementById('tipAmount');
+    const tipAmount = parseFloat(tipAmountInput.value) || 0; // If tip is not provided, default to 0
+
+    // Update total price including tip
+    const totalWithTip = total + tipAmount;
+    
     // Update checkout summary
     const checkoutSummary = document.getElementById('checkoutSummary');
     checkoutSummary.innerHTML = `
@@ -355,86 +391,20 @@ function updateTotalPrice(name, newQuantity) {
         Delivery Fee: $${deliveryFee.toFixed(2)}<br>
         Tips: $${tips.toFixed(2)}<br>
         Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-        <strong>Total Price: $${total.toFixed(2)}</strong>
+        <strong>Total Price (including tip): $${totalWithTip.toFixed(2)}</strong>
     `;
 }
+
+// Function to handle form submission for adding a new address
+document.getElementById("newAddressForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // You can handle form submission here, e.g., save the address to the server
+    // For this example, let's just close the modal
+    document.getElementById("myModal").style.display = "none";
+});
+
 </script>
-
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    
-    // Get the button that opens the modal
-    var btn = document.getElementById("addAddressBtn");
-    
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    
-    // Function to handle form submission for adding a new address
-    document.getElementById("newAddressForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        // You can handle form submission here, e.g., save the address to the server
-        // For this example, let's just close the modal
-        modal.style.display = "none";
-    });
-    </script>
-
-    <style>
-
-    /* Modal styles */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    </style>
 
 
 </body>
