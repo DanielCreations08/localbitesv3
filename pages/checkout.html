@@ -90,19 +90,35 @@
         </div>
     </div>
 
+
+    <!-- Tip -->
+<div class="c4rd">
+    <h3>Tip</h3>
+    <input type="number" id="tipAmount" class="f0rm-c0n7r0l" placeholder="Enter tip amount">
+</div>
+
     <!-- Delivery -->
     <div class="c4rd">
         <h3>Delivery</h3>
-        <!-- Delivery options will be added here -->
+        <div>
+            <label for="deliveryMethod">Select delivery method:</label><br>
+            <input type="radio" id="pickUp" name="deliveryMethod" value="pickUp" checked>
+            <label for="pickUp">Pick-up</label><br>
+            <input type="radio" id="delivery" name="deliveryMethod" value="delivery">
+            <label for="delivery">Delivery</label>
+        </div>
     </div>
 
     <!-- Delivery time slot -->
-    <div class="c4rd">
+    <div class="c4rd" id="deliveryTimeSlot">
         <h3>Delivery time</h3>
         <select name="t1m3507" id="t1m3507" class="f0rm-c0n7r0l" required>
             <!-- Time slot options will be added here -->
         </select>
     </div>
+
+
+
 
     <!-- Delivery address -->
     <div class="c4rd">
@@ -110,8 +126,34 @@
         <select name="4ddr355ID" id="4ddr355ID" class="f0rm-c0n7r0l" required>
             <!-- Address options will be added here -->
         </select>
-        <button type="button" id="4dd_r355_n3w" class="btn-0u7l1n3-5ucc355">Add new</button>
+        <button type="button" id="addAddressBtn" class="btn-0u7l1n3-5ucc355">Add new</button>
     </div>
+
+
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Add New Address</h2>
+      <!-- Form for adding a new address -->
+      <form id="newAddressForm">
+          <label for="townInput">Town:</label>
+          <input type="text" id="townInput" name="townInput" required><br><br>
+          <label for="intercomInput">Intercom:</label>
+          <input type="text" id="intercomInput" name="intercomInput"><br><br>
+          <label for="addressNumberInput">Address Number:</label>
+          <input type="text" id="addressNumberInput" name="addressNumberInput" required><br><br>
+          <label for="floorInput">Floor:</label>
+          <input type="text" id="floorInput" name="floorInput"><br><br>
+          <label for="apartmentNumberInput">Apartment Number:</label>
+          <input type="text" id="apartmentNumberInput" name="apartmentNumberInput"><br><br>
+          <label for="entryNumberInput">Entry Number:</label>
+          <input type="text" id="entryNumberInput" name="entryNumberInput"><br><br>
+          <button type="submit">Add Address</button>
+      </form>
+    </div>
+  </div>
 
     <!-- Comment -->
     <div class="c4rd">
@@ -139,7 +181,19 @@
     <!-- Payment -->
     <div class="c4rd">
         <h3>Payment</h3>
-        <!-- Payment options will be added here -->
+        <!-- Payment -->
+<div class="c4rd" id="stripePayment">
+    <h3>Pay with Stripe</h3>
+    <button id="stripePayButton" class="btn-5ucc355">Pay with Card</button>
+</div>
+
+
+<!-- Payment -->
+<div class="c4rd" id="paypalPayment">
+    <h3>Pay with PayPal</h3>
+    <button id="paypalPayButton" class="btn-5ucc355">Pay with PayPal</button>
+</div>
+
     </div>
 
     <!-- Submit Button -->
@@ -175,31 +229,64 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Render items from itemsMap
-    itemsMap.forEach((quantity, name) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('item-container');
+// Render items from itemsMap
+itemsMap.forEach((quantity, name) => {
+    const itemElement = document.createElement('div');
+    itemElement.classList.add('item-container');
 
-        const itemTotal = cartItems.find(item => item.name === name).price * quantity;
+    const itemTotal = cartItems.find(item => item.name === name).price * quantity;
 
-        itemElement.innerHTML = `
-            <div class="item-details">
-                <div>${name}</div>
-                <div class="quantity-actions">
-                    <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
-                    <span>${quantity}</span>
-                    <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
-                    <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
-                </div>
-                <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
+    // Construct the image URL using the item name directly
+    const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
+
+    itemElement.innerHTML = `
+        <div class="item-details">
+            <div>${name}</div>
+            <div class="item-image">
+                <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
             </div>
-        `;
-        cartItemsContainer.appendChild(itemElement);
-    });
+            <div class="quantity-actions">
+                <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
+                <span>${quantity}</span>
+                <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
+                <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
+            </div>
+            <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
+        </div>
+    `;
+    cartItemsContainer.appendChild(itemElement);
+});
 
     // Display total price in the summary
     checkoutSummary.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+
+    // Set delivery time based on current time and restaurant working hours
+    const deliveryTimeSlot = document.getElementById('t1m3507');
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
+
+    // Calculate delivery time slots
+    const deliveryTimeSlots = [];
+    for (let hour = workingHours.start; hour <= workingHours.end; hour++) {
+        if (hour > currentHour) {
+            deliveryTimeSlots.push(hour);
+        }
+    }
+
+    // Populate delivery time slots dropdown
+    deliveryTimeSlots.forEach(hour => {
+        const option = document.createElement('option');
+        option.text = `${hour}:00 - ${hour + 1}:00`;
+        option.value = `${hour}`;
+        deliveryTimeSlot.appendChild(option);
+    });
+
+    // Add event listener to Add Address button
+    document.getElementById('addAddressBtn').addEventListener('click', addNewAddress);
 });
+
+
 
 // Function to increase quantity
 function increaseQuantity(element, name) {
@@ -228,12 +315,12 @@ function deleteItem(element, name) {
     updateTotalPrice(name, 0); // Pass quantity as 0 to delete the item
 }
 
-// Function to update total price
+// Function to update total price and other summary details
 function updateTotalPrice(name, newQuantity) {
     const itemContainers = document.querySelectorAll('.item-container');
-    let totalPrice = 0;
+    let subtotal = 0;
 
-    // Update itemsMap and recalculate total price
+    // Update itemsMap and recalculate subtotal
     itemContainers.forEach(itemContainer => {
         const itemName = itemContainer.querySelector('.item-details div').textContent;
         const quantityElement = itemContainer.querySelector('.quantity-actions span');
@@ -245,13 +332,110 @@ function updateTotalPrice(name, newQuantity) {
             itemContainer.querySelector('.quantity-price').textContent = `${newQuantity} x $${(price).toFixed(2)}`;
         }
 
-        totalPrice += quantity * price;
+        subtotal += quantity * price;
     });
 
+    // Calculate taxes based on a tax rate (percentage)
+    const taxRate = 0.1; // 10% tax rate
+    const taxes = subtotal * taxRate;
+
+    // Calculate delivery fee, tips, promo code (if applicable)
+    const deliveryFee = 0; // Update this with the actual delivery fee calculation
+    const tips = 0; // Update this with the actual tip calculation
+    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+
+    // Calculate total price
+    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+
+    // Update checkout summary
     const checkoutSummary = document.getElementById('checkoutSummary');
-    checkoutSummary.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+    checkoutSummary.innerHTML = `
+        Subtotal: $${subtotal.toFixed(2)}<br>
+        Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
+        Delivery Fee: $${deliveryFee.toFixed(2)}<br>
+        Tips: $${tips.toFixed(2)}<br>
+        Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
+        <strong>Total Price: $${total.toFixed(2)}</strong>
+    `;
 }
 </script>
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("addAddressBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    
+    // Function to handle form submission for adding a new address
+    document.getElementById("newAddressForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // You can handle form submission here, e.g., save the address to the server
+        // For this example, let's just close the modal
+        modal.style.display = "none";
+    });
+    </script>
+
+    <style>
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
+
+
 </body>
 </html>
-
