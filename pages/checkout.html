@@ -234,178 +234,174 @@ body {
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Parse the cart data from URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const cartData = urlParams.get('cart');
-    const cartItems = JSON.parse(decodeURIComponent(cartData));
-
-    // Render cart items
-    const cartItemsContainer = document.getElementById('cartList');
-    const checkoutSummary = document.getElementById('checkoutSummary');
-
-    let totalPrice = 0;
-    let itemsMap = new Map(); // To store items with their quantities
-
-    cartItems.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        totalPrice += itemTotal;
-
-        if (itemsMap.has(item.name)) {
-            // If item already exists in the map, update its quantity
-            itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
-        } else {
-            // If item is not in the map, add it with its quantity
-            itemsMap.set(item.name, item.quantity);
-        }
-    });
-
-    // Render items from itemsMap
-    itemsMap.forEach((quantity, name) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('item-container');
-
-        const itemTotal = cartItems.find(item => item.name === name).price * quantity;
-
-        // Construct the image URL using the item name directly
-        const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
-
-        itemElement.innerHTML = `
-            <div class="item-details">
-                <div>${name}</div>
-                <div class="item-image">
-                    <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+    document.addEventListener('DOMContentLoaded', function() {
+        // Parse the cart data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const cartData = urlParams.get('cart');
+        const cartItems = JSON.parse(decodeURIComponent(cartData));
+    
+        // Add event listener to tip input
+        const tipInput = document.getElementById('tipAmount');
+        tipInput.addEventListener('change', function() {
+            updateTotalPrice();
+        });
+    
+        // Initialize tip input with default value
+        tipInput.value = 2; // Default tip amount is $2
+    
+        // Render cart items
+        const cartItemsContainer = document.getElementById('cartList');
+        const checkoutSummary = document.getElementById('checkoutSummary');
+    
+        let totalPrice = 0;
+        let itemsMap = new Map(); // To store items with their quantities
+    
+        cartItems.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+    
+            if (itemsMap.has(item.name)) {
+                // If item already exists in the map, update its quantity
+                itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
+            } else {
+                // If item is not in the map, add it with its quantity
+                itemsMap.set(item.name, item.quantity);
+            }
+        });
+    
+        // Render items from itemsMap
+        itemsMap.forEach((quantity, name) => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('item-container');
+    
+            const itemTotal = cartItems.find(item => item.name === name).price * quantity;
+    
+            // Construct the image URL using the item name directly
+            const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
+    
+            itemElement.innerHTML = `
+                <div class="item-details">
+                    <div>${name}</div>
+                    <div class="item-image">
+                        <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+                    </div>
+                    <div class="quantity-actions">
+                        <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
+                        <span>${quantity}</span>
+                        <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
+                        <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
+                    </div>
+                    <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
                 </div>
-                <div class="quantity-actions">
-                    <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
-                    <span>${quantity}</span>
-                    <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
-                    <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
-                </div>
-                <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
-            </div>
-        `;
-        cartItemsContainer.appendChild(itemElement);
-    });
-
-    // Display total price in the summary
-    checkoutSummary.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
-
-    // Set delivery time based on current time and restaurant working hours
-    const deliveryTimeSlot = document.getElementById('timeslot');
-    const currentTime = new Date();
-    const currentHour = currentTime.getHours();
-    const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
-
-    // Calculate delivery time slots
-    const deliveryTimeSlots = [];
-    for (let hour = workingHours.start; hour <= workingHours.end; hour++) {
-        if (hour > currentHour) {
-            deliveryTimeSlots.push(hour);
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
+    
+        // Display total price in the summary
+        updateTotalPrice();
+    
+        // Set delivery time based on current time and restaurant working hours
+        const deliveryTimeSlot = document.getElementById('timeslot');
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours();
+        const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
+    
+        // Calculate delivery time slots
+        const deliveryTimeSlots = [];
+        for (let hour = workingHours.start; hour <= workingHours.end; hour++) {
+            if (hour > currentHour) {
+                deliveryTimeSlots.push(hour);
+            }
         }
-    }
-
-    // Populate delivery time slots dropdown
-    deliveryTimeSlots.forEach(hour => {
-        const option = document.createElement('option');
-        option.text = `${hour}:00 - ${hour + 1}:00`;
-        option.value = `${hour}`;
-        deliveryTimeSlot.appendChild(option);
+    
+        // Populate delivery time slots dropdown
+        deliveryTimeSlots.forEach(hour => {
+            const option = document.createElement('option');
+            option.text = `${hour}:00 - ${hour + 1}:00`;
+            option.value = `${hour}`;
+            deliveryTimeSlot.appendChild(option);
+        });
+    
+        // Add event listener to Add Address button
+        document.getElementById('addAddressBtn').addEventListener('click', addNewAddress);
     });
-
-    // Add event listener to Add Address button
-    document.getElementById('addAddressBtn').addEventListener('click', addNewAddress);
-});
-
-// Function to increase quantity
-function increaseQuantity(element, name) {
-    const quantitySpan = element.parentElement.querySelector('span');
-    let quantity = parseInt(quantitySpan.textContent);
-    quantity++;
-    quantitySpan.textContent = quantity;
-    updateTotalPrice(name, quantity);
-}
-
-// Function to decrease quantity
-function decreaseQuantity(element, name) {
-    const quantitySpan = element.parentElement.querySelector('span');
-    let quantity = parseInt(quantitySpan.textContent);
-    if (quantity > 1) {
-        quantity--;
+    
+    // Function to increase quantity
+    function increaseQuantity(element, name) {
+        const quantitySpan = element.parentElement.querySelector('span');
+        let quantity = parseInt(quantitySpan.textContent);
+        quantity++;
         quantitySpan.textContent = quantity;
-        updateTotalPrice(name, quantity);
+        updateTotalPrice();
     }
-}
-
-// Function to delete item
-function deleteItem(element, name) {
-    const itemContainer = element.closest('.item-container');
-    itemContainer.remove();
-    updateTotalPrice(name, 0); // Pass quantity as 0 to delete the item
-}
-
-// Function to update total price and other summary details
-function updateTotalPrice(name, newQuantity) {
-    const itemContainers = document.querySelectorAll('.item-container');
-    let subtotal = 0;
-
-    // Update itemsMap and recalculate subtotal
-    itemContainers.forEach(itemContainer => {
-        const itemName = itemContainer.querySelector('.item-details div').textContent;
-        const quantityElement = itemContainer.querySelector('.quantity-actions span');
-        const quantity = parseInt(quantityElement.textContent);
-        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-
-        if (itemName === name) {
-            quantityElement.textContent = newQuantity;
-            itemContainer.querySelector('.quantity-price').textContent = `${newQuantity} x $${(price).toFixed(2)}`;
+    
+    // Function to decrease quantity
+    function decreaseQuantity(element, name) {
+        const quantitySpan = element.parentElement.querySelector('span');
+        let quantity = parseInt(quantitySpan.textContent);
+        if (quantity > 1) {
+            quantity--;
+            quantitySpan.textContent = quantity;
+            updateTotalPrice();
         }
-
-        subtotal += quantity * price;
+    }
+    
+    // Function to delete item
+    function deleteItem(element, name) {
+        const itemContainer = element.closest('.item-container');
+        itemContainer.remove();
+        updateTotalPrice();
+    }
+    
+    // Function to update total price and other summary details
+    function updateTotalPrice() {
+        const itemContainers = document.querySelectorAll('.item-container');
+        let subtotal = 0;
+    
+        // Update itemsMap and recalculate subtotal
+        itemContainers.forEach(itemContainer => {
+            const quantityElement = itemContainer.querySelector('.quantity-actions span');
+            const quantity = parseInt(quantityElement.textContent);
+            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+    
+            subtotal += quantity * price;
+        });
+    
+        // Calculate taxes based on a tax rate (percentage)
+        const taxRate = 0.1; // 10% tax rate
+        const taxes = subtotal * taxRate;
+    
+        // Calculate delivery fee, tips, promo code (if applicable)
+        const deliveryFee = 0; // Update this with the actual delivery fee calculation
+        const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
+        const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+    
+        // Calculate total price
+        const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+    
+        // Update checkout summary
+        const checkoutSummary = document.getElementById('checkoutSummary');
+        checkoutSummary.innerHTML = `
+            Subtotal: $${subtotal.toFixed(2)}<br>
+            Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
+            Delivery Fee: $${deliveryFee.toFixed(2)}<br>
+            Tips: $${tips.toFixed(2)}<br>
+            Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
+            <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
+        `;
+    }
+    
+    // Function to handle form submission for adding a new address
+    document.getElementById("newAddressForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // You can handle form submission here, e.g., save the address to the server
+        // For this example, let's just close the modal
+        document.getElementById("myModal").style.display = "none";
     });
-
-    // Calculate taxes based on a tax rate (percentage)
-    const taxRate = 0.1; // 10% tax rate
-    const taxes = subtotal * taxRate;
-
-    // Calculate delivery fee, tips, promo code (if applicable)
-    const deliveryFee = 0; // Update this with the actual delivery fee calculation
-    const tips = 0; // Update this with the actual tip calculation
-    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
-
-    // Calculate total price
-    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
-
-    // Calculate tip amount
-    const tipAmountInput = document.getElementById('tipAmount');
-    const tipAmount = parseFloat(tipAmountInput.value) || 0; // If tip is not provided, default to 0
-
-    // Update total price including tip
-    const totalWithTip = total + tipAmount;
     
-    // Update checkout summary
-    const checkoutSummary = document.getElementById('checkoutSummary');
-    checkoutSummary.innerHTML = `
-        Subtotal: $${subtotal.toFixed(2)}<br>
-        Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
-        Delivery Fee: $${deliveryFee.toFixed(2)}<br>
-        Tips: $${tips.toFixed(2)}<br>
-        Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-        <strong>Total Price (including tip): $${totalWithTip.toFixed(2)}</strong>
-    `;
-}
-
-// Function to handle form submission for adding a new address
-document.getElementById("newAddressForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent default form submission
+    </script>
     
-    // You can handle form submission here, e.g., save the address to the server
-    // For this example, let's just close the modal
-    document.getElementById("myModal").style.display = "none";
-});
-
-</script>
-
 
 </body>
 </html>
