@@ -3,122 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delivery Service Checkout</title>
+  <title>Delivery y Catering</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f8f9fa;
     }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .checkout-button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .cart-popup {
-      position: fixed;
-      top: 20px;
-      right: -400px; /* Off the viewport */
-      transition: right 0.3s ease-in-out; /* Animation transition */
-      background-color: #f9f9f9;
+
+    main {
       padding: 20px;
-      border: 1px solid #ccc;
-      z-index: 1000;
     }
-    .cart-item {
-      margin-bottom: 10px;
+
+    .switch {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
     }
-    .cart-popup.active {
-      right: 20px; /* Show the cart from the right corner */
+
+    .switch label {
+      margin-right: 20px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #343a40;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    #delivery:checked + label {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+
+    #catering:checked + label {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+
+    .content {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      color: #343a40;
+      margin-top: 0;
+    }
+
+    .section p {
+      color: #666666;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #545b62;
+    }
+
+    .button.secondary {
+      background-color: #6c757d;
+    }
+
+    .button.secondary:hover {
+      background-color: #545b62;
     }
   </style>
 </head>
 <body>
+  <header>
 
-<div class="container">
-  <h1>Checkout Page</h1>
-  <button class="checkout-button" onclick="showCart()">Open Cart</button>
+  </header>
 
-  <div class="cart-popup" id="cartPopup">
-    <h2>Your Cart</h2>
-    <div class="cart-item">
-      <span>Item 1</span> - $10
-    </div>
-    <div class="cart-item">
-      <span>Item 2</span> - $15
-    </div>
-    <div class="cart-item">
-      <span>Item 3</span> - $20
-    </div>
-    <button onclick="checkout()">Checkout</button>
+  <div class="switch">
+    <input type="radio" id="delivery" name="page" checked>
+    <label for="delivery">Delivery</label>
+    <input type="radio" id="catering" name="page">
+    <label for="catering">Catering</label>
   </div>
-</div>
 
-<script>
-  function showCart() {
-    var cartPopup = document.getElementById('cartPopup');
-    cartPopup.classList.toggle('active');
-  }
+  <main>
+    <div id="delivery-content" class="content active">
+      <div class="section">
 
-  function checkout() {
-    // Redirect to another page (simulate checkout completion)
-    window.location.href = "checkout-complete.html";
-  }
-</script>
+        
+      </div>
+    </div>
 
+    <div id="catering-content" class="content">
+      <div class="section">
+        <h2>¡Catering!</h2>
+        <p>Aquí puedes planificar eventos y solicitar servicios de catering.</p>
+        <button class="button secondary">Solicitar Catering</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const deliveryRadio = document.getElementById("delivery");
+    const cateringRadio = document.getElementById("catering");
+    const deliveryContent = document.getElementById("delivery-content");
+    const cateringContent = document.getElementById("catering-content");
+
+    deliveryRadio.addEventListener("change", function() {
+      if (deliveryRadio.checked) {
+        deliveryContent.classList.add("active");
+        cateringContent.classList.remove("active");
+      }
+    });
+
+    cateringRadio.addEventListener("change", function() {
+      if (cateringRadio.checked) {
+        cateringContent.classList.add("active");
+        deliveryContent.classList.remove("active");
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

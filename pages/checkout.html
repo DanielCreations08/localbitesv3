@@ -28,20 +28,20 @@
         <h3>Delivery</h3>
         <div>
             <label for="deliveryMethod">Select delivery method:</label><br>
-            <input type="radio" id="pickUp" name="deliveryMethod" value="pickUp" checked>
+            <input type="radio" id="pickUp" name="deliveryMethod" value="pickUp" class="delivery-method" checked>
             <label for="pickUp">Pick-up</label><br>
-            <input type="radio" id="delivery" name="deliveryMethod" value="delivery">
+            <input type="radio" id="delivery" name="deliveryMethod" value="delivery" class="delivery-method">
             <label for="delivery">Delivery</label>
         </div>
     </div>
-
-    <!-- Delivery time slot -->
-    <div class="card" id="deliveryTimeSlot">
-        <h3>Delivery time</h3>
-        <select name="timeslot" id="timeslot" class="form-control" required>
-            <!-- Time slot options will be added here -->
-        </select>
-    </div>
+    
+<!-- Delivery time slot -->
+<div class="card" id="deliveryTimeSlot">
+    <h3>Delivery time</h3>
+    <select name="timeslot" id="timeslot" class="form-control" required>
+        <!-- Time slot options will be added here -->
+    </select>
+</div>
 
     <!-- Delivery address -->
     <div class="card">
@@ -50,6 +50,21 @@
             <!-- Address options will be added here -->
         </select>
         <button type="button" id="addAddressBtn" class="btn-outline-success">Add new</button>
+    </div>
+
+
+    <!-- Delivery address popup -->
+    <div id="deliveryAddressPopup" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Address</h2>
+            <!-- Form for adding a new address -->
+            <form id="newAddressForm">
+                <label for="newAddressInput">New Address:</label>
+                <input type="text" id="newAddressInput" name="newAddressInput" required><br><br>
+                <button type="button" id="saveAddressBtn">Save Address</button>
+            </form>
+        </div>
     </div>
 
     <!-- Comment -->
@@ -99,8 +114,10 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" onclick="closeModal()">&times;</span>
         <h2>Add New Address</h2>
+        <!-- Simulated map location -->
+        <img src="fake_map_image.jpg" alt="Simulated Map" style="max-width: 100%; height: auto;">
         <!-- Form for adding a new address -->
         <form id="newAddressForm">
             <label for="townInput">Town:</label>
@@ -230,10 +247,26 @@ body {
     cursor: pointer;
 }
 
+.tip-button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+}
+
+.tip-button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
 </style>
 
 
 <script>
+
+
     document.addEventListener('DOMContentLoaded', function() {
         // Parse the cart data from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -251,7 +284,12 @@ body {
     
         // Render cart items
         const cartItemsContainer = document.getElementById('cartList');
+        const deliveryTimeSlot = document.getElementById('timeslot');
+        const deliveryAddress = document.getElementById('addressID');
         const checkoutSummary = document.getElementById('checkoutSummary');
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
+        const deleteAddressBtn = document.getElementById('deleteAddressBtn');
     
         let totalPrice = 0;
         let itemsMap = new Map(); // To store items with their quantities
@@ -297,21 +335,15 @@ body {
             cartItemsContainer.appendChild(itemElement);
         });
     
-        // Display total price in the summary
-        updateTotalPrice();
-    
         // Set delivery time based on current time and restaurant working hours
-        const deliveryTimeSlot = document.getElementById('timeslot');
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
         const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
     
         // Calculate delivery time slots
         const deliveryTimeSlots = [];
-        for (let hour = workingHours.start; hour <= workingHours.end; hour++) {
-            if (hour > currentHour) {
-                deliveryTimeSlots.push(hour);
-            }
+        for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
+            deliveryTimeSlots.push(hour);
         }
     
         // Populate delivery time slots dropdown
@@ -322,8 +354,24 @@ body {
             deliveryTimeSlot.appendChild(option);
         });
     
-        // Add event listener to Add Address button
-        document.getElementById('addAddressBtn').addEventListener('click', addNewAddress);
+ 
+    
+        // Display total price and update checkout summary
+        updateTotalPrice();
+
+        // Add event listener to Save Address button in popup
+        document.getElementById('saveAddressBtn').addEventListener('click', function() {
+            const newAddress = document.getElementById('newAddressInput').value;
+            if (newAddress.trim() !== '') {
+                // Add new address to dropdown
+                const option = document.createElement('option');
+                option.text = newAddress;
+                option.value = newAddress;
+                deliveryAddress.appendChild(option);
+                addresses.push(newAddress);
+            }
+            deliveryAddressPopup.style.display = 'none';
+        });
     });
     
     // Function to increase quantity
@@ -390,18 +438,11 @@ body {
             <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
         `;
     }
-    
-    // Function to handle form submission for adding a new address
-    document.getElementById("newAddressForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        // You can handle form submission here, e.g., save the address to the server
-        // For this example, let's just close the modal
-        document.getElementById("myModal").style.display = "none";
-    });
-    
-    </script>
-    
+
+
+
+
+</script>
 
 </body>
 </html>

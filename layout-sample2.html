@@ -3,147 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fake Add to Cart Button</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+<title>Checkout Page</title>
 <style>
-  body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
-  }
+    background-color: #f8f9fa;
+}
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
+.container {
+    max-width: 100%;
     padding: 20px;
-    position: relative;
-  }
+}
 
-  h1, h2 {
-    color: #333;
-  }
+.card {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-  p {
-    margin-bottom: 10px;
-  }
+/* Additional Mobile Responsive CSS */
+.card {
+    width: 100%;
+}
 
-  .add-to-cart-button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+    .card {
+        width: 48%;
+        margin-right: 2%;
+    }
+    .card:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+/* New styles */
+.tip-button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-  }
-
-  .add-to-cart-button:hover {
-    background-color: #45a049;
-  }
-
-  .popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: none;
-  }
-
-  .popup.show {
-    display: block;
-  }
-
-  .cart-icon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 24px;
-    color: #333;
     cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+    background-color: #f8f9fa;
+}
 
-  .cart-icon:hover {
-    transform: scale(1.1);
-  }
-
-  .corner-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: red;
+.tip-button.active {
+    background-color: #007bff;
     color: #fff;
-    padding: 5px 10px;
-    border-radius: 50%;
-    font-size: 12px;
-  }
+}
+
+.promo-code-input {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 </style>
 </head>
 <body>
   <div class="container">
-    <h1>Product Details</h1>
-    <p>Product Name: Sample Product</p>
-    <p>Price: $10.00</p>
-
-    <!-- Menu Item Button -->
-    <button id="menuItemButton">Menu Item</button>
-
-    <!-- Popup -->
-    <div class="popup" id="popup">
-
-
-        
-      <h2>Add to Cart</h2>
-      <button id="addToCartButton" class="add-to-cart-button">
-        Add to Cart
-      </button>
+    <!-- List of items -->
+    <div class="card">
+        <h3>Items</h3>
+        <!-- List of items -->
+        <div id="cartList" class="border-wrap">
+            <!-- Items will be added dynamically here -->
+        </div>
     </div>
 
-    <!-- Cart Icon -->
-    <div class="cart-icon" id="cartIcon">
-      <i class="fas fa-shopping-cart"></i>
-      <span class="corner-badge" id="cartItemCount">0</span>
+    <!-- Tip -->
+    <div class="card">
+        <h3>Tip</h3>
+        <div>
+            <button class="tip-button" onclick="setTipAmount(2)">$2</button>
+            <button class="tip-button" onclick="setTipAmount(5)">$5</button>
+            <button class="tip-button" onclick="setTipAmount(10)">$10</button>
+            <button class="tip-button" onclick="setTipAmount(20)">$20</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Function to handle adding item to cart
-    function addToCart() {
-      // Dummy item details (in real scenario, this data would come from the product page)
-      const item = {
-        name: 'Sample Product',
-        price: 10.00
-      };
+    <!-- Gift -->
+    <div class="card">
+        <h3>Gift</h3>
+        <div>
+            <input type="checkbox" id="giftCheckbox">
+            <label for="giftCheckbox">Include Gift</label>
+        </div>
+    </div>
 
-      // Update cart item count
-      updateCartItemCount();
+    <!-- Promo Code -->
+    <div class="card">
+        <h3>Promo Code</h3>
+        <input type="text" id="promoCodeInput" class="promo-code-input" placeholder="Enter promo code">
+    </div>
 
-      // Close the popup
-      document.getElementById('popup').classList.remove('show');
-    }
+    <!-- Delivery -->
+    <div class="card">
+        <h3>Delivery</h3>
+        <div>
+            <button class="tip-button" onclick="setDeliveryMethod('pickUp')">Pick-up</button>
+            <button class="tip-button" onclick="setDeliveryMethod('delivery')">Delivery</button>
+        </div>
+    </div>
+    
+<!-- Delivery time slot -->
+<div class="card" id="deliveryTimeSlot" style="display: none;">
+    <h3>Delivery time</h3>
+    <select name="timeslot" id="timeslot" class="form-control" required>
+        <!-- Time slot options will be added here -->
+    </select>
+</div>
 
-    // Function to update cart item count
-    function updateCartItemCount() {
-      const cartItemCount = parseInt(document.getElementById('cartItemCount').textContent) + 1;
-      document.getElementById('cartItemCount').textContent = cartItemCount;
-    }
+    <!-- Delivery address -->
+    <div class="card" id="deliveryAddress" style="display: none;">
+        <h3>Delivery Address</h3>
+        <select name="addressID" id="addressID" class="form-control" required>
+            <!-- Address options will be added here -->
+        </select>
+        <button type="button" id="addAddressBtn" class="btn-outline-success">Add new</button>
+    </div>
 
-    // Show popup when menu item button is clicked
-    document.getElementById('menuItemButton').addEventListener('click', function() {
-      document.getElementById('popup').classList.add('show');
+    <!-- Comment -->
+    <div class="card">
+        <h3>Comment</h3>
+        <textarea name="comment" id="comment" class="form-control" placeholder="Your comment here ..."></textarea>
+    </div>
+
+    <!-- Restaurant information -->
+    <div class="card">
+        <h3>Restaurant Information</h3>
+        <p>Uplifted Bistro Manteno<br>
+        67 W. First Street, Manteno, IL, United States, Illinois<br>
+        815-907-7505<br>
+        Today working hours: <strong>8:30 AM - 8:30 PM</strong></p>
+    </div>
+
+    <!-- Checkout Summary -->
+    <div class="card">
+        <h3>Checkout Summary</h3>
+        <div id="checkoutSummary" class="summary-details">
+            <!-- Summary details will be added here -->
+        </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="card">
+        <h3>Payment</h3>
+        <!-- Payment -->
+        <div id="stripePayment">
+            <h3>Pay with Stripe</h3>
+            <button id="stripePayButton" class="btn-success">Pay with Card</button>
+        </div>
+
+        <!-- Payment -->
+        <div id="paypalPayment">
+            <h3>Pay with PayPal</h3>
+            <button id="paypalPayButton" class="btn-success">Pay with PayPal</button>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+        <button type="submit" class="btn-success">Place Order</button>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Add New Address</h2>
+        <!-- Simulated map location -->
+        <img src="fake_map_image.jpg" alt="Simulated Map" style="max-width: 100%; height: auto;">
+        <!-- Form for adding a new address -->
+        <form id="newAddressForm">
+            <label for="townInput">Town:</label>
+            <input type="text" id="townInput" name="townInput" required><br><br>
+            <label for="intercomInput">Intercom:</label>
+            <input type="text" id="intercomInput" name="intercomInput"><br><br>
+            <label for="addressNumberInput">Address Number:</label>
+            <input type="text" id="addressNumberInput" name="addressNumberInput" required><br><br>
+            <label for="floorInput">Floor:</label>
+            <input type="text" id="floorInput" name="floorInput"><br><br>
+            <label for="apartmentNumberInput">Apartment Number:</label>
+            <input type="text" id="apartmentNumberInput" name="apartmentNumberInput"><br><br>
+            <label for="entryNumberInput">Entry Number:</label>
+            <input type="text" id="entryNumberInput" name="entryNumberInput"><br><br>
+            <button type="submit">Add Address</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Parse the cart data from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const cartData = urlParams.get('cart');
+    const cartItems = JSON.parse(decodeURIComponent(cartData));
+
+    // Add event listener to tip input
+    const tipInput = document.getElementById('tipAmount');
+    tipInput.addEventListener('change', function() {
+        updateTotalPrice();
     });
 
-    // Attach click event listener to the "Add to Cart" button
-    document.getElementById('addToCartButton').addEventListener('click', addToCart);
-  </script>
+    // Initialize tip input with default value
+    tipInput.value = 2; // Default tip amount is $2
+
+    // Render cart items
+    const cartItemsContainer = document.getElementById('cartList');
+    const deliveryTimeSlot = document.getElementById('timeslot');
+    const deliveryAddress = document.getElementById('addressID');
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    const addAddressBtn = document.getElementById('addAddressBtn');
+    const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
+    const deleteAddressBtn = document.getElementById('deleteAddressBtn');
+
+    let totalPrice = 0;
+    let itemsMap = new Map(); // To store items with their quantities
+
+    cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+
+        if (itemsMap.has(item.name)) {
+            // If item already exists in the map, update its quantity
+            itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
+        } else {
+            // If item is not in the map, add it with its quantity
+            itemsMap.set(item.name, item.quantity);
+        }
+    });
+
+    // Render items from itemsMap
+    itemsMap.forEach((quantity, name) => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item-container');
+
+        const itemTotal = cartItems.find(item => item.name === name).price * quantity;
+
+        // Construct the image URL using the item name directly
+        const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
+
+        itemElement.innerHTML = `
+            <div class="item-details">
+                <div>${name}</div>
+                <div class="item-image">
+                    <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+                </div>
+                <div class="quantity-actions">
+                    <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
+                    <span>${quantity}</span>
+                    <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
+                    <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
+                </div>
+                <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
+            </div>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+    });
+
+    // Set delivery time based on current time and restaurant working hours
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
+
+    // Calculate delivery time slots
+    const deliveryTimeSlots = [];
+    for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
+        deliveryTimeSlots.push(hour);
+    }
+
+    // Populate delivery time slots dropdown
+    deliveryTimeSlots.forEach(hour => {
+        const option = document.createElement('option');
+        option.text = `${hour}:00 - ${hour + 1}:00`;
+        option.value = `${hour}`;
+        deliveryTimeSlot.appendChild(option);
+    });
+
+    // Add event listener to Save Address button in popup
+    document.getElementById('saveAddressBtn').addEventListener('click', function() {
+        const newAddress = document.getElementById('newAddressInput').value;
+        if (newAddress.trim() !== '') {
+            // Add new address to dropdown
+            const option = document.createElement('option');
+            option.text = newAddress;
+            option.value = newAddress;
+            deliveryAddress.appendChild(option);
+            addresses.push(newAddress);
+        }
+        deliveryAddressPopup.style.display = 'none';
+    });
+});
+
+// Function to increase quantity
+function increaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    quantity++;
+    quantitySpan.textContent = quantity;
+    updateTotalPrice();
+}
+
+// Function to decrease quantity
+function decreaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    if (quantity > 1) {
+        quantity--;
+        quantitySpan.textContent = quantity;
+        updateTotalPrice();
+    }
+}
+
+// Function to delete item
+function deleteItem(element, name) {
+    const itemContainer = element.closest('.item-container');
+    itemContainer.remove();
+    updateTotalPrice();
+}
+
+// Function to update total price and other summary details
+function updateTotalPrice() {
+    const itemContainers = document.querySelectorAll('.item-container');
+    let subtotal = 0;
+
+    // Update itemsMap and recalculate subtotal
+    itemContainers.forEach(itemContainer => {
+        const quantityElement = itemContainer.querySelector('.quantity-actions span');
+        const quantity = parseInt(quantityElement.textContent);
+        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+
+        subtotal += quantity * price;
+    });
+
+    // Calculate taxes based on a tax rate (percentage)
+    const taxRate = 0.1; // 10% tax rate
+    const taxes = subtotal * taxRate;
+
+    // Calculate delivery fee, tips, promo code (if applicable)
+    const deliveryFee = 0; // Update this with the actual delivery fee calculation
+    const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
+    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+
+    // Calculate total price
+    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+
+    // Update checkout summary
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    checkoutSummary.innerHTML = `
+        Subtotal: $${subtotal.toFixed(2)}<br>
+        Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
+        Delivery Fee: $${deliveryFee.toFixed(2)}<br>
+        Tips: $${tips.toFixed(2)}<br>
+        Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
+        <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
+    `;
+}
+
+</script>
+
 </body>
 </html>
