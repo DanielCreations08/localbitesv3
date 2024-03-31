@@ -66,6 +66,7 @@
 
 <main>
   <div id="delivery-content" class="content active">
+
     <div class="section">
       <div>
 
@@ -80,7 +81,7 @@
         </div>
       </div>
       
-      <section>
+ 
         <div class="addressSection">
       
           
@@ -112,21 +113,45 @@
               <a href="/pages/main-page.html">
               <button class="find-restaurants-button">FIND RESTAURANTS</button></a>
             </div>
+
+            <div class="cities-grid">
+              <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+                  <div class="city-info">
+                      <h2>Manteno</h2>
+                  </div>
+                  <div class="delivery-man">
+                    <a href="/pages/main-page.html">
+                      <img src="/assets/delivery-man.png" alt="Kankakee Image"> 
+                    </a>   
+                  </div>
+                  
+                  
+              </div>
+          
+          
+          
+              <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+                  <div class="city-info">
+                      <h2>Kankakee</h2>
+                  </div>
+                  <div class="delivery-man">
+
+                      <img src="/assets/delivery-man.png" alt="Kankakee Image"> 
+                    </a>   
+                  </div>
+                  
+                  
+              </div>
+          </div>
               
           </div>
         </div>
-      
-
-
-
-
-
-
-
-
+    </div>
       
     </div>
   </div>
+
+
 
   <div id="catering-content" class="content">
     <div class="section">
@@ -143,7 +168,7 @@
         </div>
       </div>
       
-      <section>
+ 
         <div class="addressSection">
       
           
@@ -172,9 +197,35 @@
             </div>
             
             <div >
-              <a href="/pages/main-page.html">
+              <a href="/pages/catering-main-page.html">
               <button class="find-restaurants-button">FIND RESTAURANTS</button></a>
             </div>
+
+            <div class="cities-grid">
+              <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+                  <div class="city-info">
+                      <h2>Manteno</h2>
+                  </div>
+                  <div class="delivery-man">
+                      <img src="/assets/delivery-man.png" alt="Kankakee Image">      
+                  </div>
+                  
+                  
+              </div>
+          
+          
+          
+              <div class="city" style="background-image: url('/assets/kankakee-delivery.png');">
+                  <div class="city-info">
+                      <h2>Kankakee</h2>
+                  </div>
+                  <div class="delivery-man">
+                      <img src="/assets/delivery-man.png" alt="Kankakee Image">      
+                  </div>
+                  
+                  
+              </div>
+          </div>
               
           </div>
         </div>
@@ -313,7 +364,7 @@ margin: 8px auto;
 background-color: #FB7306;
 color: #fff;
 border: none;
-padding: 22px 10px;
+padding: 15px 12px;
 cursor: pointer;
 }
 
@@ -385,10 +436,12 @@ width: 52%;
         margin: 0 auto;
         max-width: 800px;
         height: 145px;
-        margin-bottom: 250px;
+        margin-bottom: 50px;
         border-radius: 5px;
         overflow: hidden;
         color: white;
+        padding-top: 15px;
+  
     }
 
     .city {
@@ -462,9 +515,9 @@ width: 52%;
         .cities-grid {
             grid-template-columns: 1fr;
             height: 375px; /* Ajuste de altura para móvil */
-            margin-bottom: 50px;
-            padding: 0px 15px;
+            padding: 20px 15px;
             color: white;
+  
           }
         }
 
@@ -594,7 +647,6 @@ width: 52%;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px;
   }
 
   .section h2 {
