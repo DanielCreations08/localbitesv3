@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/pages/main-page.css">
+  <script src="/pages/main-page.js" defer></script> 
+
+
+  
+  <title>Delivery v3</title>
+
+</head>
+<body>
+
+<nav class="navbar">
+
+  <a href="/index.html">
+  <div class="logo">
+    <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
+  </div>
+</a>
+
+  <div class="menu">
+    <a href="/index.html">Home</a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+    <a href="#">About Us</a>
+    <a href="#">My Account</a>
+  </div>
+  <div class="cart-order-toggle">
+    <div class="cart">
+      <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
+    </div>
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
+    <div class="order-now">
+      <button>Order Now</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
+
+<div class="mobile-menu">
+  <a href="#">Home</a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+  <a href="#">About Us</a>
+  <a href="#">Login</a>
+</div>
+
+
+
+
+
+<!-- Popup Container -->
+<div id="popup-container">
+  <div id="popup-content">
+    <button id="close-button" onclick="hidePopup()">X</button>
+    <p>Sorry, this restaurant is closed.</p>
+    <a id="continue-link" href="#" onclick="hidePopup()">Continue</a>
+</div>
+</div>
+
+
+
+
+
+  <!-- Location Bar -->
+  <div class="locationBar" id="locationBar">
+    <div class="boldText">Delivering to:</div>
+    <div class="locationText">
+      <span>Kankakee, IL, USA</span>
+      <span class="locationIcon"><i class="fas fa-map-marker-alt"></i></span>
+    </div>
+  </div>
+
+
+  
+
+<!-- Search Bar -->
+<div class="welcome-section">
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search for restaurants...">
+        <button class="search-button">Search</button>
+    </div>
+</div>
+
+</div>
+
+
+
+<!-- Restaurant Category Filter -->
+<div class="filterContainer">
+
+   <button class="filterButton" onclick="filterCategory('all')">All Categories</button>
+   <button class="filterButton" onclick="filterCategory('breakfast')">Breakfast</button>
+   <button class="filterButton" onclick="filterCategory('lunch')">Lunch</button>
+   <button class="filterButton" onclick="filterCategory('mexican')">Mexican</button>
+   <button class="filterButton" onclick="filterCategory('asian')">Asian</button>
+   <button class="filterButton" onclick="filterCategory('american')">American</button>
+   <button class="filterButton" onclick="filterCategory('healthy')">Healthy</button>
+   <button class="filterButton" onclick="filterCategory('seafood')">Seafood</button>
+   <button class="filterButton" onclick="filterCategory('italian')">Italian</button>
+
+</div>
+
+
+
+<!-- Featured Restaurants Carousel -->
+<section>
+  <div class="titleContainer">
+    <div class="title">
+       <h1>Caterers Near Me</h1>
+    </div>
+  </div>
+
+  <div class="carousel-container">
+    <div class="featuredContainer" id="carousel">
+
+  
+    <div class="featuredRestaurants">
+      <a href="/menu/uplifted-bistro-order-page/uplifted-bistro-menu.html" style="text-decoration: none;">
+      <div class="restaurantCard" data-category="breakfast">
+        <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro.png" alt="Restaurant Image">
+        <div class="restaurantName">Uplifted Bistro</div>
+        <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+      </div>
+    </a>
+    </div>
+
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="italian" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/tuccis.png" alt="Restaurant Image">
+        <div class="restaurantName">Tucci's</div>
+        <div class="restaurantHours">Closed</div>
+      </div>
+    </div>
+  
+  
+    <div class="featuredRestaurants">
+  
+  
+  <div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
+    <img class="restaurantImage" src="/pages/restaurants/beng-food.png" alt="Restaurant Image">
+    <div class="restaurantName">BENG</div>
+    <div class="restaurantHours">Closed</div>
+  
+  </div>
+  
+    </div>
+  
+  
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/hokkaido-ramen.png" alt="Restaurant Image">
+        <div class="restaurantName">Hokkaido Ramen House in Bourbonnais</div>
+        <div class="restaurantHours">Closed</div>
+      </div>
+    </div>
+  
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="mexican" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/dos-amigos.png" alt="Restaurant Image">
+        <div class="restaurantName">Dos Amigos</div>
+        <div class="restaurantHours">Closed</div>
+      </div>    
+    </div>
+  
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="american" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/windy-hill-grill.png" alt="Restaurant Image">
+        <div class="restaurantName">Windy Hill Grill</div>
+        <div class="restaurantHours">Closed</div>
+      </div>
+    </div>
+  
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="healthy" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/essential-smoothies.png" alt="Restaurant Image">
+        <div class="restaurantName">Essential Smoothies</div>
+        <div class="restaurantHours">Closed</div>
+      </div>
+    </div>
+  
+  
+    <div class="featuredRestaurants">
+      <div class="restaurantCard closed" data-category="lunch" onclick="showPopup()">
+        <img class="restaurantImage" src="/pages/restaurants/jimmy-jos-bbq.png" alt="Restaurant Image">
+        <div class="restaurantName">Jimmy Jo's BBQ</div>
+        <div class="restaurantHours">Closed</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+
+
+  
+    <!-- Restaurants Grid -->
+    <section>
+      <div class="titleContainer">
+        <div class="title">
+           <h1>Restaurants Near Me</h1>
+        </div>
+      </div>
+
+
+      <div class="restaurantGrid" id="restaurantGrid">
+        <!-- Open Restaurant Example-->
+        <a href="/menu/uplifted-bistro-order-page/uplifted-bistro-menu.html"  style="text-decoration: none;">
+        <div class="restaurantCard" data-category="breakfast">
+          <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro.png" alt="Restaurant Image">
+          <div class="restaurantName">Uplifted Bistro</div>
+          <div class="restaurantHours"> 10:00AM - 08:00PM</div>
+        </div>
+        </a>
+        
+        
+        <!-- Open Restaurant Example-->
+        <div class="restaurantCard closed" data-category="italian" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/pizza-mia.png" alt="Restaurant Image">
+          <div class="restaurantName">Pizza Mia</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <!-- Closed Restaurant Examples-->
+        <div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/yannis-cafe-manteno.png" alt="Restaurant Image">
+          <div class="restaurantName">Yanni's Cafe</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="lunch" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/jimmy-jos-bbq.png" alt="Restaurant Image">
+          <div class="restaurantName">Jimmy Jo's BBQ</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/beng-food.png" alt="Restaurant Image">
+          <div class="restaurantName">BENG</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="breakfast" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/uplifted-bistro-manteno.png" alt="Restaurant Image">
+          <div class="restaurantName">Uplifted Bistro Manteno Downtown</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="asian" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/hokkaido-ramen.png" alt="Restaurant Image">
+          <div class="restaurantName">Hokkaido Ramen House in Bourbonnais</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="asian" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/main-dynasty.png" alt="Restaurant Image">
+          <div class="restaurantName">Main Dynasty</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        
+        <div class="restaurantCard closed" data-category="healthy" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/essential-smoothies.png" alt="Restaurant Image">
+          <div class="restaurantName">Essential Smoothies</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="mexican" onclick="showPopup ()">
+          <img class="restaurantImage" src="/pages/restaurants/la-siesta.png" alt="Restaurant Image">
+          <div class="restaurantName">La Siesta</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        
+        <div class="restaurantCard" data-category="american" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/poor-boy.png" alt="Restaurant Image">
+          <div class="restaurantName">Poor Boy</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="mexican" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/dos-amigos.png" alt="Restaurant Image">
+          <div class="restaurantName">Dos Amigos</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="italian" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/tuccis.png" alt="Restaurant Image">
+          <div class="restaurantName">Tucci's</div>
+          <div class="restaurantHours">Closed</div>
+        </div>
+        
+        <div class="restaurantCard closed" data-category="american" onclick="showPopup()">
+          <img class="restaurantImage" src="/pages/restaurants/windy-hill-grill.png" alt="Restaurant Image">
+          <div class="restaurantName">Windy Hill Grill</div>
+          <div class="restaurantHours">Closed</div>
+        </div>          
+    </section>
+
+
+
+
+</body>
+</html>
