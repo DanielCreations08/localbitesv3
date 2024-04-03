@@ -1,0 +1,955 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
+  <link rel="stylesheet" href="/menu/uplifted-bistro-order-page/uplifted-bistro-catering-menu.css"> 
+  <script src="/menu/uplifted-bistro-order-page/uplifted-bistro-order.js" defer></script> 
+
+  <title>Delivery v3</title>
+
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/index.html">
+  <div class="logo">
+    <img src="/assets/delivery-service-in-kankakee-logo.png" alt="Tu Logo">
+  </div>
+  </a>
+  <div class="menu">
+    <a href="/index.html"></a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+  </div>
+  <div class="cart-order-toggle">
+    <div class="cart"  onclick="showCart()"> 
+        <img src="/assets/png-icons/cart-icon.png" alt="Carrito de compras">
+        <span class="cart-quantity" id="cartQuantity">0</span> <!-- New span for quantity -->
+    </div>
+</div>
+
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">&#9776;</div>
+    <div class="order-now">
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<div class="mobile-menu-container" onclick="closeMobileMenu()"></div>
+
+<div class="mobile-menu">
+  <a href="/index.html">Home</a>
+<!-- <a href="#">Catering</a> -->
+<!--   <a href="#">Donations</a>-->
+  <a href="#">About Us</a>
+  <a href="#">My Account</a>
+</div>
+</head>
+
+  <!-- Location Bar -->
+  <div class="locationBar" id="locationBar">
+    <div class="boldText">Delivering to:</div>
+    <div class="locationText">
+      <span>Kankakee, IL, USA</span>
+      <span class="locationIcon"><i class="fas fa-map-marker-alt"></i></span>
+    </div>
+  </div>
+
+
+<div class="hoursContainer">
+  <div class="workingHours">
+      Today working hours: 10:30 am to 8:30pm
+  </div>
+</div>
+
+
+<!-- Search Bar -->
+<div class="restaurantCovers">
+
+  <div class="coverContainer"> 
+    <div class="btn-back"><i class="fas fa-arrow-left"></i><span></span> Back to restaurants</div>
+      <div class="nameCover">
+        <div class="titleCover">UPLIFTED BISTRO</div>
+        <div class="descriptionCover"><p>Elevate your meetings, celebration or event with signature flavors and fresh ingredients.</p></div>
+      </div>
+  
+  </div>
+  
+
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="  Search a meal...">
+    <button class="search-button">Search</button>
+  </div>
+
+</div>
+
+
+
+            <!-- Food Category Filter -->
+<div class="filterContainer">
+    <button class="filterButton" onclick="filterCategory('seafood')">Coffee</button>
+    <button class="filterButton" onclick="filterCategory('all')">All Categories</button>
+    <button class="filterButton" onclick="filterCategory('lunch')">Box Lunches</button>
+    <button class="filterButton" onclick="filterCategory('morningstars')">Salads</button>
+    <button class="filterButton" onclick="filterCategory('mexican')">Tacos</button>
+    <button class="filterButton" onclick="filterCategory('asian')">Half Sandwich</button>
+    <button class="filterButton" onclick="filterCategory('american')">Boba Tea</button>
+    <button class="filterButton" onclick="filterCategory('healthy')">Smoothies</button>
+    <button class="filterButton" onclick="filterCategory('italian')">Desserts</button>
+ 
+ </div>
+
+
+<!-- Restaurants Grid -->
+<section>
+  <div class="titleContainer" data-category="morningstars">
+      <div class="title">
+          <h1>Box Lunches</h1>
+      </div>
+  </div>
+
+  <div class="restaurantGrid" id="restaurantGrid">
+      <!-- Food Examples-->
+      <a href="#" style="text-decoration: none;">
+          <div class="restaurantCard popup-trigger" data-category="lunch">
+              <img class="restaurantImage" src="/menu/uplifted-bistro-order-page/box-lunch.jpg" alt="Restaurant Image">
+              <div class="restaurantName">Read More</div>
+              <div class="foodItemName">Box Lunch</div>
+              <div class="foodDescription">Enjoy a delightful box lunches featuring a choice of deli-style cold sandwiches served on a mini sub, wrap, or half sandwich, complete with fresh lettuce, tomatoes, and optional pickles, accompanied by chips, a cookie, and a refreshing can of soda.</div>
+          </div>
+      </a>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Pop-up Container -->
+      <div class="popup-container" id="popupContainer">
+     
+        <div class="popup-content">
+            
+                <!-- Contenedor de las pestañas -->
+    <div class="tab-container">
+        <!-- Pestañas -->
+        <button class="tab-btn active" onclick="openTab(event, 'content1')">Menu Item</button>
+        <button class="tab-btn" onclick="openTab(event, 'content2')">Reviews</button>
+    </div>
+    <!-- Contenido de las pestañas -->
+    <div id="content1" class="tab-content active">
+        <!-- Contenido de la primera pestaña -->
+     
+
+                <div class="itemName">
+                    <div class="itemNameHolder">
+            
+                    </div>
+                  
+                
+                    <div class="close-btn" onclick="closePopup()">×</div>
+                  </div>
+    
+
+              <div class="food-box">
+
+                
+
+                
+                <div id="mainImageContainer">
+                  <img src="/menu/uplifted-bistro-order-page/item100.jpg" alt="Product Image" id="mainImage">
+              </div>
+              <div class="thumbnails">
+                  <div class="thumbnail">
+                      <img src="/menu/uplifted-bistro-order-page/item100.jpg" alt="Thumbnail 1" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/uplifted-bistro-order-page/item101.jpg" alt="Thumbnail 2" onclick="changeMainImage(this.src)">
+                  </div>
+                  <div class="thumbnail">
+                      <img src="/menu/uplifted-bistro-order-page/item102.jpg" alt="Thumbnail 3" onclick="changeMainImage(this.src)">
+                  </div>
+              </div>
+              
+                
+              <div class="itemNames">
+              
+                  <h1>Box Lunch</h1>
+         
+                
+
+                <div class="itemDescription">
+                  <p>Enjoy a delightful box lunches featuring a choice of deli-style cold sandwiches served on a mini sub, wrap, or half sandwich, complete with fresh lettuce, tomatoes, and optional pickles, accompanied by chips, a cookie, and a refreshing can of soda. </p>
+                </div>
+
+                
+                <p class="food-price">$6.79</p>
+              </div>
+          
+              </div>
+
+              <div class="delivery-simulator">
+
+
+
+                <div class="selection-section">
+                    <div class="selection-title">
+                        <div class="title-container">
+                            <span class="section-title">Choose Your Size</span>
+                            <span class="required-text">1 Required</span> <!-- Nuevo texto -->
+                        </div>
+                    </div>
+                    <div class="selection-options" id="mealOptions">
+                        <div class="option" onclick="selectOption('Burger', this)">
+                            <span>5 people</span>
+                            <span class="price">+$62.50</span>
+                        </div>
+                        <div class="option" onclick="selectOption('Pizza', this)">
+                            <span>10 people</span>
+                            <span class="price">+$125.00</span>
+                        </div>
+                        <div class="option" onclick="selectOption('Salad', this)">
+                            <span>15 people</span>
+                            <span class="price">+$187.50</span>
+                        </div>
+                        <div class="option" onclick="selectOption('Salad', this)">
+                          <span>20 people</span>
+                          <span class="price">+$250.00</span>
+                        </div>
+                        <div class="option" onclick="selectOption('Salad', this)">
+                          <span>50 people</span>
+                          <span class="price">+$625.00</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+
+
+                <div class="selection-section">
+                  <div class="selection-title">
+                      <div class="title-container">
+                          <span class="section-title">Choose Your Sandwich</span>
+                          <span class="required-text">1 Required</span> <!-- Nuevo texto -->
+                      </div>
+                  </div>
+                  <div class="selection-options" id="mealOptions">
+                      <div class="option" onclick="selectOption('Burger', this)">
+                          <span>Turkey Club</span>
+                          <span class="price">+$0.00</span>
+                      </div>
+                      <div class="option" onclick="selectOption('Pizza', this)">
+                          <span>Italiano</span>
+                          <span class="price">+$0.00</span>
+                      </div>
+                      <div class="option" onclick="selectOption('Salad', this)">
+                          <span>Roast Beef & Cheddar</span>
+                          <span class="price">+$0.00</span>
+                      </div>
+
+                      <div class="option" onclick="selectOption('Salad', this)">
+                        <span>Ham & Turkey</span>
+                        <span class="price">+$0.00</span>
+                      </div>
+
+                      <div class="option" onclick="selectOption('Salad', this)">
+                        <span>Veggie Wrap (No bread)</span>
+                        <span class="price">+$0.00</span>
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+              <div class="selection-section">
+                <div class="selection-title">
+                    <div class="title-container">
+                        <span class="section-title">Choose Your Bread</span>
+                        <span class="required-text">1 Required</span> <!-- Nuevo texto -->
+                    </div>
+                </div>
+                <div class="selection-options" id="mealOptions">
+                    <div class="option" onclick="selectOption('Burger', this)">
+                        <span></span>
+                        <span class="price">+$0.00</span>
+                    </div>
+                    <div class="option" onclick="selectOption('Pizza', this)">
+                        <span>Italiano</span>
+                        <span class="price">+$0.00</span>
+                    </div>
+                    <div class="option" onclick="selectOption('Salad', this)">
+                        <span>Roast Beef & Cheddar</span>
+                        <span class="price">+$0.00</span>
+                    </div>
+
+                    <div class="option" onclick="selectOption('Salad', this)">
+                      <span>Ham & Turkey</span>
+                      <span class="price">+$0.00</span>
+                    </div>
+
+                    <div class="option" onclick="selectOption('Salad', this)">
+                      <span>Veggie Wrap</span>
+                      <span class="price">+$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            
+                <div class="selection-section">
+                  <div class="selection-title">
+                      <span class="title-container">Choose Your Can of Soda</span>
+                  </div>
+                  
+                  <div class="selection-options" id="drinkOptions">
+                      <div class="option" onclick="toggleMultiSelection('Coke', this)">
+                          <span>Coke</span>
+                          <span class="price">+$0.00</span>
+                      </div>
+                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
+                            <span>Pepsi</span>
+                            <span class="price">+$0.00</span>
+                        </div>
+                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
+                            <span>Fanta</span>
+                            <span class="price">+$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- New Section for Special Instructions -->
+        <div class="special-instructions-section">
+          <label for="specialInstructions">Special Instructions:</label>
+          <textarea id="specialInstructions" rows="4"></textarea>
+      </div>
+
+<!-- Quantity Section -->
+<div class="quantity-section">
+    <span class="quantity-label">Quantity:</span>
+    <span class="quantity-icons" onclick="adjustQuantity(-1)">-</span>
+    <span id="quantity">1</span>
+    <span class="quantity-icons" onclick="adjustQuantity(1)">+</span>
+  </div>
+  
+
+<!-- Checkout Section -->
+<div class="checkout-section">
+  <div class="add-to-order-container">
+      <button id="addToCartButton" class="add-to-cart-button" onclick="addToCart(1); closePopup()">Add to Cart</button>
+      
+  </div>
+  <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
+</div>
+
+</div>
+    
+<div id="content2" class="tab-content">
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <div class="reviewer-info">
+                <img src="/user-reviews/user-review.jpg" alt="Reviewer Profile Picture">
+                <div class="reviewer-details">
+                    <h3>John Doe</h3>
+                    <span class="review-date">April 1, 2024</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>My favorite breakfast ever! Highly recommended.</p>
+                <div class="rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span>
+                </div>
+            </div>
+        </div>
+        <!-- Additional reviews can be added here -->
+    </div>
+    
+</div>
+
+
+</div>
+
+    </div>
+
+
+
+
+          </div>
+      </div>
+
+      <script>
+          // Get the elements
+          const popupContainer = document.getElementById('popupContainer');
+          const popupTrigger = document.querySelector('.popup-trigger');
+
+          // Function to open the pop-up
+          function openPopup() {
+              popupContainer.style.display = 'flex';
+          }
+
+          // Function to close the pop-up
+          function closePopup() {
+              popupContainer.style.display = 'none';
+          }
+
+          // Function to select a topping (you can customize this function)
+          function selectTopping(topping) {
+              // Add your logic here
+    
+              console.log(`Selected topping: ${topping}`);
+          }
+
+          // Add click event listener to the trigger
+          popupTrigger.addEventListener('click', openPopup);
+
+          // Add click event listener to close the pop-up when clicking outside it
+          window.addEventListener('click', (event) => {
+              if (event.target === popupContainer) {
+                  closePopup();
+              }
+          });
+
+
+
+
+
+
+
+
+
+
+          // Function to handle topping selection
+function selectTopping(topping, element) {
+    // Add or remove 'selected' class on tap
+    element.classList.toggle('selected');
+
+    // Add your logic to handle the selected topping (if needed)
+    if (element.classList.contains('selected')) {
+        // Topping is selected
+        console.log(topping + ' selected');
+    } else {
+        // Topping is deselected
+        console.log(topping + ' deselected');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+let selectedQuantity = 1;
+
+// Function to adjust quantity
+function adjustQuantity(value) {
+    selectedQuantity += value;
+    if (selectedQuantity < 1) {
+        selectedQuantity = 1;
+    }
+    document.getElementById('quantity').innerText = selectedQuantity;
+}
+
+// Function to update selected quantity when input changes
+function updateSelectedQuantity() {
+    const quantityInput = document.getElementById('quantity');
+    selectedQuantity = parseInt(quantityInput.value) || 1; // Parse the value to integer, default to 1 if NaN
+}
+
+// Call updateSelectedQuantity whenever input changes
+document.getElementById('quantity').addEventListener('input', updateSelectedQuantity);
+
+
+
+      </script>
+  </div>
+</section>
+
+
+
+
+
+<script>
+  
+function changeMainImage(src) {
+  document.getElementById('mainImage').src = src;
+}
+</script>
+    
+
+    
+<script>
+  // Restaurant Category Filters
+  function filterCategory(category) {
+      const cards = document.querySelectorAll('.restaurantCard');
+  
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+  
+        if (category === 'all' || category === cardCategory) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+
+</script>
+
+<script>
+  // Obtener la referencia a la imagen principal
+  const mainImage = document.getElementById('mainImage');
+  
+  // Agregar un evento de escucha para el movimiento del mouse
+  mainImage.addEventListener('mousemove', function(e) {
+    // Calcular el tamaño del área de zoom
+    const zoomLevel = 2; // Factor de zoom
+    const offsetX = e.offsetX / mainImage.clientWidth; // Posición X del cursor relativa a la imagen
+    const offsetY = e.offsetY / mainImage.clientHeight; // Posición Y del cursor relativa a la imagen
+    
+    // Aplicar transformación CSS para realizar el zoom
+    mainImage.style.transformOrigin = `${offsetX * 100}% ${offsetY * 100}%`; // Establecer el punto de origen del zoom
+    mainImage.style.transform = `scale(${zoomLevel})`; // Aplicar el zoom
+  });
+  
+  // Restablecer el zoom cuando el mouse sale de la imagen
+  mainImage.addEventListener('mouseleave', function() {
+    mainImage.style.transform = 'scale(1)'; // Restablecer el zoom
+  });
+  </script>
+
+  <script>
+    // Function to handle drink selection
+function selectDrink(drink, element) {
+    // Remove 'selected' class from all drink rectangles
+    const drinkRectangles = document.querySelectorAll('.drink-rectangle');
+    drinkRectangles.forEach(rectangle => {
+        rectangle.classList.remove('selected');
+    });
+
+    // Add 'selected' class to the clicked drink rectangle
+    element.classList.add('selected');
+
+    // Add your logic to handle the selected drink
+    console.log(drink + ' selected');
+}
+
+  </script>
+
+
+<script>
+function selectOption(item, element) {
+    const allOptions = element.parentElement.querySelectorAll('.option');
+
+    // Deseleccionar todas las opciones
+    allOptions.forEach(option => {
+        option.classList.remove('selected');
+    });
+
+    // Seleccionar la opción clicada
+    element.classList.add('selected');
+
+    console.log(item + ' selected');
+}
+
+function toggleMultiSelection(item, element) {
+    element.classList.toggle('selected');
+
+    if (element.classList.contains('selected')) {
+        console.log(item + ' selected');
+    } else {
+        console.log(item + ' deselected');
+    }
+}
+
+</script>
+  
+
+<script>
+// Función para abrir la pestaña deseada
+function openTab(evt, tabName) {
+    // Oculta todos los contenidos de las pestañas
+    var tabContents = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+
+    // Quita la clase "active" de todos los botones de pestaña
+    var tabBtns = document.getElementsByClassName("tab-btn");
+    for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].className = tabBtns[i].className.replace(" active", "");
+    }
+
+    // Muestra el contenido de la pestaña seleccionada
+    document.getElementById(tabName).style.display = "block";
+    // Agrega la clase "active" al botón de la pestaña seleccionada
+    evt.currentTarget.className += " active";
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="checkout-container">
+           <!-- <h1 class="checkout-title">Checkout Page</h1>
+    <button class="checkout-button" onclick="showCart()">Open Cart</button>
+  Additional reviews can be added here --> 
+    <div class="cart-popup" id="cartPopup">
+        <span class="close-button-cart" onclick="closeCart()">&times;</span>
+        <h2 style="text-align: center;">Your Cart</h2>
+        <div id="cartContent" class="cart-content"></div>
+        <div class="cart-total">Total: $<span id="totalCost">0.00</span></div>
+        <button onclick="checkout()" class="view-all-button">Checkout</button>
+    </div>
+</div>
+
+
+  <style>
+    /* Existing CSS */
+    .checkout-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+      position: relative; /* Add relative positioning to the container */
+    }
+    .checkout-title {
+      text-align: center;
+    }
+    .checkout-button {
+      display: block;
+      margin: 20px auto; /* Center the button */
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .cart-popup {
+      position: fixed;
+      top: 60px;
+      right: -2600px; /* Off the viewport */
+      transition: right 0.3s ease-in-out; /* Animation transition */
+      background-color: #ffffff; /* White background */
+      padding: 20px;
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000;
+      width: 40%; /* Set a fixed width for the cart */
+    }
+    @media only screen and (max-width: 768px) {
+      .cart-popup {
+        top: 65px;
+        right: -1600px; /* Off the viewport */
+        transition: right 0.3s ease-in-out; /* Animation transition */
+        padding: 10px;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        z-index: 1000;
+        width: 82%; /* Set a fixed width for the cart */
+      }
+    }
+
+    .cart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .cart-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    }
+    .cart-popup.active {
+      right: 20px; /* Show the cart from the right corner */
+    }
+    .cart-total {
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .item-image {
+      width: 65px;
+      height: 65px;
+      border-radius: 5px; /* Change to square border */
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .item-details {
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+    }
+    .quantity-adjust {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    .quantity-adjust button {
+      background-color: orange;
+      border: 2px solid #f9a602; /* Yellow border */
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0px 5px;
+    }
+    .quantity-input {
+      text-align: center;
+      padding: 2px;
+      margin: 10px 6px 0px 6px;
+      width: 20px;
+    }
+    .close-button-cart {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .view-all-button {
+      background-color: #30b521;
+      display: block;
+      margin: 10px auto; /* Center the button and decrease padding */
+      padding: 18px 50px; /* Decrease padding */
+      color: #ffffff; /* Green color */
+      font-size: 16px;
+      cursor: pointer;
+      border: none; /* Remove border */
+    }
+    .cart-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .restaurant-name {
+      font-weight: bold;
+    }
+  </style>
+
+<script>
+    let cartItems = [];
+    
+    function showCart() {
+      var cartPopup = document.getElementById('cartPopup');
+      cartPopup.classList.add('active');
+    }
+    
+    function closeCart() {
+      var cartPopup = document.getElementById('cartPopup');
+      cartPopup.classList.remove('active');
+    }
+    
+    function checkout() {
+    // Encode cart data into URL parameters
+    const cartData = encodeURIComponent(JSON.stringify(cartItems));
+    // Redirect to the checkout page with cart data
+    window.location.href = "/pages/checkout.html?cart=" + cartData;
+}
+
+    
+    function addItemToCart() {
+      let existingItem = cartItems.find(item => item.id === "item100");
+      if (existingItem) {
+        existingItem.quantity++;
+        existingItem.totalCost += existingItem.price;
+      } else {
+        let newItem = {
+          id: "item100",
+          name: "Meat Starter",
+          restaurant: "Uplifted Bistro",
+          image: "/menu/uplifted-bistro-order-page/item100.jpg",
+          price: 6.79,
+          quantity: 1,
+          totalCost: 6.79
+        };
+        cartItems.push(newItem);
+      }
+      updateCartContent();
+      showCart();
+    }
+    
+    function updateCartContent() {
+  const cartContent = document.getElementById('cartContent');
+  cartContent.innerHTML = "";
+  let totalQuantity = 0; // Initialize total quantity counter
+  cartItems.forEach(item => {
+    totalQuantity += item.quantity; // Accumulate quantity for each item
+    const itemHTML = `
+      <div class="cart-item">
+        <div class="item-details">
+          <img src="${item.image}" alt="Item Image" class="item-image">
+          <div>
+            <span>${item.name}</span><br>
+            <span class="restaurant-name">${item.restaurant}</span><br>
+            $${item.price.toFixed(2)} 
+          </div>
+          <div class="quantity-adjust">
+            <button onclick="decreaseQuantity('${item.id}')">-</button>
+            <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+            <button onclick="increaseQuantity('${item.id}')">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+    cartContent.innerHTML += itemHTML;
+  });
+  updateTotalCost();
+  // Update cart quantity display
+  document.getElementById('cartQuantity').textContent = totalQuantity;
+  // Add pulse animation class to cart icon if there are items in the cart
+  const cartIcon = document.querySelector('.cart');
+  if (totalQuantity > 0) {
+    cartIcon.classList.add('pulse');
+  } else {
+    cartIcon.classList.remove('pulse');
+  }
+}
+
+    
+    function updateTotalCost() {
+      let totalCost = cartItems.reduce((acc, item) => acc + item.totalCost, 0);
+      document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+    }
+    
+    function increaseQuantity(itemId) {
+      let item = cartItems.find(item => item.id === itemId);
+      if (item) {
+        item.quantity++;
+        item.totalCost += item.price;
+        updateCartContent();
+      }
+    }
+    
+    function decreaseQuantity(itemId) {
+      let item = cartItems.find(item => item.id === itemId);
+      if (item) {
+        item.quantity--;
+        item.totalCost -= item.price;
+        if (item.quantity === 0) {
+          cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+        }
+        updateCartContent();
+      }
+    }
+    
+    // Call addItemToCart initially to handle adding item to cart
+    document.getElementById('addToCartButton').addEventListener('click', addItemToCart);
+    
+    // Call updateCartContent initially to handle empty cart state
+    updateCartContent();
+</script>
+
+
+</body>
+</html>                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

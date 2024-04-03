@@ -1,0 +1,555 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+/* NAV BAR STYLE */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #FB7306;
+  color: white;
+  padding: 15px 0px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+}
+
+.logo img {
+  width: 120px;
+  padding-left: 25px;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #ffcc00;
+}
+
+.cart-order-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.cart img {
+  margin-top: 7px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle {
+  font-size: 35px;
+  padding-bottom: 5px;
+  padding-right: 30px;
+  cursor: pointer;
+  display: none;
+}
+
+.mobile-menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  display: none;
+  z-index: 2; /* Coloca encima del menú */
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #FB7306;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: -80%;
+  width: 80%;
+  height: 100%;
+  transition: left 0.3s ease;
+  z-index: 2; /* Coloca encima del fondo oscuro */
+}
+
+.mobile-menu a {
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  background-color: #555;
+}
+
+.mobile-menu.show {
+  left: 0;
+}
+
+.order-now {
+  padding-right: 25px;
+  order: 3;
+}
+
+.order-now button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+
+
+.order-now button:hover {
+  background-color: #5a5a5a;
+}
+
+@media only screen and (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .cart-order-toggle {
+    order: 2;
+  }
+
+  .order-now {
+    display: none;
+  }
+
+  .navbar {
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .mobile-menu-container {
+    display: none; /* Oculta inicialmente */
+  }
+
+  .mobile-menu.show {
+    left: 0;
+    width: 70%;
+  }
+}
+
+
+/* NAV BAR ENDS */
+
+
+
+
+
+
+    .welcome-section {
+            
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 20px 20px 0px 20px;
+            border-radius: 5px;
+        }
+
+        .search-container {
+            margin-top: 168px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Media query for smaller screens (e.g., mobile) */
+        @media only screen and (max-width: 767px) {
+            .search-container {
+              margin-top: 160px;
+             }
+        }
+
+        #search {
+            padding: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 70%;
+            transition: border-color 0.3s ease;
+        }
+
+        #search:focus {
+            border-color: #000000;
+        }
+
+        .search-button {
+            padding: 15px 20px;
+            background-color: #FB7306;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #000000;
+        }
+
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    
+
+    
+
+
+
+    
+
+    /* Location Bar */
+    .locationBar {
+      position: fixed;
+      top: 80px; /* Adjusted margin-top for the navbar */
+      width: 100%;
+      height: 70px; /* Initial height */
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      transition: all 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+ 
+      font-size: 18px;
+    }
+
+    .locationBar.scroll-up {
+   
+      height: 40px; /* Adjusted height when scrolled up */
+      padding: 14px 0px 0px 10px; /* Adjusted padding when scrolled up */
+      font-size: 85%; /* Reduced font size when scrolled up */
+      transform: translateY(-15px); /* Adjusted translateY for sliding up effect */
+    }
+
+    .boldText {
+      margin-right: 10px;
+      font-weight: bold;
+      margin-bottom: 5px; /* Adjusted margin to separate "Delivering to:" from the location */
+    }
+
+    .locationText {
+      margin-right: 10px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .locationIcon {
+      margin-left: 5px;
+    }
+
+
+    @media only screen and (max-width: 767px) {
+      .locationBar {
+        top: 72px;
+      }
+    }
+
+
+
+
+
+
+/* Filter Button Container */
+.filterContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  margin: 0px 0px 0px 20px; /* Agregado margen lateral en desktop */
+  display: flex;
+}
+
+/* Filter Button */
+.filterButton {
+  font-size: 18px;
+  padding: 12px 15px;
+  margin: 0px 0px 0px 15px;
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+/* Hover effect */
+.filterButton:hover {
+  background-color: #ffcc00; /* Naranja en hover */
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  display: none; /* Oculto por defecto */
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  .filterContainer {
+    overflow-x: auto;
+    margin: 0; /* Eliminado margen lateral en móviles */
+    width: 100%; /* Ajuste para ocupar todo el ancho */
+    white-space: nowrap; /* Garantizar que los elementos no se envuelvan en columnas */
+    flex-wrap: unset; /* Restablecer el envoltorio flexible */
+    justify-content: flex-start; /* Alinear los elementos al principio */
+  }
+
+  .scrollIndicator {
+    display: block; /* Mostrar solo en dispositivos móviles */
+  }
+}
+
+
+
+/* Featured Restaurants Container */
+.featuredContainer {
+
+  background-color: #fff;
+  padding: 10px 0px 15px 0px;
+  margin: 0px 20px 0px 20px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.featuredRestaurants {
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+.carousel-container {
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Restaurant Grid Container */
+.restaurantGrid {
+  margin: 2px 12px 25px 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 25px 0px; /* Default gap for larger screens */
+  padding: 25px 0px; /* Padding for both sides */
+  justify-content: space-around;
+}
+
+/* Media query for smaller screens (e.g., mobile) */
+@media only screen and (max-width: 767px) {
+  .restaurantGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Adjust the gap between cards */
+    padding: 8px 0px 35px 0px; /* Adjust the overall padding */
+    margin: 1px 1px 1px 1px;
+  }
+}
+
+/* Restaurant Card */
+.restaurantCard {
+ 
+  position: relative;
+  width: 170px; /* Adjusted the width to 100% */
+  height: 210px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Set margin to 0 to avoid unintended spacing */
+  
+}
+
+@media only screen and (max-width: 414px) {
+  .restaurantCard {
+    width: 174px; /* Adjusted the width to 100% */
+    height: 188px;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .restaurantCard {
+    width: 175px; /* Adjusted the width to 100% */
+    height: 192px;
+  }
+}
+
+
+/* Restaurant Image */
+.restaurantImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden; /* Añadido para ocultar cualquier desbordamiento de la imagen */
+}
+
+/* Restaurant Name */
+.restaurantName {
+  text-overflow: ellipsis; /* Add this line */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff; /* White color for the name */
+  background-color: #a07f5a; /* Orange background for the name */
+  padding: 5px;
+  border-radius: 0 0 0 0;
+}
+
+/* Restaurant Hours */
+.restaurantHours {
+  font-size: 14px;
+  text-align: center;
+  color: #fff; /* White color for the hours */
+  background-color: #ffbb00; /* Yellow background for the hours */
+  padding: 5px;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Closed Restaurant Style */
+
+#popup-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+
+#popup-content {
+  
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+#close-button {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#app-icons {
+  margin-top: 0px;
+}
+
+#app-icons img {
+  width: 150px;
+  margin: 2px;
+}
+
+#continue-link {
+  display: block;
+  margin-top: 20px;
+  color: #333;
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
