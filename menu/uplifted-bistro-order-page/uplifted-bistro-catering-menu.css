@@ -213,12 +213,19 @@ body {
  
 }
 
+.backBtnContainer {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0px;
+}
+
 .btn-back {
-  background-color: #FB7306;
-  padding: 15px 0px;
+  background-color: #0000005f;
+  padding: 15px 20px;
   color: #ffffff;
   text-shadow: none;
 }
+
 
 
 .nameCover {
@@ -245,7 +252,7 @@ body {
 /* Media query for smaller screens (e.g., mobile) */
 @media only screen and (max-width: 767px) {
   .nameCover{
-    margin-top: 95px;
+    margin-top: 65px;
     height: 135px;
     font-size: 35px;
   }
@@ -805,6 +812,7 @@ body {
 /* Special Instructions Section */
 .special-instructions-section {
   margin: 20px 10px 0px 10px;
+  width: 95%;
 }
 
 label {
