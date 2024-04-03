@@ -185,13 +185,13 @@
               </div>
               <div class="thumbnails">
                   <div class="thumbnail">
-                      <img src="/menu/uplifted-bistro-order-page/item100.jpg" alt="Thumbnail 1" onclick="changeMainImage(this.src)">
+                      <img src="/menu/uplifted-bistro-order-page/box-lunch.jpg" alt="Thumbnail 1" onclick="changeMainImage(this.src)">
                   </div>
                   <div class="thumbnail">
-                      <img src="/menu/uplifted-bistro-order-page/item101.jpg" alt="Thumbnail 2" onclick="changeMainImage(this.src)">
+                      <img src="/menu/uplifted-bistro-order-page/sandwich-bistro.jpg" alt="Thumbnail 2" onclick="changeMainImage(this.src)">
                   </div>
                   <div class="thumbnail">
-                      <img src="/menu/uplifted-bistro-order-page/item102.jpg" alt="Thumbnail 3" onclick="changeMainImage(this.src)">
+                      <img src="/menu/uplifted-bistro-order-page/chips-bistro.jpg" alt="Thumbnail 3" onclick="changeMainImage(this.src)">
                   </div>
               </div>
               
@@ -207,7 +207,7 @@
                 </div>
 
                 
-                <p class="food-price">$6.79</p>
+              <!--<p class="food-price">$6.79</p>--> 
               </div>
           
               </div>
@@ -476,7 +476,7 @@
       <button id="addToCartButton" class="add-to-cart-button" onclick="addToCart(1); closePopup()">Add to Cart</button>
       
   </div>
-  <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
+  <span class="total-price">Total= $62.49</span> <!-- Replace with your dynamic total price -->
 </div>
 
 </div>
@@ -912,7 +912,7 @@ function openTab(evt, tabName) {
     // Encode cart data into URL parameters
     const cartData = encodeURIComponent(JSON.stringify(cartItems));
     // Redirect to the checkout page with cart data
-    window.location.href = "/pages/checkout.html?cart=" + cartData;
+    window.location.href = "/pages/checkout-catering.html?cart=" + cartData;
 }
 
     
@@ -924,12 +924,12 @@ function openTab(evt, tabName) {
       } else {
         let newItem = {
           id: "item100",
-          name: "Meat Starter",
+          name: "Box Lunch",
           restaurant: "Uplifted Bistro",
-          image: "/menu/uplifted-bistro-order-page/item100.jpg",
-          price: 6.79,
+          image: "/menu/uplifted-bistro-order-page/box-lunch.jpg",
+          price: 62.49,
           quantity: 1,
-          totalCost: 6.79
+          totalCost: 62.49
         };
         cartItems.push(newItem);
       }
