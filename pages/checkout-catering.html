@@ -401,42 +401,44 @@ body {
         updateTotalPrice();
     }
     
+
     // Function to update total price and other summary details
     function updateTotalPrice() {
-        const itemContainers = document.querySelectorAll('.item-container');
-        let subtotal = 0;
-    
-        // Update itemsMap and recalculate subtotal
-        itemContainers.forEach(itemContainer => {
-            const quantityElement = itemContainer.querySelector('.quantity-actions span');
-            const quantity = parseInt(quantityElement.textContent);
-            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-    
-            subtotal += quantity * price;
-        });
-    
-        // Calculate taxes based on a tax rate (percentage)
-        const taxRate = 0.1; // 10% tax rate
-        const taxes = subtotal * taxRate;
-    
-        // Calculate delivery fee, tips, promo code (if applicable)
-        const deliveryFee = 0; // Update this with the actual delivery fee calculation
-        const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
-        const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
-    
-        // Calculate total price
-        const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
-    
-        // Update checkout summary
-        const checkoutSummary = document.getElementById('checkoutSummary');
-        checkoutSummary.innerHTML = `
-            Subtotal: $${subtotal.toFixed(2)}<br>
-            Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
-            Delivery Fee: $${deliveryFee.toFixed(2)}<br>
-            Tips: $${tips.toFixed(2)}<br>
-            Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-            <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
-        `;
+    const itemContainers = document.querySelectorAll('.item-container');
+    let subtotal = 0;
+
+    // Update itemsMap and recalculate subtotal
+    itemContainers.forEach(itemContainer => {
+        const quantityElement = itemContainer.querySelector('.quantity-actions span');
+        const quantity = parseInt(quantityElement.textContent);
+        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+
+        subtotal += quantity * price;
+    });
+
+    // Calculate taxes based on a tax rate (percentage)
+    const taxRate = 0.2; // 20% tax rate
+    const taxes = subtotal * taxRate;
+
+    // Calculate delivery fee, tips, promo code (if applicable)
+    const deliveryFee = 6; // Fixed delivery fee
+    const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
+    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+
+    // Calculate total price
+    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+
+
+// Update checkout summary
+const checkoutSummary = document.getElementById('checkoutSummary');
+checkoutSummary.innerHTML = `
+    Subtotal: $${subtotal.toFixed(2)}<br>
+    Taxes (${(taxRate * 100).toFixed(2)}%) & Delivery Fee: $${(taxes + deliveryFee).toFixed(2)}<br>
+    Tips: $${tips.toFixed(2)}<br>
+    Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
+    <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
+`;
+
     }
 
 
