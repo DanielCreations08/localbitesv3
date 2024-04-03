@@ -4,70 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout Page</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-}
-
-.container {
-    max-width: 100%;
-    padding: 20px;
-}
-
-.card {
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-/* Additional Mobile Responsive CSS */
-.card {
-    width: 100%;
-}
-
-/* Media Query for larger screens */
-@media (min-width: 768px) {
-    .card {
-        width: 48%;
-        margin-right: 2%;
-    }
-    .card:nth-child(2n) {
-        margin-right: 0;
-    }
-}
-
-/* New styles */
-.tip-button {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f8f9fa;
-}
-
-.tip-button.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.promo-code-input {
-    width: 70%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <!-- List of items -->
     <div class="card">
         <h3>Items</h3>
@@ -80,40 +20,23 @@ body {
     <!-- Tip -->
     <div class="card">
         <h3>Tip</h3>
-        <div>
-            <button class="tip-button" onclick="setTipAmount(2)">$2</button>
-            <button class="tip-button" onclick="setTipAmount(5)">$5</button>
-            <button class="tip-button" onclick="setTipAmount(10)">$10</button>
-            <button class="tip-button" onclick="setTipAmount(20)">$20</button>
-        </div>
-    </div>
-
-    <!-- Gift -->
-    <div class="card">
-        <h3>Gift</h3>
-        <div>
-            <input type="checkbox" id="giftCheckbox">
-            <label for="giftCheckbox">Include Gift</label>
-        </div>
-    </div>
-
-    <!-- Promo Code -->
-    <div class="card">
-        <h3>Promo Code</h3>
-        <input type="text" id="promoCodeInput" class="promo-code-input" placeholder="Enter promo code">
+        <input type="number" id="tipAmount" class="form-control" placeholder="Enter tip amount">
     </div>
 
     <!-- Delivery -->
     <div class="card">
         <h3>Delivery</h3>
         <div>
-            <button class="tip-button" onclick="setDeliveryMethod('pickUp')">Pick-up</button>
-            <button class="tip-button" onclick="setDeliveryMethod('delivery')">Delivery</button>
+            <label for="deliveryMethod">Select delivery method:</label><br>
+            <input type="radio" id="pickUp" name="deliveryMethod" value="pickUp" class="delivery-method" checked>
+            <label for="pickUp">Pick-up</label><br>
+            <input type="radio" id="delivery" name="deliveryMethod" value="delivery" class="delivery-method">
+            <label for="delivery">Delivery</label>
         </div>
     </div>
     
 <!-- Delivery time slot -->
-<div class="card" id="deliveryTimeSlot" style="display: none;">
+<div class="card" id="deliveryTimeSlot">
     <h3>Delivery time</h3>
     <select name="timeslot" id="timeslot" class="form-control" required>
         <!-- Time slot options will be added here -->
@@ -121,12 +44,27 @@ body {
 </div>
 
     <!-- Delivery address -->
-    <div class="card" id="deliveryAddress" style="display: none;">
+    <div class="card">
         <h3>Delivery Address</h3>
         <select name="addressID" id="addressID" class="form-control" required>
             <!-- Address options will be added here -->
         </select>
         <button type="button" id="addAddressBtn" class="btn-outline-success">Add new</button>
+    </div>
+
+
+    <!-- Delivery address popup -->
+    <div id="deliveryAddressPopup" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Address</h2>
+            <!-- Form for adding a new address -->
+            <form id="newAddressForm">
+                <label for="newAddressInput">New Address:</label>
+                <input type="text" id="newAddressInput" name="newAddressInput" required><br><br>
+                <button type="button" id="saveAddressBtn">Save Address</button>
+            </form>
+        </div>
     </div>
 
     <!-- Comment -->
@@ -199,173 +137,310 @@ body {
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Parse the cart data from URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const cartData = urlParams.get('cart');
-    const cartItems = JSON.parse(decodeURIComponent(cartData));
 
-    // Add event listener to tip input
-    const tipInput = document.getElementById('tipAmount');
-    tipInput.addEventListener('change', function() {
-        updateTotalPrice();
-    });
-
-    // Initialize tip input with default value
-    tipInput.value = 2; // Default tip amount is $2
-
-    // Render cart items
-    const cartItemsContainer = document.getElementById('cartList');
-    const deliveryTimeSlot = document.getElementById('timeslot');
-    const deliveryAddress = document.getElementById('addressID');
-    const checkoutSummary = document.getElementById('checkoutSummary');
-    const addAddressBtn = document.getElementById('addAddressBtn');
-    const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
-    const deleteAddressBtn = document.getElementById('deleteAddressBtn');
-
-    let totalPrice = 0;
-    let itemsMap = new Map(); // To store items with their quantities
-
-    cartItems.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        totalPrice += itemTotal;
-
-        if (itemsMap.has(item.name)) {
-            // If item already exists in the map, update its quantity
-            itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
-        } else {
-            // If item is not in the map, add it with its quantity
-            itemsMap.set(item.name, item.quantity);
-        }
-    });
-
-    // Render items from itemsMap
-    itemsMap.forEach((quantity, name) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('item-container');
-
-        const itemTotal = cartItems.find(item => item.name === name).price * quantity;
-
-        // Construct the image URL using the item name directly
-        const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
-
-        itemElement.innerHTML = `
-            <div class="item-details">
-                <div>${name}</div>
-                <div class="item-image">
-                    <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
-                </div>
-                <div class="quantity-actions">
-                    <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
-                    <span>${quantity}</span>
-                    <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
-                    <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
-                </div>
-                <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
-            </div>
-        `;
-        cartItemsContainer.appendChild(itemElement);
-    });
-
-    // Set delivery time based on current time and restaurant working hours
-    const currentTime = new Date();
-    const currentHour = currentTime.getHours();
-    const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
-
-    // Calculate delivery time slots
-    const deliveryTimeSlots = [];
-    for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
-        deliveryTimeSlots.push(hour);
-    }
-
-    // Populate delivery time slots dropdown
-    deliveryTimeSlots.forEach(hour => {
-        const option = document.createElement('option');
-        option.text = `${hour}:00 - ${hour + 1}:00`;
-        option.value = `${hour}`;
-        deliveryTimeSlot.appendChild(option);
-    });
-
-    // Add event listener to Save Address button in popup
-    document.getElementById('saveAddressBtn').addEventListener('click', function() {
-        const newAddress = document.getElementById('newAddressInput').value;
-        if (newAddress.trim() !== '') {
-            // Add new address to dropdown
-            const option = document.createElement('option');
-            option.text = newAddress;
-            option.value = newAddress;
-            deliveryAddress.appendChild(option);
-            addresses.push(newAddress);
-        }
-        deliveryAddressPopup.style.display = 'none';
-    });
-});
-
-// Function to increase quantity
-function increaseQuantity(element, name) {
-    const quantitySpan = element.parentElement.querySelector('span');
-    let quantity = parseInt(quantitySpan.textContent);
-    quantity++;
-    quantitySpan.textContent = quantity;
-    updateTotalPrice();
+<style>
+    /* Mobile Responsive CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
 }
 
-// Function to decrease quantity
-function decreaseQuantity(element, name) {
-    const quantitySpan = element.parentElement.querySelector('span');
-    let quantity = parseInt(quantitySpan.textContent);
-    if (quantity > 1) {
-        quantity--;
+.container {
+    max-width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Additional Mobile Responsive CSS */
+.card {
+    width: 100%;
+}
+
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+    .card {
+        width: 48%;
+        margin-right: 2%;
+    }
+    .card:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+/* Styles for item list */
+.item-container {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantity-price {
+    font-size: 14px;
+}
+
+.quantity-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-action {
+    cursor: pointer;
+    border: none;
+    background: none;
+    margin: 0 5px;
+}
+
+/* Styles for summary */
+.summary-details {
+    font-weight: bold;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tip-button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+}
+
+.tip-button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+</style>
+
+
+<script>
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Parse the cart data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const cartData = urlParams.get('cart');
+        const cartItems = JSON.parse(decodeURIComponent(cartData));
+    
+        // Add event listener to tip input
+        const tipInput = document.getElementById('tipAmount');
+        tipInput.addEventListener('change', function() {
+            updateTotalPrice();
+        });
+    
+        // Initialize tip input with default value
+        tipInput.value = 2; // Default tip amount is $2
+    
+        // Render cart items
+        const cartItemsContainer = document.getElementById('cartList');
+        const deliveryTimeSlot = document.getElementById('timeslot');
+        const deliveryAddress = document.getElementById('addressID');
+        const checkoutSummary = document.getElementById('checkoutSummary');
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
+        const deleteAddressBtn = document.getElementById('deleteAddressBtn');
+    
+        let totalPrice = 0;
+        let itemsMap = new Map(); // To store items with their quantities
+    
+        cartItems.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+    
+            if (itemsMap.has(item.name)) {
+                // If item already exists in the map, update its quantity
+                itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
+            } else {
+                // If item is not in the map, add it with its quantity
+                itemsMap.set(item.name, item.quantity);
+            }
+        });
+    
+        // Render items from itemsMap
+        itemsMap.forEach((quantity, name) => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('item-container');
+    
+            const itemTotal = cartItems.find(item => item.name === name).price * quantity;
+    
+            // Construct the image URL using the item name directly
+            const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
+    
+            itemElement.innerHTML = `
+                <div class="item-details">
+                    <div>${name}</div>
+                    <div class="item-image">
+                        <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+                    </div>
+                    <div class="quantity-actions">
+                        <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
+                        <span>${quantity}</span>
+                        <button class="btn-action" onclick="increaseQuantity(this, '${name}')">+</button>
+                        <button class="btn-action" onclick="deleteItem(this, '${name}')">Delete</button>
+                    </div>
+                    <div class="quantity-price">${quantity} x $${(itemTotal / quantity).toFixed(2)}</div>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
+    
+        // Set delivery time based on current time and restaurant working hours
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours();
+        const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
+    
+        // Calculate delivery time slots
+        const deliveryTimeSlots = [];
+        for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
+            deliveryTimeSlots.push(hour);
+        }
+    
+        // Populate delivery time slots dropdown
+        deliveryTimeSlots.forEach(hour => {
+            const option = document.createElement('option');
+            option.text = `${hour}:00 - ${hour + 1}:00`;
+            option.value = `${hour}`;
+            deliveryTimeSlot.appendChild(option);
+        });
+    
+ 
+    
+        // Display total price and update checkout summary
+        updateTotalPrice();
+
+        // Add event listener to Save Address button in popup
+        document.getElementById('saveAddressBtn').addEventListener('click', function() {
+            const newAddress = document.getElementById('newAddressInput').value;
+            if (newAddress.trim() !== '') {
+                // Add new address to dropdown
+                const option = document.createElement('option');
+                option.text = newAddress;
+                option.value = newAddress;
+                deliveryAddress.appendChild(option);
+                addresses.push(newAddress);
+            }
+            deliveryAddressPopup.style.display = 'none';
+        });
+    });
+    
+    // Function to increase quantity
+    function increaseQuantity(element, name) {
+        const quantitySpan = element.parentElement.querySelector('span');
+        let quantity = parseInt(quantitySpan.textContent);
+        quantity++;
         quantitySpan.textContent = quantity;
         updateTotalPrice();
     }
-}
+    
+    // Function to decrease quantity
+    function decreaseQuantity(element, name) {
+        const quantitySpan = element.parentElement.querySelector('span');
+        let quantity = parseInt(quantitySpan.textContent);
+        if (quantity > 1) {
+            quantity--;
+            quantitySpan.textContent = quantity;
+            updateTotalPrice();
+        }
+    }
+    
+    // Function to delete item
+    function deleteItem(element, name) {
+        const itemContainer = element.closest('.item-container');
+        itemContainer.remove();
+        updateTotalPrice();
+    }
+    
+    // Function to update total price and other summary details
+    function updateTotalPrice() {
+        const itemContainers = document.querySelectorAll('.item-container');
+        let subtotal = 0;
+    
+        // Update itemsMap and recalculate subtotal
+        itemContainers.forEach(itemContainer => {
+            const quantityElement = itemContainer.querySelector('.quantity-actions span');
+            const quantity = parseInt(quantityElement.textContent);
+            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+    
+            subtotal += quantity * price;
+        });
+    
+        // Calculate taxes based on a tax rate (percentage)
+        const taxRate = 0.1; // 10% tax rate
+        const taxes = subtotal * taxRate;
+    
+        // Calculate delivery fee, tips, promo code (if applicable)
+        const deliveryFee = 0; // Update this with the actual delivery fee calculation
+        const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
+        const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+    
+        // Calculate total price
+        const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+    
+        // Update checkout summary
+        const checkoutSummary = document.getElementById('checkoutSummary');
+        checkoutSummary.innerHTML = `
+            Subtotal: $${subtotal.toFixed(2)}<br>
+            Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
+            Delivery Fee: $${deliveryFee.toFixed(2)}<br>
+            Tips: $${tips.toFixed(2)}<br>
+            Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
+            <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
+        `;
+    }
 
-// Function to delete item
-function deleteItem(element, name) {
-    const itemContainer = element.closest('.item-container');
-    itemContainer.remove();
-    updateTotalPrice();
-}
 
-// Function to update total price and other summary details
-function updateTotalPrice() {
-    const itemContainers = document.querySelectorAll('.item-container');
-    let subtotal = 0;
 
-    // Update itemsMap and recalculate subtotal
-    itemContainers.forEach(itemContainer => {
-        const quantityElement = itemContainer.querySelector('.quantity-actions span');
-        const quantity = parseInt(quantityElement.textContent);
-        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-
-        subtotal += quantity * price;
-    });
-
-    // Calculate taxes based on a tax rate (percentage)
-    const taxRate = 0.1; // 10% tax rate
-    const taxes = subtotal * taxRate;
-
-    // Calculate delivery fee, tips, promo code (if applicable)
-    const deliveryFee = 0; // Update this with the actual delivery fee calculation
-    const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
-    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
-
-    // Calculate total price
-    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
-
-    // Update checkout summary
-    const checkoutSummary = document.getElementById('checkoutSummary');
-    checkoutSummary.innerHTML = `
-        Subtotal: $${subtotal.toFixed(2)}<br>
-        Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
-        Delivery Fee: $${deliveryFee.toFixed(2)}<br>
-        Tips: $${tips.toFixed(2)}<br>
-        Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-        <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
-    `;
-}
 
 </script>
 
