@@ -402,8 +402,8 @@ body {
     }
     
 
-    // Function to update total price and other summary details
-    function updateTotalPrice() {
+// Function to update total price and other summary details
+function updateTotalPrice() {
     const itemContainers = document.querySelectorAll('.item-container');
     let subtotal = 0;
 
@@ -416,30 +416,33 @@ body {
         subtotal += quantity * price;
     });
 
-    // Calculate taxes based on a tax rate (percentage)
-    const taxRate = 0.2; // 20% tax rate
-    const taxes = subtotal * taxRate;
-
-    // Calculate delivery fee, tips, promo code (if applicable)
-    const deliveryFee = 6; // Fixed delivery fee
-    const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
-    const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
+    // Calculate taxes and fees based on a tax rate (percentage)
+    const taxRate = 0.20; // 20% tax rate
+    const taxesAndFees = subtotal * taxRate;
+    
+    // Fixed delivery fee
+    const deliveryFee = 5.29;
+    
+    // Tip amount
+    const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
+    
+    // Discount amount
+    const discountAmount = 0.00;
 
     // Calculate total price
-    const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
+    const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
 
-
-// Update checkout summary
-const checkoutSummary = document.getElementById('checkoutSummary');
-checkoutSummary.innerHTML = `
-    Subtotal: $${subtotal.toFixed(2)}<br>
-    Taxes (${(taxRate * 100).toFixed(2)}%) & Delivery Fee: $${(taxes + deliveryFee).toFixed(2)}<br>
-    Tips: $${tips.toFixed(2)}<br>
-    Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-    <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
-`;
-
-    }
+    // Update checkout summary
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    checkoutSummary.innerHTML = `
+        Sub Total:     $${subtotal.toFixed(2)}<br>
+        Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
+        Delivery:       $${deliveryFee.toFixed(2)}<br>
+        Discount:       $${discountAmount.toFixed(2)}<br>
+        Tip:            $${tipAmount.toFixed(2)}<br><br>
+        <strong>Total Price: $${total.toFixed(2)}</strong>
+    `;
+}
 
 
 
