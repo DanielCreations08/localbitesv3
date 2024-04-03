@@ -197,12 +197,11 @@ body {
   background-size: cover; /* Adjusts the background image to cover the entire element */
   background-position: center; /* Centers the background image */
   color: white;
-  text-shadow: 
-  -1px -1px 0 black,  
-  1px -1px 0 black,
-  -1px 1px 0 black,
-  1px 1px 0 black; /* Sombra negra */
+  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.69); /* Contorno de 1px de grosor en color negro */
+  text-stroke: 1px black;
+  color: white; /* Color del texto */
 }
+
 
 
 
@@ -210,7 +209,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
- 
+
 }
 
 .backBtnContainer {
@@ -224,6 +223,7 @@ body {
   padding: 15px 20px;
   color: #ffffff;
   text-shadow: none;
+  text-stroke: none;
 
 }
 
@@ -231,7 +231,7 @@ body {
 
 .nameCover {
   margin-top: 55px;
-  font-size: 35px;
+  font-size: 50px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -241,14 +241,18 @@ body {
 }
 
 .descriptionCover {
-  font-size: 18px;
-  font-weight: 200;
   display: flex;
   flex-direction: column;
   align-items: center; /* Align items vertically in the middle */
   justify-content: center; /* Align items horizontally in the middle */
   width: 92%;
+  font-size: 22px;
+  font-weight: 600;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.457); /* Contorno de 1px de grosor en color negro */
+  color: rgb(255, 255, 255); /* Color del texto */
+  margin-bottom: 2px;
 }
+
 
 /* Media query for smaller screens (e.g., mobile) */
 @media only screen and (max-width: 767px) {
@@ -256,6 +260,10 @@ body {
     margin-top: 65px;
     height: 135px;
     font-size: 35px;
+  }
+
+  .descriptionCover {
+    margin-bottom: 55px;
   }
 }
 
