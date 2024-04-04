@@ -277,33 +277,59 @@ body {
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Calculate tomorrow's date
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Initialize Flatpickr for date selection
+        const datePicker = flatpickr("#datePicker", {
+            mode: "range", // Enable range mode
+            defaultDate: [tomorrow, tomorrow], // Set default date range to tomorrow
+            minDate: "today", // Minimum date is today
+            maxDate: new Date().fp_incr(31), // Maximum date is today + 31 days
+            disable: [
+                function(date) {
+                    // Disable all days beyond the allowed range (including grace day)
+                    return date > new Date().fp_incr(30);
+                },
+                function(date) {
+                    // Disable Sundays
+                    return date.getDay() === 0;
+                }
+            ],
+            onChange: function(selectedDates, dateStr, instance) {
+                updateTotalPrice(selectedDates);
+            }
+        });
+
         // Parse the cart data from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const cartData = urlParams.get('cart');
         const cartItems = JSON.parse(decodeURIComponent(cartData));
-    
+
         // Add event listener to tip input
         const tipInput = document.getElementById('tipAmount');
         tipInput.addEventListener('change', function() {
             updateTotalPrice();
         });
-    
+
         // Initialize tip input with default value
         tipInput.value = 2; // Default tip amount is $2
-    
+
         // Render cart items
         const cartItemsContainer = document.getElementById('cartList');
         const deliveryAddress = document.getElementById('addressID');
         const checkoutSummary = document.getElementById('checkoutSummary');
         const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
-    
+
         let totalPrice = 0;
         let itemsMap = new Map(); // To store items with their quantities
-    
+
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
-    
+
             if (itemsMap.has(item.name)) {
                 // If item already exists in the map, update its quantity
                 itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
@@ -312,17 +338,17 @@ body {
                 itemsMap.set(item.name, item.quantity);
             }
         });
-    
+
         // Render items from itemsMap
         itemsMap.forEach((quantity, name) => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('item-container');
-    
+
             const itemTotal = cartItems.find(item => item.name === name).price * quantity;
-    
+
             // Construct the image URL using the item name directly
             const imagePath = `/menu/uplifted-bistro-order-page/box-lunch.jpg`;
-    
+
             itemElement.innerHTML = `
                 <div class="item-details">
                     <div>${name}</div>
@@ -345,7 +371,7 @@ body {
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
         const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
-    
+
         // Calculate delivery time slots
         const deliveryTimeSlots = [];
         for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
@@ -361,27 +387,8 @@ body {
             deliveryTimeSlot.appendChild(option);
         });
 
-         // Initialize Flatpickr for date selection
-         const datePicker = flatpickr("#datePicker", {
-            mode: "range",
-            dateFormat: "Y-m-d", // Formato de fecha YYYY-MM-DD
-            minDate: "today", // La fecha mínima es hoy
-            maxDate: new Date().fp_incr(31), // La fecha máxima es hoy + 31 días (incluido el día de gracia)
-            disable: [
-                function(date) {
-                    // Deshabilitar todos los días posteriores al rango permitido (incluido el día de gracia)
-                    return date > new Date().fp_incr(30);
-                },
-                function(date) {
-                    // Deshabilitar domingos
-                    return date.getDay() === 0;
-                }
-            ],
-            onChange: updateTotalPrice // Actualizar el precio total al cambiar la selección de fechas
-        });
-
         // Display total price and update checkout summary
-        updateTotalPrice();
+        updateTotalPrice([tomorrow, tomorrow]);
 
         // Add event listener to Save Address button in popup
         document.getElementById('saveAddressBtn').addEventListener('click', function() {
@@ -426,19 +433,14 @@ body {
     }
 
     // Function to update total price and other summary details
-    function updateTotalPrice() {
+    function updateTotalPrice(selectedDates = []) {
         const itemContainers = document.querySelectorAll('.item-container');
         let subtotal = 0;
-
-        // Get selected date range
-        const selectedDates = document.getElementById('datePicker').value.split(" to ");
-        const startDate = new Date(selectedDates[0]);
-        const endDate = new Date(selectedDates[1]);
 
         // Calculate number of days in the range, excluding Sundays
         let totalDays = 0;
         if (selectedDates.length === 2) {
-            totalDays = calculateTotalDays(startDate, endDate);
+            totalDays = calculateTotalDays(selectedDates[0], selectedDates[1]);
         }
 
         // Update itemsMap and recalculate subtotal
@@ -487,7 +489,6 @@ body {
         return totalDays;
     }
 </script>
-    
 
 
 <style>
