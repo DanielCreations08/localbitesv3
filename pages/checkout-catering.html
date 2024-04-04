@@ -6,7 +6,7 @@
 <title>Checkout Page</title>
 <link rel="stylesheet" type="text/css" href="">
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
@@ -41,7 +41,7 @@
     
 <!-- Delivery time slot -->
 <div class="card" id="deliveryTimeSlot">
-    <h3>Delivery time</h3>
+    <h3>Delivery time <div class="question-mark-icon" data-toggle="tooltip" title="Select the time slot for delivery."></div></h3>
     <select name="timeslot" id="timeslot" class="form-control" required>
         <!-- Time slot options will be added here -->
     </select>
@@ -272,6 +272,23 @@ body {
     color: #fff;
 }
 
+
+
+
+
+
+
+
+
+
+    /* Add styles for question mark icon */
+    .question-mark-icon {
+        display: inline-block;
+        margin-left: 5px;
+        cursor: pointer;
+        color: #007bff; /* You can adjust the color as needed */
+    }
+
 </style>
 
 
@@ -388,97 +405,94 @@ body {
         });
 
         // Display total price and update checkout summary
-        updateTotalPrice([tomorrow, tomorrow]);
+        updateTotalPrice();
 
-        // Add event listener to Save Address button in popup
-        document.getElementById('saveAddressBtn').addEventListener('click', function() {
-            const newAddress = document.getElementById('newAddressInput').value;
-            if (newAddress.trim() !== '') {
-                // Add new address to dropdown
-                const option = document.createElement('option');
-                option.text = newAddress;
-                option.value = newAddress;
-                document.getElementById('addressID').appendChild(option);
-                addresses.push(newAddress);
-            }
-            document.getElementById('deliveryAddressPopup').style.display = 'none';
-        });
+// Add event listeners for quantity buttons to update prices when quantity changes
+const quantityButtons = document.querySelectorAll('.btn-action');
+quantityButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        updateTotalPrice(); // Call updateTotalPrice when quantity changes
+    });
+});
+});
+
+// Function to increase quantity
+function increaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    quantity++;
+    quantitySpan.textContent = quantity;
+    updateTotalPrice(); // Call updateTotalPrice after increasing quantity
+}
+
+// Function to decrease quantity
+function decreaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    if (quantity > 1) {
+        quantity--;
+        quantitySpan.textContent = quantity;
+        updateTotalPrice(); // Call updateTotalPrice after decreasing quantity
+    }
+}
+
+// Function to delete item
+function deleteItem(element, name) {
+    const itemContainer = element.closest('.item-container');
+    itemContainer.remove();
+    updateTotalPrice(); // Call updateTotalPrice after deleting item
+}
+
+// Function to update total price and other summary details
+function updateTotalPrice(selectedDates = []) {
+    const itemContainers = document.querySelectorAll('.item-container');
+    let subtotal = 0;
+
+    // Calculate number of days in the range, excluding Sundays
+    let totalDays = 0;
+    if (selectedDates.length === 2) {
+        totalDays = calculateTotalDays(selectedDates[0], selectedDates[1]);
+    } else {
+        // If no date range selected, assume single day (tomorrow)
+        totalDays = 1;
+    }
+
+    // Update itemsMap and recalculate subtotal
+    itemContainers.forEach(itemContainer => {
+        const quantityElement = itemContainer.querySelector('.quantity-actions span');
+        const quantity = parseInt(quantityElement.textContent);
+        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+
+        subtotal += quantity * price * totalDays;
     });
 
-    // Function to increase quantity
-    function increaseQuantity(element, name) {
-        const quantitySpan = element.parentElement.querySelector('span');
-        let quantity = parseInt(quantitySpan.textContent);
-        quantity++;
-        quantitySpan.textContent = quantity;
-        updateTotalPrice();
-    }
+    // Calculate taxes and fees based on a tax rate (percentage)
+    const taxRate = 0.20; // 20% tax rate
+    const taxesAndFees = subtotal * taxRate;
 
-    // Function to decrease quantity
-    function decreaseQuantity(element, name) {
-        const quantitySpan = element.parentElement.querySelector('span');
-        let quantity = parseInt(quantitySpan.textContent);
-        if (quantity > 1) {
-            quantity--;
-            quantitySpan.textContent = quantity;
-            updateTotalPrice();
-        }
-    }
+    // Fixed delivery fee
+    const deliveryFee = 5.29;
 
-    // Function to delete item
-    function deleteItem(element, name) {
-        const itemContainer = element.closest('.item-container');
-        itemContainer.remove();
-        updateTotalPrice();
-    }
+    // Tip amount
+    const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
 
-    // Function to update total price and other summary details
-    function updateTotalPrice(selectedDates = []) {
-        const itemContainers = document.querySelectorAll('.item-container');
-        let subtotal = 0;
+    // Discount amount
+    const discountAmount = 0.00;
 
-        // Calculate number of days in the range, excluding Sundays
-        let totalDays = 0;
-        if (selectedDates.length === 2) {
-            totalDays = calculateTotalDays(selectedDates[0], selectedDates[1]);
-        }
+    // Calculate total price
+    const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
 
-        // Update itemsMap and recalculate subtotal
-        itemContainers.forEach(itemContainer => {
-            const quantityElement = itemContainer.querySelector('.quantity-actions span');
-            const quantity = parseInt(quantityElement.textContent);
-            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-
-            subtotal += quantity * price * totalDays;
-        });
-
-        // Calculate taxes and fees based on a tax rate (percentage)
-        const taxRate = 0.20; // 20% tax rate
-        const taxesAndFees = subtotal * taxRate;
-
-        // Fixed delivery fee
-        const deliveryFee = 5.29;
-
-        // Tip amount
-        const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
-
-        // Discount amount
-        const discountAmount = 0.00;
-
-        // Calculate total price
-        const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
-
-        // Update checkout summary
-        const checkoutSummary = document.getElementById('checkoutSummary');
-        checkoutSummary.innerHTML = `
-            Sub Total:     $${subtotal.toFixed(2)}<br>
-            Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
-            Delivery:       $${deliveryFee.toFixed(2)}<br>
-            Discount:       $${discountAmount.toFixed(2)}<br>
-            Tip:            $${tipAmount.toFixed(2)}<br><br>
-            <strong>Total Price: $${total.toFixed(2)}</strong>
-        `;
-    }
+    // Update checkout summary
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    checkoutSummary.innerHTML = `
+        Sub Total:     $${subtotal.toFixed(2)}<br>
+        Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
+        Delivery:       $${deliveryFee.toFixed(2)}<br>
+        Discount:       $${discountAmount.toFixed(2)}<br>
+        Tip:            $${tipAmount.toFixed(2)}<br><br>
+        <strong>Total Price: $${total.toFixed(2)}</strong>
+    `;
+}
 
     // Function to calculate total days in the range, excluding Sundays
     function calculateTotalDays(startDate, endDate) {
@@ -488,6 +502,10 @@ body {
         }
         return totalDays;
     }
+
+
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
 </script>
 
 
