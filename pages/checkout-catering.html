@@ -47,7 +47,8 @@
     </select>
 
 
-    <input type="text" id="datePicker" placeholder="Seleccione una fecha">
+    <input type="text" id="datePicker" placeholder="Select a date">
+
 
     
 
@@ -275,8 +276,6 @@ body {
 
 
 <script>
-
-
     document.addEventListener('DOMContentLoaded', function() {
         // Parse the cart data from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -294,12 +293,9 @@ body {
     
         // Render cart items
         const cartItemsContainer = document.getElementById('cartList');
-        const deliveryTimeSlot = document.getElementById('timeslot');
         const deliveryAddress = document.getElementById('addressID');
         const checkoutSummary = document.getElementById('checkoutSummary');
-        const addAddressBtn = document.getElementById('addAddressBtn');
         const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
-        const deleteAddressBtn = document.getElementById('deleteAddressBtn');
     
         let totalPrice = 0;
         let itemsMap = new Map(); // To store items with their quantities
@@ -344,7 +340,7 @@ body {
             `;
             cartItemsContainer.appendChild(itemElement);
         });
-    
+
         // Set delivery time based on current time and restaurant working hours
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
@@ -355,17 +351,33 @@ body {
         for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
             deliveryTimeSlots.push(hour);
         }
-    
+
         // Populate delivery time slots dropdown
+        const deliveryTimeSlot = document.getElementById('timeslot');
         deliveryTimeSlots.forEach(hour => {
             const option = document.createElement('option');
             option.text = `${hour}:00 - ${hour + 1}:00`;
             option.value = `${hour}`;
             deliveryTimeSlot.appendChild(option);
         });
-    
- 
-    
+
+         // Initialize Flatpickr for date selection
+         const datePicker = flatpickr("#datePicker", {
+            mode: "range",
+            dateFormat: "Y-m-d", // Formato de fecha YYYY-MM-DD
+            minDate: "today", // La fecha mínima es hoy
+            maxDate: new Date().fp_incr(31), // La fecha máxima es hoy + 31 días (incluido el día de gracia)
+            enable: [
+                function(date) {
+                    // Habilitar todos los días (incluso los domingos)
+                    return true;
+                }
+            ],
+            // Predeterminar la fecha de entrega al día siguiente
+            defaultDate: [new Date().fp_incr(1), new Date().fp_incr(1)],
+            onChange: updateTotalPrice // Actualizar el precio total al cambiar la selección de fechas
+        });
+
         // Display total price and update checkout summary
         updateTotalPrice();
 
@@ -377,13 +389,13 @@ body {
                 const option = document.createElement('option');
                 option.text = newAddress;
                 option.value = newAddress;
-                deliveryAddress.appendChild(option);
+                document.getElementById('addressID').appendChild(option);
                 addresses.push(newAddress);
             }
-            deliveryAddressPopup.style.display = 'none';
+            document.getElementById('deliveryAddressPopup').style.display = 'none';
         });
     });
-    
+
     // Function to increase quantity
     function increaseQuantity(element, name) {
         const quantitySpan = element.parentElement.querySelector('span');
@@ -392,7 +404,7 @@ body {
         quantitySpan.textContent = quantity;
         updateTotalPrice();
     }
-    
+
     // Function to decrease quantity
     function decreaseQuantity(element, name) {
         const quantitySpan = element.parentElement.querySelector('span');
@@ -403,19 +415,32 @@ body {
             updateTotalPrice();
         }
     }
-    
+
     // Function to delete item
     function deleteItem(element, name) {
         const itemContainer = element.closest('.item-container');
         itemContainer.remove();
         updateTotalPrice();
     }
-    
 
 // Function to update total price and other summary details
 function updateTotalPrice() {
     const itemContainers = document.querySelectorAll('.item-container');
     let subtotal = 0;
+
+    // Get selected date range
+    const selectedDates = document.getElementById('datePicker').value.split(" to ");
+    const startDate = new Date(selectedDates[0]);
+    const endDate = new Date(selectedDates[1] || selectedDates[0]); // Use startDate if endDate is not selected
+
+    // Calculate number of days in the range, excluding Sundays
+    let totalDays = 0;
+    if (selectedDates.length === 2) {
+        totalDays = calculateTotalDays(startDate, endDate);
+    } else {
+        // If only one day is selected, calculate totalDays accordingly
+        totalDays = calculateTotalDays(startDate, startDate);
+    }
 
     // Update itemsMap and recalculate subtotal
     itemContainers.forEach(itemContainer => {
@@ -423,19 +448,19 @@ function updateTotalPrice() {
         const quantity = parseInt(quantityElement.textContent);
         const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
 
-        subtotal += quantity * price;
+        subtotal += quantity * price * totalDays;
     });
 
     // Calculate taxes and fees based on a tax rate (percentage)
     const taxRate = 0.20; // 20% tax rate
     const taxesAndFees = subtotal * taxRate;
-    
+
     // Fixed delivery fee
     const deliveryFee = 5.29;
-    
+
     // Tip amount
     const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
-    
+
     // Discount amount
     const discountAmount = 0.00;
 
@@ -455,38 +480,16 @@ function updateTotalPrice() {
 }
 
 
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-flatpickr("#datePicker", {
-    dateFormat: "Y-m-d", // Formato de fecha YYYY-MM-DD
-    minDate: "today", // La fecha mínima es hoy
-    maxDate: new Date().fp_incr(30), // La fecha máxima es hoy + 30 días
-    disable: [
-        function(date) {
-            // Deshabilitar todos los días posteriores al rango permitido
-            return date > new Date().fp_incr(30);
+    // Function to calculate total days in the range, excluding Sundays
+    function calculateTotalDays(startDate, endDate) {
+        let totalDays = 0;
+        for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
+            if (day.getDay() !== 0) totalDays++;
         }
-    ],
-    // Otras opciones aquí
-});
+        return totalDays;
+    }
 </script>
+    
 
 
 <style>
