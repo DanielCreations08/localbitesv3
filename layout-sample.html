@@ -1,149 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delivery y Catering</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-    }
-
-    main {
-      padding: 20px;
-    }
-
-    .switch {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .switch label {
-      margin-right: 20px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #343a40;
-      border-radius: 5px;
-      padding: 10px 20px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .switch input {
-      display: none;
-    }
-
-    #delivery:checked + label {
-      background-color: #6c757d;
-      color: #ffffff;
-    }
-
-    #catering:checked + label {
-      background-color: #6c757d;
-      color: #ffffff;
-    }
-
-    .content {
-      display: none;
-    }
-
-    .active {
-      display: block;
-    }
-
-    .section {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .section h2 {
-      color: #343a40;
-      margin-top: 0;
-    }
-
-    .section p {
-      color: #666666;
-    }
-
-    .button {
-      padding: 10px 20px;
-      background-color: #6c757d;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .button:hover {
-      background-color: #545b62;
-    }
-
-    .button.secondary {
-      background-color: #6c757d;
-    }
-
-    .button.secondary:hover {
-      background-color: #545b62;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Page</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
-  <header>
-
-  </header>
-
-  <div class="switch">
-    <input type="radio" id="delivery" name="page" checked>
-    <label for="delivery">Delivery</label>
-    <input type="radio" id="catering" name="page">
-    <label for="catering">Catering</label>
-  </div>
-
-  <main>
-    <div id="delivery-content" class="content active">
-      <div class="section">
-
-        
-      </div>
+<div class="container">
+    <!-- Tabs para seleccionar el tipo de checkout -->
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'cart')">Cart</button>
+        <button class="tablinks" onclick="openTab(event, 'corporate')">Corporate</button>
+        <button class="tablinks" onclick="openTab(event, 'event')">Event</button>
     </div>
 
-    <div id="catering-content" class="content">
-      <div class="section">
-        <h2>¡Catering!</h2>
-        <p>Aquí puedes planificar eventos y solicitar servicios de catering.</p>
-        <button class="button secondary">Solicitar Catering</button>
-      </div>
+    <!-- Contenido del carrito -->
+    <div id="cart" class="tabcontent">
+        <!-- Aquí se mostrará el contenido del carrito -->
     </div>
-  </main>
 
-  <script>
-    const deliveryRadio = document.getElementById("delivery");
-    const cateringRadio = document.getElementById("catering");
-    const deliveryContent = document.getElementById("delivery-content");
-    const cateringContent = document.getElementById("catering-content");
+    <!-- Contenido del checkout corporativo -->
+    <div id="corporate" class="tabcontent">
+        <!-- Aquí se mostrará el contenido del checkout corporativo -->
 
-    deliveryRadio.addEventListener("change", function() {
-      if (deliveryRadio.checked) {
-        deliveryContent.classList.add("active");
-        cateringContent.classList.remove("active");
-      }
+        hols
+    </div>
+
+    <!-- Contenido del checkout de evento/celebración -->
+    <div id="event" class="tabcontent">
+        <!-- Aquí se mostrará el contenido del checkout de evento/celebración -->
+    </div>
+</div>
+
+<script>
+// Función para validar si una fecha es domingo
+function isSunday(date) {
+    return date.getDay() === 0;
+}
+
+// Función para calcular el número de días entre dos fechas, excluyendo los domingos
+function calculateTotalDays(startDate, endDate) {
+    let totalDays = 0;
+    for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
+        if (!isSunday(day)) {
+            totalDays++;
+        }
+    }
+    return totalDays;
+}
+
+// Función para abrir una pestaña
+function openTab(event, tabName) {
+    // Ocultar todas las pestañas y marcar el botón como inactivo
+    const tabContents = document.getElementsByClassName("tabcontent");
+    for (let tabContent of tabContents) {
+        tabContent.style.display = "none";
+    }
+    const tablinks = document.getElementsByClassName("tablinks");
+    for (let tablink of tablinks) {
+        tablink.className = tablink.className.replace(" active", "");
+    }
+    // Mostrar la pestaña seleccionada y marcar el botón como activo
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+
+    // Actualizar la fecha seleccionada automáticamente para pedidos corporativos
+    if (tabName === "cart") {
+        const datePicker = document.getElementById("datePicker");
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1); // Obtener la fecha de mañana
+        datePicker.value = tomorrow.toISOString().split('T')[0]; // Establecer la fecha de mañana en el datepicker
+    }
+}
+
+// Función para agregar una nueva dirección de entrega
+function addNewAddress() {
+    // Lógica para agregar una nueva dirección de entrega
+}
+
+// Función para procesar el pedido
+function submitOrder() {
+    // Lógica para procesar el pedido
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Agregar event listener para la pestaña activa inicialmente
+    const defaultTab = document.querySelector(".tablinks.active");
+    const defaultTabName = defaultTab.getAttribute("onclick").split("'")[1];
+    openTab({ currentTarget: defaultTab }, defaultTabName);
+
+    // Agregar event listener para el botón de pago con Stripe
+    const stripePayButton = document.getElementById("stripePayButton");
+    stripePayButton.addEventListener("click", function() {
+        // Lógica para procesar el pago con Stripe
     });
 
-    cateringRadio.addEventListener("change", function() {
-      if (cateringRadio.checked) {
-        cateringContent.classList.add("active");
-        deliveryContent.classList.remove("active");
-      }
+    // Agregar event listener para el botón de pago con PayPal
+    const paypalPayButton = document.getElementById("paypalPayButton");
+    paypalPayButton.addEventListener("click", function() {
+        // Lógica para procesar el pago con PayPal
     });
-  </script>
+
+    // Agregar event listener para el cambio en el campo de propina
+    const tipAmount = document.getElementById("tipAmount");
+    tipAmount.addEventListener("change", function() {
+        // Lógica para actualizar el resumen del pedido con la propina
+    });
+
+    // Agregar event listener para el cambio en el campo de dirección de entrega
+    const addressID = document.getElementById("addressID");
+    addressID.addEventListener("change", function() {
+        // Lógica para actualizar la dirección de entrega seleccionada
+    });
+
+    // Inicializar el datepicker con las opciones adecuadas
+    const datePicker = flatpickr("#datePicker", {
+        minDate: "tomorrow",
+        maxDate: new Date().fp_incr(30),
+        disable: [
+            function(date) {
+                // Deshabilitar los domingos
+                return isSunday(date);
+            }
+        ]
+    });
+
+    // Inicializar el timeslot con las opciones adecuadas
+    const deliveryTimeSlot = document.getElementById("timeslot");
+    // Lógica para poblar el timeslot con opciones adecuadas
+});
+
+</script>
+
+<style>
+  
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 100%;
+    padding: 20px;
+}
+
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab button {
+    background-color: #f2f2f2;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.tab button.active {
+    background-color: #ddd;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+}
+</style>
+
 </body>
 </html>
-
-

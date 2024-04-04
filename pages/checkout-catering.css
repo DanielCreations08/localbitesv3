@@ -1,0 +1,205 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 100%;
+    padding: 20px;
+}
+
+/* Tab Styles */
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab button {
+    background-color: #f2f2f2;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.tab button.active {
+    background-color: #ddd;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+}
+
+/* Delivery Date Selector Styles */
+.delivery-date label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.delivery-date input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .tab button {
+        width: 100%;
+    }
+
+    .tabcontent {
+        padding: 10px;
+    }
+}
+
+
+.card {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+/* Estilos específicos para cada caja */
+
+/* Items */
+.item-container {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.quantity-actions button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-actions button:hover {
+    background-color: #0056b3;
+}
+
+.quantity-price {
+    font-size: 14px;
+}
+
+/* Tip */
+#tipAmount {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Delivery */
+.delivery-method {
+    margin-right: 10px;
+}
+
+/* Delivery Address */
+#addressID {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#addAddressBtn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#addAddressBtn:hover {
+    background-color: #218838;
+}
+
+/* Comment */
+#comment {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* Checkout Summary */
+.summary-details {
+    font-weight: bold;
+}
+
+/* Payment */
+#stripePayment,
+#paypalPayment {
+    margin-bottom: 10px;
+}
+
+#stripePayButton,
+#paypalPayButton {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#stripePayButton:hover,
+#paypalPayButton:hover {
+    background-color: #218838;
+}
+
+/* Submit Button */
+.text-center button {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.text-center button:hover {
+    background-color: #e0a800;
+}
