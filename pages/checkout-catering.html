@@ -281,29 +281,29 @@ body {
         const urlParams = new URLSearchParams(window.location.search);
         const cartData = urlParams.get('cart');
         const cartItems = JSON.parse(decodeURIComponent(cartData));
-    
+
         // Add event listener to tip input
         const tipInput = document.getElementById('tipAmount');
         tipInput.addEventListener('change', function() {
             updateTotalPrice();
         });
-    
+
         // Initialize tip input with default value
-        tipInput.value = 0; // Default tip amount is $2
-    
+        tipInput.value = 0; // Default tip amount is $0
+
         // Render cart items
         const cartItemsContainer = document.getElementById('cartList');
         const deliveryAddress = document.getElementById('addressID');
         const checkoutSummary = document.getElementById('checkoutSummary');
         const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
-    
+
         let totalPrice = 0;
         let itemsMap = new Map(); // To store items with their quantities
-    
+
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
-    
+
             if (itemsMap.has(item.name)) {
                 // If item already exists in the map, update its quantity
                 itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
@@ -312,22 +312,22 @@ body {
                 itemsMap.set(item.name, item.quantity);
             }
         });
-    
+
         // Render items from itemsMap
         itemsMap.forEach((quantity, name) => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('item-container');
-    
+
             const itemTotal = cartItems.find(item => item.name === name).price * quantity;
-    
+
             // Construct the image URL using the item name directly
             const imagePath = `/menu/uplifted-bistro-order-page/box-lunch.jpg`;
-    
+
             itemElement.innerHTML = `
                 <div class="item-details">
                     <div>${name}</div>
                     <div class="item-image">
-                        <img src="${imagePath}" alt="${name}"  style="width: 50px; height: 50px;">
+                        <img src="${imagePath}" alt="${name}" style="width: 50px; height: 50px;">
                     </div>
                     <div class="quantity-actions">
                         <button class="btn-action" onclick="decreaseQuantity(this, '${name}')">-</button>
@@ -345,7 +345,7 @@ body {
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
         const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
-    
+
         // Calculate delivery time slots
         const deliveryTimeSlots = [];
         for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
@@ -361,25 +361,30 @@ body {
             deliveryTimeSlot.appendChild(option);
         });
 
-         // Initialize Flatpickr for date selection
-         const datePicker = flatpickr("#datePicker", {
+        // Initialize Flatpickr for date selection
+        const datePicker = flatpickr("#datePicker", {
             mode: "range",
-            dateFormat: "Y-m-d", // Formato de fecha YYYY-MM-DD
-            minDate: "today", // La fecha mínima es hoy
-            maxDate: new Date().fp_incr(31), // La fecha máxima es hoy + 31 días (incluido el día de gracia)
-            enable: [
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            maxDate: new Date().fp_incr(30),
+            disable: [
                 function(date) {
-                    // Habilitar todos los días (incluso los domingos)
-                    return true;
+                    // Disable Sundays
+                    return date.getDay() === 0;
                 }
             ],
-            // Predeterminar la fecha de entrega al día siguiente
-            defaultDate: [new Date().fp_incr(1), new Date().fp_incr(1)],
-            onChange: updateTotalPrice // Actualizar el precio total al cambiar la selección de fechas
+            // Default date to the next day
+            defaultDate: [new Date().fp_incr(1), new Date().fp_incr(1)]
         });
 
         // Display total price and update checkout summary
         updateTotalPrice();
+
+        // Add event listener to Apply button
+        const applyButton = document.getElementById('applyButton');
+        applyButton.addEventListener('click', function() {
+            updateTotalPrice(); // Update total price after applying the selection
+        });
 
         // Add event listener to Save Address button in popup
         document.getElementById('saveAddressBtn').addEventListener('click', function() {
@@ -423,62 +428,61 @@ body {
         updateTotalPrice();
     }
 
-// Function to update total price and other summary details
-function updateTotalPrice() {
-    const itemContainers = document.querySelectorAll('.item-container');
-    let subtotal = 0;
+    // Function to update total price and other summary details
+    function updateTotalPrice() {
+        const itemContainers = document.querySelectorAll('.item-container');
+        let subtotal = 0;
 
-    // Get selected date range
-    const selectedDates = document.getElementById('datePicker').value.split(" to ");
-    const startDate = new Date(selectedDates[0]);
-    const endDate = new Date(selectedDates[1] || selectedDates[0]); // Use startDate if endDate is not selected
+        // Get selected date range
+        const selectedDates = document.getElementById('datePicker').value.split(" to ");
+        const startDate = new Date(selectedDates[0]);
+        const endDate = new Date(selectedDates[1] || selectedDates[0]); // Use startDate if endDate is not selected
 
-    // Calculate number of days in the range, excluding Sundays
-    let totalDays = 0;
-    if (selectedDates.length === 2) {
-        totalDays = calculateTotalDays(startDate, endDate);
-    } else {
-        // If only one day is selected, calculate totalDays accordingly
-        totalDays = calculateTotalDays(startDate, startDate);
+        // Calculate number of days in the range, excluding Sundays
+        let totalDays = 0;
+        if (selectedDates.length === 2) {
+            totalDays = calculateTotalDays(startDate, endDate);
+        } else {
+            // If only one day is selected, calculate totalDays accordingly
+            totalDays = calculateTotalDays(startDate, startDate);
+        }
+
+        // Update itemsMap and recalculate subtotal
+        itemContainers.forEach(itemContainer => {
+            const quantityElement = itemContainer.querySelector('.quantity-actions span');
+            const quantity = parseInt(quantityElement.textContent);
+            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+
+            subtotal += quantity * price * totalDays;
+        });
+
+        // Calculate taxes and fees based on a tax rate (percentage)
+        const taxRate = 0.20; // 20% tax rate
+        const taxesAndFees = subtotal * taxRate;
+
+        // Fixed delivery fee
+        const deliveryFee = 5.29;
+
+        // Tip amount
+        const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
+
+        // Discount amount
+        const discountAmount = 0.00;
+
+        // Calculate total price
+        const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
+
+        // Update checkout summary
+        const checkoutSummary = document.getElementById('checkoutSummary');
+        checkoutSummary.innerHTML = `
+            Sub Total:     $${subtotal.toFixed(2)}<br>
+            Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
+            Delivery:       $${deliveryFee.toFixed(2)}<br>
+            Discount:       $${discountAmount.toFixed(2)}<br>
+            Tip:            $${tipAmount.toFixed(2)}<br><br>
+            <strong>Total Price: $${total.toFixed(2)}</strong>
+        `;
     }
-
-    // Update itemsMap and recalculate subtotal
-    itemContainers.forEach(itemContainer => {
-        const quantityElement = itemContainer.querySelector('.quantity-actions span');
-        const quantity = parseInt(quantityElement.textContent);
-        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-
-        subtotal += quantity * price * totalDays;
-    });
-
-    // Calculate taxes and fees based on a tax rate (percentage)
-    const taxRate = 0.20; // 20% tax rate
-    const taxesAndFees = subtotal * taxRate;
-
-    // Fixed delivery fee
-    const deliveryFee = 5.29;
-
-    // Tip amount
-    const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
-
-    // Discount amount
-    const discountAmount = 0.00;
-
-    // Calculate total price
-    const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
-
-    // Update checkout summary
-    const checkoutSummary = document.getElementById('checkoutSummary');
-    checkoutSummary.innerHTML = `
-        Sub Total:     $${subtotal.toFixed(2)}<br>
-        Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
-        Delivery:       $${deliveryFee.toFixed(2)}<br>
-        Discount:       $${discountAmount.toFixed(2)}<br>
-        Tip:            $${tipAmount.toFixed(2)}<br><br>
-        <strong>Total Price: $${total.toFixed(2)}</strong>
-    `;
-}
-
 
     // Function to calculate total days in the range, excluding Sundays
     function calculateTotalDays(startDate, endDate) {
