@@ -714,12 +714,13 @@ body {
 
 
 
+/* Contenedor principal */
 .selection-options {
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  gap: 20px; /* Espacio entre los elementos */
+  grid-template-columns: repeat(2, 1fr); /* Comienza con 2 columnas */
 }
+
 
 .option {
   display: flex;
@@ -733,10 +734,8 @@ body {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-weight: bold;
-  width: 100%;
-  margin-right: 5px;
-  margin-left: 5px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  background-color: #ccc; /* Color de fondo de las opciones */
 }
 
 
