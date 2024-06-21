@@ -716,28 +716,29 @@ body {
 
 /* Contenedor principal */
 .selection-options {
+
   display: grid;
-  gap: 20px; /* Espacio entre los elementos */
-  grid-template-columns: repeat(2, 1fr); /* Comienza con 2 columnas */
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 5px 8px;
+  justify-content: space-evenly;
 }
 
 
+
 .option {
-  display: flex;
-  flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
   text-align: center; /* Centra el texto dentro de los elementos */
-  padding: 15px 20px;
+  padding: 10px 0px;
   border-radius: 5px;
   margin-bottom: 18px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-weight: bold;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-  background-color: #ccc; /* Color de fondo de las opciones */
-}
 
+}
 
 .priceItemDetail {
   border-radius: 10px;
