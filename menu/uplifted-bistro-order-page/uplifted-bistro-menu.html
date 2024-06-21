@@ -286,12 +286,53 @@
                             </div>
                         </div>
                         <div class="option" onclick="toggleMultiSelection('Fanta', this)">
+                            <span>Lemonade</span>
+                            <div class="priceItemDetail">
+                              <span class="price">+$2.00</span>
+                            </div>
+                        </div>
+
+                        <div class="option" onclick="toggleMultiSelection('Coke', this)">
+                          <span>Diet Coke</span>
+                          <div class="priceItemDetail">
+                            <span class="price">+$2.00</span>
+                          </div>
+                      </div>
+                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
+                            <span>Diet Pepsi</span>
+                            <div class="priceItemDetail">
+                              <span class="price">+$2.00</span>
+                            </div>
+                        </div>
+                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
+                            <span>7up</span>
+                            <div class="priceItemDetail">
+                              <span class="price">+$2.00</span>
+                            </div>
+                        </div>
+                        <div class="option" onclick="toggleMultiSelection('Coke', this)">
+                          <span>Sprite</span>
+                          <div class="priceItemDetail">
+                            <span class="price">+$2.00</span>
+                          </div>
+                      </div>
+                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
+                            <span>Mountain Dew</span>
+                            <div class="priceItemDetail">
+                              <span class="price">+$2.00</span>
+                            </div>
+                        </div>
+                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
                             <span>Fanta</span>
                             <div class="priceItemDetail">
                               <span class="price">+$2.00</span>
                             </div>
                         </div>
-                        -
+                        
+                    </div>
+
+                    <div class="expand-toggle">
+                      <button id="showMoreButton" onclick="toggleHiddenOptions()">See More Options</button>
                     </div>
                 </div>
             </div>
@@ -847,6 +888,23 @@ function openTab(evt, tabName) {
     
     // Call updateCartContent initially to handle empty cart state
     updateCartContent();
+
+
+
+
+    // Función para alternar la visibilidad de más opciones
+function toggleHiddenOptions() {
+  var optionsContainer = document.getElementById('drinkOptions');
+  optionsContainer.classList.toggle('collapsed');
+
+  var buttonText = document.getElementById('showMoreButton').innerText;
+  if (buttonText === 'See More Options') {
+    document.getElementById('showMoreButton').innerText = 'See Less Options';
+  } else {
+    document.getElementById('showMoreButton').innerText = 'See More Options';
+  }
+}
+
 </script>
 
 

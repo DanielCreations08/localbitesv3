@@ -718,8 +718,9 @@ body {
 .selection-options {
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 5px 8px;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila */
+
+  gap: 1px 8px;
   justify-content: space-evenly;
 }
 
@@ -747,7 +748,7 @@ body {
   text-align: center;
   color: #fff;
   background-color: #FB7306;
-  padding: 2px 12px 2px 12px;
+  padding: 5px 12px 5px 12px;
   margin: 5px 40px;
 }
 
@@ -758,6 +759,16 @@ body {
 
 .price {
   font-size: 15px;
+}
+
+.expand-toggle {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.selection-options.collapsed .option:nth-child(n+5) {
+  display: none;
 }
 
 /* Special Instructions Section */
