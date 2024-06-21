@@ -892,7 +892,7 @@ function openTab(evt, tabName) {
 
 
 
-    // Función para alternar la visibilidad de más opciones
+// Función para alternar la visibilidad de más opciones
 function toggleHiddenOptions() {
   var optionsContainer = document.getElementById('drinkOptions');
   optionsContainer.classList.toggle('collapsed');
@@ -904,6 +904,13 @@ function toggleHiddenOptions() {
     document.getElementById('showMoreButton').innerText = 'See More Options';
   }
 }
+
+// Ejecutar la función de ocultar opciones al cargar la página
+window.onload = function() {
+  var optionsContainer = document.getElementById('drinkOptions');
+  optionsContainer.classList.add('collapsed');
+};
+
 
 </script>
 
