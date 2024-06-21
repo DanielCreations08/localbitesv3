@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout Page</title>
 <link rel="stylesheet" type="text/css" href="">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
 <div class="container">
@@ -37,10 +41,17 @@
     
 <!-- Delivery time slot -->
 <div class="card" id="deliveryTimeSlot">
-    <h3>Delivery time</h3>
+    <h3>Delivery time <div class="question-mark-icon" data-toggle="tooltip" title="Select the time slot for delivery."></div></h3>
     <select name="timeslot" id="timeslot" class="form-control" required>
         <!-- Time slot options will be added here -->
     </select>
+
+
+    <input type="text" id="datePicker" placeholder="Select a date">
+
+
+    
+
 </div>
 
     <!-- Delivery address -->
@@ -261,43 +272,81 @@ body {
     color: #fff;
 }
 
+
+
+
+
+
+
+
+
+
+    /* Add styles for question mark icon */
+    .question-mark-icon {
+        display: inline-block;
+        margin-left: 5px;
+        cursor: pointer;
+        color: #007bff; /* You can adjust the color as needed */
+    }
+
 </style>
 
 
 <script>
-
-
     document.addEventListener('DOMContentLoaded', function() {
+        // Calculate tomorrow's date
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Initialize Flatpickr for date selection
+        const datePicker = flatpickr("#datePicker", {
+            mode: "range", // Enable range mode
+            defaultDate: [tomorrow, tomorrow], // Set default date range to tomorrow
+            minDate: "today", // Minimum date is today
+            maxDate: new Date().fp_incr(31), // Maximum date is today + 31 days
+            disable: [
+                function(date) {
+                    // Disable all days beyond the allowed range (including grace day)
+                    return date > new Date().fp_incr(30);
+                },
+                function(date) {
+                    // Disable Sundays
+                    return date.getDay() === 0;
+                }
+            ],
+            onChange: function(selectedDates, dateStr, instance) {
+                updateTotalPrice(selectedDates);
+            }
+        });
+
         // Parse the cart data from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const cartData = urlParams.get('cart');
         const cartItems = JSON.parse(decodeURIComponent(cartData));
-    
+
         // Add event listener to tip input
         const tipInput = document.getElementById('tipAmount');
         tipInput.addEventListener('change', function() {
             updateTotalPrice();
         });
-    
+
         // Initialize tip input with default value
         tipInput.value = 2; // Default tip amount is $2
-    
+
         // Render cart items
         const cartItemsContainer = document.getElementById('cartList');
-        const deliveryTimeSlot = document.getElementById('timeslot');
         const deliveryAddress = document.getElementById('addressID');
         const checkoutSummary = document.getElementById('checkoutSummary');
-        const addAddressBtn = document.getElementById('addAddressBtn');
         const deliveryAddressPopup = document.getElementById('deliveryAddressPopup');
-        const deleteAddressBtn = document.getElementById('deleteAddressBtn');
-    
+
         let totalPrice = 0;
         let itemsMap = new Map(); // To store items with their quantities
-    
+
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
-    
+
             if (itemsMap.has(item.name)) {
                 // If item already exists in the map, update its quantity
                 itemsMap.set(item.name, itemsMap.get(item.name) + item.quantity);
@@ -306,17 +355,17 @@ body {
                 itemsMap.set(item.name, item.quantity);
             }
         });
-    
+
         // Render items from itemsMap
         itemsMap.forEach((quantity, name) => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('item-container');
-    
+
             const itemTotal = cartItems.find(item => item.name === name).price * quantity;
-    
+
             // Construct the image URL using the item name directly
-            const imagePath = `/menu/uplifted-bistro-order-page/item100.jpg`;
-    
+            const imagePath = `/menu/uplifted-bistro-order-page/box-lunch.jpg`;
+
             itemElement.innerHTML = `
                 <div class="item-details">
                     <div>${name}</div>
@@ -334,115 +383,135 @@ body {
             `;
             cartItemsContainer.appendChild(itemElement);
         });
-    
+
         // Set delivery time based on current time and restaurant working hours
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
         const workingHours = { start: 8, end: 20 }; // Assuming working hours are from 8 AM to 8 PM
-    
+
         // Calculate delivery time slots
         const deliveryTimeSlots = [];
         for (let hour = currentHour + 1; hour <= workingHours.end; hour++) {
             deliveryTimeSlots.push(hour);
         }
-    
+
         // Populate delivery time slots dropdown
+        const deliveryTimeSlot = document.getElementById('timeslot');
         deliveryTimeSlots.forEach(hour => {
             const option = document.createElement('option');
             option.text = `${hour}:00 - ${hour + 1}:00`;
             option.value = `${hour}`;
             deliveryTimeSlot.appendChild(option);
         });
-    
- 
-    
+
         // Display total price and update checkout summary
         updateTotalPrice();
 
-        // Add event listener to Save Address button in popup
-        document.getElementById('saveAddressBtn').addEventListener('click', function() {
-            const newAddress = document.getElementById('newAddressInput').value;
-            if (newAddress.trim() !== '') {
-                // Add new address to dropdown
-                const option = document.createElement('option');
-                option.text = newAddress;
-                option.value = newAddress;
-                deliveryAddress.appendChild(option);
-                addresses.push(newAddress);
-            }
-            deliveryAddressPopup.style.display = 'none';
-        });
+// Add event listeners for quantity buttons to update prices when quantity changes
+const quantityButtons = document.querySelectorAll('.btn-action');
+quantityButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        updateTotalPrice(); // Call updateTotalPrice when quantity changes
     });
-    
-    // Function to increase quantity
-    function increaseQuantity(element, name) {
-        const quantitySpan = element.parentElement.querySelector('span');
-        let quantity = parseInt(quantitySpan.textContent);
-        quantity++;
+});
+});
+
+// Function to increase quantity
+function increaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    quantity++;
+    quantitySpan.textContent = quantity;
+    updateTotalPrice(); // Call updateTotalPrice after increasing quantity
+}
+
+// Function to decrease quantity
+function decreaseQuantity(element, name) {
+    const quantitySpan = element.parentElement.querySelector('span');
+    let quantity = parseInt(quantitySpan.textContent);
+    if (quantity > 1) {
+        quantity--;
         quantitySpan.textContent = quantity;
-        updateTotalPrice();
+        updateTotalPrice(); // Call updateTotalPrice after decreasing quantity
     }
-    
-    // Function to decrease quantity
-    function decreaseQuantity(element, name) {
-        const quantitySpan = element.parentElement.querySelector('span');
-        let quantity = parseInt(quantitySpan.textContent);
-        if (quantity > 1) {
-            quantity--;
-            quantitySpan.textContent = quantity;
-            updateTotalPrice();
+}
+
+// Function to delete item
+function deleteItem(element, name) {
+    const itemContainer = element.closest('.item-container');
+    itemContainer.remove();
+    updateTotalPrice(); // Call updateTotalPrice after deleting item
+}
+
+// Function to update total price and other summary details
+function updateTotalPrice(selectedDates = []) {
+    const itemContainers = document.querySelectorAll('.item-container');
+    let subtotal = 0;
+
+    // Calculate number of days in the range, excluding Sundays
+    let totalDays = 0;
+    if (selectedDates.length === 2) {
+        totalDays = calculateTotalDays(selectedDates[0], selectedDates[1]);
+    } else {
+        // If no date range selected, assume single day (tomorrow)
+        totalDays = 1;
+    }
+
+    // Update itemsMap and recalculate subtotal
+    itemContainers.forEach(itemContainer => {
+        const quantityElement = itemContainer.querySelector('.quantity-actions span');
+        const quantity = parseInt(quantityElement.textContent);
+        const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
+
+        subtotal += quantity * price * totalDays;
+    });
+
+    // Calculate taxes and fees based on a tax rate (percentage)
+    const taxRate = 0.20; // 20% tax rate
+    const taxesAndFees = subtotal * taxRate;
+
+    // Fixed delivery fee
+    const deliveryFee = 5.29;
+
+    // Tip amount
+    const tipAmount = parseFloat(document.getElementById('tipAmount').value) || 0.00;
+
+    // Discount amount
+    const discountAmount = 0.00;
+
+    // Calculate total price
+    const total = subtotal + taxesAndFees + deliveryFee + tipAmount - discountAmount;
+
+    // Update checkout summary
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    checkoutSummary.innerHTML = `
+        Sub Total:     $${subtotal.toFixed(2)}<br>
+        Taxes and Fees: $${taxesAndFees.toFixed(2)}<br>
+        Delivery:       $${deliveryFee.toFixed(2)}<br>
+        Discount:       $${discountAmount.toFixed(2)}<br>
+        Tip:            $${tipAmount.toFixed(2)}<br><br>
+        <strong>Total Price: $${total.toFixed(2)}</strong>
+    `;
+}
+
+    // Function to calculate total days in the range, excluding Sundays
+    function calculateTotalDays(startDate, endDate) {
+        let totalDays = 0;
+        for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
+            if (day.getDay() !== 0) totalDays++;
         }
-    }
-    
-    // Function to delete item
-    function deleteItem(element, name) {
-        const itemContainer = element.closest('.item-container');
-        itemContainer.remove();
-        updateTotalPrice();
-    }
-    
-    // Function to update total price and other summary details
-    function updateTotalPrice() {
-        const itemContainers = document.querySelectorAll('.item-container');
-        let subtotal = 0;
-    
-        // Update itemsMap and recalculate subtotal
-        itemContainers.forEach(itemContainer => {
-            const quantityElement = itemContainer.querySelector('.quantity-actions span');
-            const quantity = parseInt(quantityElement.textContent);
-            const price = parseFloat(itemContainer.querySelector('.quantity-price').textContent.split('$')[1]);
-    
-            subtotal += quantity * price;
-        });
-    
-        // Calculate taxes based on a tax rate (percentage)
-        const taxRate = 0.1; // 10% tax rate
-        const taxes = subtotal * taxRate;
-    
-        // Calculate delivery fee, tips, promo code (if applicable)
-        const deliveryFee = 0; // Update this with the actual delivery fee calculation
-        const tips = parseFloat(document.getElementById('tipAmount').value) || 0; // Tip amount
-        const promoCodeDiscount = 0; // Update this with the actual promo code discount calculation
-    
-        // Calculate total price
-        const total = subtotal + taxes + deliveryFee + tips - promoCodeDiscount;
-    
-        // Update checkout summary
-        const checkoutSummary = document.getElementById('checkoutSummary');
-        checkoutSummary.innerHTML = `
-            Subtotal: $${subtotal.toFixed(2)}<br>
-            Taxes (${(taxRate * 100).toFixed(2)}%): $${taxes.toFixed(2)}<br>
-            Delivery Fee: $${deliveryFee.toFixed(2)}<br>
-            Tips: $${tips.toFixed(2)}<br>
-            Promo Code Discount: $${promoCodeDiscount.toFixed(2)}<br>
-            <strong>Total Price (including tip): $${total.toFixed(2)}</strong>
-        `;
+        return totalDays;
     }
 
 
-
-
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
 </script>
+
+
+<style>
+  
+</style>
 
 </body>
 </html>
