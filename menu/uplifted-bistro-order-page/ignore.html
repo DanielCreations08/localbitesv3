@@ -1,0 +1,91 @@
+<html>
+
+
+<div class="add-to-order-container">
+    <button id="addToCartButton" class="menu-modal-subbtn error" onclick="addToCartAndScrollToTop()">
+        Add To Cart
+    </button>
+</div>
+
+
+
+</html>
+
+
+<script>
+    // js to open or close the menue modal
+
+    const MenupopupContainer = document.getElementById('MenupopupContainer');
+
+    function openMenuModal() {
+        MenupopupContainer.style.display = 'flex';
+    }
+
+    function closeMenuPopup() {
+        MenupopupContainer.style.display = 'none';
+    }
+
+    window.addEventListener('click', (event) => {
+        if (event.target === MenupopupContainer) {
+            closeMenuPopup();
+        }
+    });
+
+    // js to open or close the menue modal ends here
+
+    // function to zoom in menu modal image
+
+    const mainImage = document.getElementById('modalImg');
+
+    mainImage.addEventListener('mousemove', function(e) {
+
+        const zoomLevel = 2;
+        const offsetX = e.offsetX / mainImage.clientWidth;
+        const offsetY = e.offsetY / mainImage.clientHeight;
+
+        mainImage.style.transformOrigin = `${offsetX * 100}% ${offsetY * 100}%`;
+        mainImage.style.transform = `scale(${zoomLevel})`;
+    });
+
+    mainImage.addEventListener('mouseleave', function() {
+        mainImage.style.transform = 'scale(1)';
+    });
+
+    // function to zoom in menu modal image ends here
+
+    // function to add or minus quantity in menue modal
+
+    let selectedQuantity = 1;
+
+    function adjustQuantity(value) {
+        const quantityInput = document.getElementById('quantity');
+        selectedQuantity = parseInt(quantityInput.value) || 1;
+        selectedQuantity += value;
+
+        if (selectedQuantity < 1) {
+            selectedQuantity = 1;
+        }
+        quantityInput.value = selectedQuantity;
+
+        addToCartModalContent.mainPriceCal();
+    }
+
+    function updateSelectedQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        selectedQuantity = parseInt(quantityInput.value) || 1;
+    }
+
+    document.getElementById('quantity').addEventListener('change', updateSelectedQuantity);
+
+    // function to add or minus quantity in menue modal ends here
+
+    // js to close required notification in menu modal
+
+    function closeRequiredNot() {
+        var MenuNot = document.getElementById("requiredErrorNot");
+        MenuNot.classList.remove("showNot");
+    }
+
+
+
+</script>

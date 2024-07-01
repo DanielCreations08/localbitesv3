@@ -352,14 +352,33 @@
   </div>
   
 
+
+
+
+
+
+
+
+
+  
 <!-- Checkout Section -->
 <div class="checkout-section">
   <div class="add-to-order-container">
-      <button id="addToCartButton" class="add-to-cart-button" onclick="addToCart(1); closePopup()">Add to Cart</button>
-      
+    <button id="addToCartButton" class="add-to-cart-button" onclick="addItemToCartAndScrollToTop()">Add to Cart</button>
   </div>
-  <span class="total-price">Total= $6.79</span> <!-- Replace with your dynamic total price -->
+  <span class="total-price">Total= $6.79</span> 
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
     
@@ -910,6 +929,43 @@ window.onload = function() {
   var optionsContainer = document.getElementById('drinkOptions');
   optionsContainer.classList.add('collapsed');
 };
+
+
+
+
+
+
+
+
+
+
+
+
+function addItemToCartAndScrollToTop() {
+    addItemToCart();
+
+    var popupContent = document.querySelector('.popup-content');
+    popupContent.scrollTo({ top: 0, behavior: 'smooth' });
+    closePopup();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
