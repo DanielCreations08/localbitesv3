@@ -109,7 +109,7 @@
           <div class="restaurantCard popup-trigger" data-category="morningstars">
               <img class="restaurantImage" src="/menu/uplifted-bistro-order-page/item100.jpg" alt="Restaurant Image">
               <div class="restaurantName">$6.79</div>
-              <div class="foodItemName">Meat Starter</div>
+              <div class="foodItemName">Meat Starter - Long Name</div>
               <div class="foodDescription">Egg and American cheese. Served on choice of toasted bagel, croissant, or wrap.</div>
           </div>
       </a>
@@ -269,72 +269,80 @@
             
                 <div class="selection-section">
                   <div class="selection-title">
-                      <span class="title-container">Add a Drink?</span>
+                      <span class="title-container">Want to Exclude?</span>
                   </div>
                   
                   <div class="selection-options" id="drinkOptions">
-                      <div class="option" onclick="toggleMultiSelection('Coke', this)">
-                          <span>Coke</span>
+                    <div class="option" onclick="toggleMultiSelection('Egg', this)">
+                        <span>Egg</span>
+                        <div class="priceItemDetail">
+                          <span>Tap to Remove</span>
+                        </div>
+                    </div>
+                      <div class="option" onclick="toggleMultiSelection('Mayo', this)">
+                          <span>Mayo</span>
                           <div class="priceItemDetail">
-                            <span class="price">+$2.00</span>
+                            <span>Tap to Remove</span>
                           </div>
                       </div>
-                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
-                            <span>Pepsi</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
-                        </div>
-                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
-                            <span>Lemonade</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
-                        </div>
+                      <div class="option" onclick="toggleMultiSelection('Bun', this)">
+                          <span>Bun</span>
+                          <div class="priceItemDetail">
+                            <span>Tap to Remove</span>
+                          </div>
+                      </div>
 
-                        <div class="option" onclick="toggleMultiSelection('Coke', this)">
-                          <span>Diet Coke</span>
+                      <div class="option" onclick="toggleMultiSelection('Beans', this)">
+                        <span>Beans</span>
+                        <div class="priceItemDetail">
+                          <span class="price">Tap to Remove</span>
+                        </div>
+                    </div>
+                      <div class="option" onclick="toggleMultiSelection('Tomato', this)">
+                          <span>Tomato</span>
                           <div class="priceItemDetail">
-                            <span class="price">+$2.00</span>
+                            <span class="price">Tap to Remove</span>
                           </div>
                       </div>
-                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
-                            <span>Diet Pepsi</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
-                        </div>
-                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
-                            <span>7up</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
-                        </div>
-                        <div class="option" onclick="toggleMultiSelection('Coke', this)">
-                          <span>Sprite</span>
+                      <div class="option" onclick="toggleMultiSelection('Ketchup', this)">
+                          <span>Ketchup</span>
                           <div class="priceItemDetail">
-                            <span class="price">+$2.00</span>
+                            <span class="price">Tap to Remove</span>
                           </div>
                       </div>
-                        <div class="option" onclick="toggleMultiSelection('Pepsi', this)">
-                            <span>Mountain Dew</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
+                      <div class="option" onclick="toggleMultiSelection('Pickles', this)">
+                        <span>Pickles</span>
+                        <div class="priceItemDetail">
+                          <span class="price">Tap to Remove</span>
                         </div>
-                        <div class="option" onclick="toggleMultiSelection('Fanta', this)">
-                            <span>Fanta</span>
-                            <div class="priceItemDetail">
-                              <span class="price">+$2.00</span>
-                            </div>
+                    </div>
+                      <div class="option" onclick="toggleMultiSelection('Mustard', this)">
+                          <span>Mustard</span>
+                          <div class="priceItemDetail">
+                            <span class="price">Tap to Remove</span>
+                          </div>
+                      </div>
+                      <div class="option" onclick="toggleMultiSelection('Onion', this)">
+                          <span>Onion</span>
+                          <div class="priceItemDetail">
+                            <span class="price">Tap to Remove</span>
+                          </div>
+                      </div>
+                      <div class="option" onclick="toggleMultiSelection('Lettuce', this)">
+                        <span>Lettuce</span>
+                        <div class="priceItemDetail">
+                          <span class="price">Tap to Remove</span>
                         </div>
+                    </div>
                         
                     </div>
 
                     <div class="expand-toggle">
-                      <button id="showMoreButton" onclick="toggleHiddenOptions()">See More Options</button>
+                      <button id="showMoreButton" onclick="toggleHiddenOptions()"><div class="showMoreButton">See More Options</div></button>
                     </div>
                 </div>
+
+               
             </div>
             
         <!-- New Section for Special Instructions -->
@@ -931,16 +939,6 @@ window.onload = function() {
 };
 
 
-
-
-
-
-
-
-
-
-
-
 function addItemToCartAndScrollToTop() {
     addItemToCart();
 
@@ -950,26 +948,27 @@ function addItemToCartAndScrollToTop() {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
+<script>
+  function toggleMultiSelection(item, element) {
+    element.classList.toggle('selected');
+
+    // Get the price detail span without using the class 'price'
+    const priceDetailSpan = element.querySelector('.priceItemDetail span');
+
+    if (element.classList.contains('selected')) {
+        console.log(item + ' selected');
+        // Change the text to "Removed"
+        priceDetailSpan.textContent = 'Removed';
+    } else {
+        console.log(item + ' deselected');
+        // Change the text back to "Tap to Remove"
+        priceDetailSpan.textContent = 'Tap to Remove';
+    }
+}
+
+</script>
 
 </body>
 </html>                                                                         

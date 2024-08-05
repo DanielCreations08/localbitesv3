@@ -501,7 +501,7 @@ body {
 .foodDescription {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   /* Número máximo de líneas antes de la truncación */
   -webkit-box-orient: vertical;
   /* Orientación vertical del contenedor de caja */
@@ -741,6 +741,7 @@ body {
 
 }
 
+
 .priceItemDetail {
   border-radius: 10px;
   font-size: 16px;
@@ -749,7 +750,7 @@ body {
   color: #fff;
   background-color: #FB7306;
   padding: 5px 12px 5px 12px;
-  margin: 5px 40px;
+  margin: 5px 10px;
 }
 
 .option.selected {
@@ -765,6 +766,7 @@ body {
   text-align: center;
   margin-top: 10px;
 }
+
 
 
 .selection-options.collapsed .option:nth-child(n+5) {
@@ -869,7 +871,6 @@ button {
   color: #ed2020;
   margin-bottom: 10px;
 }
-
 
 
 
